@@ -1,5 +1,5 @@
-import { db } from '../db/db.js';
-import Hall from '../schema/hallSchema.js';
+import { db } from '../../db/db.js';
+import Hall from '../../schema/hallSchema.js';
 import express from 'express'
 const router = express.Router();
 
