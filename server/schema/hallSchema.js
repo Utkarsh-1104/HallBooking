@@ -1,22 +1,14 @@
-const mongoose = require('mongoose')
-const { db } = require('../db/db')
+import mongoose from 'mongoose'
 
-async function hallSchema() {
-    try {
-        await db()
-        const await hallSchema = new mongoose.Schema({
-            hall_name: {
-                type: String,
-                required: true
-            },
-            hall_capacity: Number,
-            hall_availability: [String]
-        })
-        
-    } catch (error) {
-        console.log('Server down.');
-    } 
+const hallSchema = new mongoose.Schema({
+    hall_name: {
+        type: String,
+        required: true
+    },
+    hall_capacity: Number,
+    hall_availability: [Object]
+})
 
-}
+const Hall = mongoose.models.Hall || mongoose.model('Hall', hallSchema)
 
-export const Hall = mongoose.model('Hall', hallSchema)
+export default Hall

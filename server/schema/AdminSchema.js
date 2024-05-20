@@ -12,7 +12,8 @@ async function adminSchema() {
             password: {
                 type: String,
                 required: true
-            }
+            },
+            designation: String
         })
     } catch (error) {
         console.log('error');
