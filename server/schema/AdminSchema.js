@@ -1,23 +1,16 @@
-const mongoose = require('mongoose')
-const { db } = require('../db/db')
+import mongoose from 'mongoose';
 
-async function adminSchema() {
-    try {
-        await db()
-        const adminSchema = new mongoose.Schema({
-            username: {
-                type: String,
-                required: true
-            },
-            password: {
-                type: String,
-                required: true
-            },
-            designation: String
-        })
-    } catch (error) {
-        console.log('error');
-    }
-}
+const adminSchema = new mongoose.Schema({
+    username: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    designation: String
+})
+const Admin = mongoose.models.Admin ||  mongoose.model('Admin', adminSchema)
 
-export const Admin = mongoose.model('Admin', adminSchema)
+export default Admin

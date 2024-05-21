@@ -6,14 +6,20 @@ const router = express.Router();
 router.patch('/:name', async (req, res) => {
     try {
         await db()
-        await Hall.findOneAndUpdate (
-            { hall_name: req.params.name }, 
-            { hall_availability: req.body.hall_availability }
+        await Hall.updateOne (
+            { 
+                hall_name: req.params.name 
+            }, 
+            { 
+                "$push": {
+                    hall_availability: req.body 
+                }
+            }
         )
         return res.json({
             msg: 'hall updated',
             status: 200
-        })
+        })  
     } catch (error) {
         return res.json({
             msg: error.message,
