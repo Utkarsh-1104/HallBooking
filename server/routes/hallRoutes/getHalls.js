@@ -16,4 +16,18 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    await db()
+    const indi_hall = await Hall.findById(id)
+    res.send(indi_hall)
+  } catch (error) {
+    res.json({
+      msg: error.message,
+      status: 400
+    })
+  }
+})
+
 export default router;

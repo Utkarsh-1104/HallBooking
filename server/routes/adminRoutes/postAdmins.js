@@ -22,7 +22,6 @@ router.post('/', async (req, res) => {
             status: 400
         })
     }
-    res.json({ msg: 'post admins' })
 })
 
 export default router;
