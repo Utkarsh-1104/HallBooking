@@ -4,6 +4,7 @@ import getHalls from './routes/hallRoutes/getHalls.js'
 import postHalls from './routes/hallRoutes/postHalls.js'
 import bookHall from './routes/hallRoutes/bookHall.js'
 import updateHall from './routes/hallRoutes/updateHalls.js'
+import removeHall from './routes/hallRoutes/removeHall.js'
 
 import getAdmins from './routes/adminRoutes/getAdmins.js'
 import postAdmins from './routes/adminRoutes/postAdmins.js'
@@ -18,6 +19,7 @@ app.use('/gethalls', getHalls)
 app.use('/posthall', postHalls)
 app.use('/bookhall', bookHall)
 app.use('/updatehall', updateHall)
+app.use('/removehall', removeHall)
 
 app.use('/getadmins', getAdmins)
 app.use('/postadmins', postAdmins)
