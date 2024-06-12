@@ -2,7 +2,7 @@
 const LandingPage = () => {
   return (
     <div className='bg-black h-screen'>
-        <h1 className='text-white'>Landing Page</h1>
+        <h1 className='text-white font-[Poppins] '>Landing Page</h1>
     </div>
   )
 }
