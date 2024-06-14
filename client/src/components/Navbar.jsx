@@ -10,7 +10,8 @@ const Navbar = () => {
               <h3 className="hover:text-[red] cursor-pointer " onClick={() => {navigate('/')} } >Home</h3>
               <h3 className="hover:text-[red] cursor-pointer " onClick={() => {navigate('adminlogin')}} >Admin Login</h3>
               <h3 className="hover:text-[red] cursor-pointer " onClick={() => {navigate('/superadminlogin')}} >Super Admin Login</h3>
-              <h3 className="hover:text-[red] cursor-pointer " >Something</h3>
+              <h3 className="hover:text-[red] cursor-pointer " onClick={() => {navigate('/adminpage')}} >Admin Page</h3>
+              <h3 className="hover:text-[red] cursor-pointer " onClick={() => {navigate('/superadminpage')}} >Super Admin Page</h3>
             </div>
         </nav>
     </div>
