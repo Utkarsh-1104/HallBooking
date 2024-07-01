@@ -5,13 +5,8 @@ const SuperAdminLogin = React.lazy(() => import('./components/SuperAdminLogin'))
 const AdminPage = React.lazy(() => import('./components/AdminPage'))
 const SuperAdminPage = React.lazy(() => import('./components/SuperAdminPage'))
 const LandingPage = React.lazy(() => import('./components/LandingPage'))
-// import AdminLogin from './components/AdminLogin'
-// import LandingPage from './components/LandingPage'
 import Navbar from './components/Navbar'
-// import SuperAdminLogin from './components/SuperAdminLogin'
 import { Suspense } from "react"
-// import AdminPage from "./components/AdminPage"
-// import SuperAdminPage from "./components/SuperAdminPage"
 
 function App() {
   return (
