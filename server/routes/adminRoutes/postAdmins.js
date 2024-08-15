@@ -7,6 +7,8 @@ router.post('/', async (req, res) => {
     try {
         await db()
         const admin = await new Admin({
+            fname: req.body.fname,
+            lname: req.body.lname,
             username: req.body.username,
             password: req.body.password,
             designation: req.body.designation
