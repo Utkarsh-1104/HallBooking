@@ -5,10 +5,12 @@ const SuperAdminPage = React.lazy(() => import('./components/superAdmin/SuperAdm
 const LandingPage = React.lazy(() => import('./components/misc/LandingPage'))
 import Navbar from './components/misc/Navbar'
 import { Suspense } from "react"
+import { RecoilRoot } from "recoil"
 
 function App() {
   return (
     <>
+    <RecoilRoot>
       <BrowserRouter>
         <Navbar />
         <Routes>
@@ -17,6 +19,7 @@ function App() {
           <Route path="/superadminpage" element={<Suspense fallback={"...loading"}><SuperAdminPage /></Suspense> }></Route>
         </Routes>
       </BrowserRouter>
+    </RecoilRoot>
     </>
   )
 }
