@@ -22,7 +22,7 @@ export const passwordAtom = atom({
 
 export const roleAtom = atom({
     key: 'roleAtom',
-    default: ''
+    default: 'admin'
 })
 
 export const designationAtom = atom({
