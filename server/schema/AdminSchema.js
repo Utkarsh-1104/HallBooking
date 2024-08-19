@@ -22,6 +22,10 @@ const adminSchema = new mongoose.Schema({
         minlength: [6, 'Password must be at least 6 characters long'],
         unique: true
     },
+    role: {
+        type: String,
+        default: 'ADMIN'
+    },
     designation: String
 })
 const Admin = mongoose.models.Admin ||  mongoose.model('Admin', adminSchema)

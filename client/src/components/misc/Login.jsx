@@ -1,9 +1,8 @@
 
-const SuperAdminLogin = () => {
+const Login = () => {
   return (
     <div className='bg-black h-screen text-white flex items-center justify-center'>
       <div className="h-fit w-fit flex flex-col items-center ">
-
         <h1 className="text-3xl ">Login</h1>
         <p className="text-xl font-[100] pt-2 ">Welcome <span className="underline underline-offset-4">super user</span>, please login to continue. </p>
         <input type="text" placeholder="Username" className="w-96 h-12 ps-3 mt-8 mb-4 bg-[#363636] border-2 rounded-md focus:border-orange-600 focus:outline-none " />
@@ -14,4 +13,4 @@ const SuperAdminLogin = () => {
   )
 }
 
-export default SuperAdminLogin
+export default Login

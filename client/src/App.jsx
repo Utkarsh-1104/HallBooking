@@ -1,11 +1,9 @@
 import React from "react"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-const AdminLogin = React.lazy(() => import('./components/AdminLogin'))
-const SuperAdminLogin = React.lazy(() => import('./components/SuperAdminLogin'))
-const AdminPage = React.lazy(() => import('./components/AdminPage'))
-const SuperAdminPage = React.lazy(() => import('./components/SuperAdminPage'))
-const LandingPage = React.lazy(() => import('./components/LandingPage'))
-import Navbar from './components/Navbar'
+const Login = React.lazy(() => import('./components/misc/Login'))
+const SuperAdminPage = React.lazy(() => import('./components/superAdmin/SuperAdminDashboard'))
+const LandingPage = React.lazy(() => import('./components/misc/LandingPage'))
+import Navbar from './components/misc/Navbar'
 import { Suspense } from "react"
 
 function App() {
@@ -14,10 +12,8 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/adminlogin" element={<Suspense fallback="...loading"><AdminLogin /></Suspense> } />
-          <Route path="/superadminlogin" element={<Suspense fallback="...loading"><SuperAdminLogin /></Suspense>} />
-          <Route path="/adminpage" element={<Suspense fallback={"...loading"} ><AdminPage /></Suspense> } />
+          <Route path="/home" element={<LandingPage />} />
+          <Route path="/login" element={<Suspense fallback="...loading"><Login /></Suspense>} />
           <Route path="/superadminpage" element={<Suspense fallback={"...loading"}><SuperAdminPage /></Suspense> }></Route>
         </Routes>
       </BrowserRouter>

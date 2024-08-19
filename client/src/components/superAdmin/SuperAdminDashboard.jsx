@@ -1,5 +1,5 @@
 
-const SuperAdminPage = () => {
+const SuperAdminDashboard = () => {
   return (
     <div className='bg-black h-screen'>
         <h1 className='text-white text-center font-[Poppins] '>Super Admin Page</h1>
@@ -7,4 +7,4 @@ const SuperAdminPage = () => {
   )
 }
 
-export default SuperAdminPage
+export default SuperAdminDashboard
