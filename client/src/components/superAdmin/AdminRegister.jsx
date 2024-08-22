@@ -14,29 +14,46 @@ const AdminRegister = () => {
     async function handleSubmit(e) {
         e.preventDefault();
 
-        const admin = {
-            fname: fname,
-            lname: lname,
-            username: username,
-            password: password,
-            role: role,
-            designation: designation
+        if ( (fname.toLowerCase() != fname.toUpperCase()) ) {
+            if ( (lname.toLowerCase() != lname.toUpperCase()) ) {
+                if ( (username.toLowerCase() != username.toUpperCase()) && username.length >= 6 ) {
+                    if ( (password.toLowerCase() != password.toUpperCase()) && password.length >= 6 ) {
+                        postAdmin();
+                    } else {
+                        alert('Password must be atleast 6 characters')
+                    } 
+                } else {
+                    alert('Username must be atleast 6 characters')
+                }
+            } else {
+                alert('Last name should be string')
+            }
+        } else {
+            alert('First name should be string')
         }
 
-        try {
-            await axios.post('http://localhost:3000/postadmins', admin)
-            // SimpleAlert();
-            alert('Admin registered successfully');
-        } catch (e) {
-            console.log(e);
+        async function postAdmin() {
+            try {
+                await axios.post('http://localhost:3000/postadmins', {
+                    fname: fname,
+                    lname: lname,
+                    username: username,
+                    password: password,
+                    role: role,
+                    designation: designation
+                })
+                alert('Admin registered successfully');
+            } catch (e) {
+                console.log(e);
+            }
+
+            setfname('');
+            setlname('');
+            setusername('');
+            setpassword('');
+            setrole('');
+            setdesignation('');
         }
-        
-        setfname('');
-        setlname('');
-        setusername('');
-        setpassword('');
-        setrole('');
-        setdesignation('');
     }
   return (
     <div className="text-white ">

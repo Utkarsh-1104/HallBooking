@@ -13,7 +13,6 @@ const adminSchema = new mongoose.Schema({
     username: {
         type: String,
         required: [true, 'Please enter a username'],
-        unique: true,
         minlength: [6, 'Username must be at least 6 characters long']
     },
     password: {
