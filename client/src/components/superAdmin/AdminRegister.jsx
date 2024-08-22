@@ -1,6 +1,7 @@
 import { useRecoilState } from "recoil"
 import { designationAtom, fnameAtom, lnameAtom, passwordAtom, roleAtom, usernameAtom } from "../../atoms/adminRegisterAtoms"
 import axios from 'axios'
+import SimpleAlert from "../../ui/Alert"
 
 const AdminRegister = () => {
 
@@ -39,10 +40,11 @@ const AdminRegister = () => {
                     lname: lname,
                     username: username,
                     password: password,
-                    role: role,
+                    role: (role === "") ? 'admin' : role,
                     designation: designation
                 })
                 alert('Admin registered successfully');
+                <SimpleAlert />
             } catch (e) {
                 console.log(e);
             }
@@ -70,7 +72,7 @@ const AdminRegister = () => {
                     <input type="password" name="adminPass" placeholder="Password" id="adminPass" className="w-80 h-12 ps-3 bg-[#363636] border-2 rounded-md focus:border-orange-600 focus:outline-none" value={password} onChange={ (e) => (setpassword(e.target.value)) } />
                 </div>
                 <div className="flex gap-6 mt-6 ">
-                    <select name="role" id="role" className="w-80 h-12 ps-3 mb-4 bg-[#363636] border-2 rounded-md focus:border-orange-600 focus:outline-none " value={role} onChange={ (e) => (setrole(e.target.value)) }>
+                    <select name="role" id="role" className="w-80 h-12 ps-3 mb-4 bg-[#363636] border-2 rounded-md focus:border-orange-600 focus:outline-none " defaultValue="admin" value={role} onChange={ (e) => (setrole(e.target.value)) }>
                         <option value="admin">Admin</option>
                         <option value="superadmin">Super Admin</option>
                     </select>
