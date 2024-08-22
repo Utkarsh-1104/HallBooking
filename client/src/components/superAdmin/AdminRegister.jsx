@@ -1,5 +1,6 @@
 import { useRecoilState } from "recoil"
 import { designationAtom, fnameAtom, lnameAtom, passwordAtom, roleAtom, usernameAtom } from "../../atoms/adminRegisterAtoms"
+import axios from 'axios'
 
 const AdminRegister = () => {
 
@@ -10,9 +11,26 @@ const AdminRegister = () => {
     const [role, setrole] = useRecoilState(roleAtom)
     const [designation, setdesignation] = useRecoilState(designationAtom)
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
-        console.log(fname, lname, username, password, role, designation);
+
+        const admin = {
+            fname: fname,
+            lname: lname,
+            username: username,
+            password: password,
+            role: role,
+            designation: designation
+        }
+
+        try {
+            await axios.post('http://localhost:3000/postadmins', admin)
+            // SimpleAlert();
+            alert('Admin registered successfully');
+        } catch (e) {
+            console.log(e);
+        }
+        
         setfname('');
         setlname('');
         setusername('');
@@ -24,8 +42,8 @@ const AdminRegister = () => {
     <div className="text-white ">
         <div className="h-fit w-fit flex flex-col items-center ">
             <h1 className="text-3xl ">Add Admins</h1>
-            <p className="text-xl font-[100] pt-2 ">Add new admins to the system. </p>
-            <form action="" method="">
+            <p className="text-xl font-[100] pt-2 ">Add new admins to the system.</p>
+            <form className="flex flex-col items-center" action="" method="">
                 <div className="flex gap-6 mt-8">
                     <input type="text" placeholder="First Name" className="w-80 h-12 ps-3 bg-[#363636] border-2 rounded-md focus:border-orange-600 focus:outline-none " value={fname} onChange={ (e) => (setfname(e.target.value)) } />
                     <input type="text" placeholder="Last Name" className="w-80 h-12 ps-3 bg-[#363636] border-2 rounded-md focus:border-orange-600 focus:outline-none " value={lname} onChange={ (e) => (setlname(e.target.value)) } />

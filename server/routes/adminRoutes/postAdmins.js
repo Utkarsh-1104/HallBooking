@@ -11,6 +11,7 @@ router.post('/', async (req, res) => {
             lname: req.body.lname,
             username: req.body.username,
             password: req.body.password,
+            role: req.body.role,
             designation: req.body.designation
         })
         await admin.save()
