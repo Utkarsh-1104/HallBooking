@@ -29,3 +29,13 @@ export const designationAtom = atom({
     key: 'designationAtom',
     default: ''
 })
+
+export const eventAtom = atom({
+    key: 'eventAtom',
+    default: ''
+})
+
+export const textAtom = atom({
+    key: 'textAtom',
+    default: ''
+})

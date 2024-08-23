@@ -1,12 +1,20 @@
-import * as React from 'react';
+/* eslint-disable react/prop-types */
+import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-import CheckIcon from '@mui/icons-material/Check';
 
-const SimpleAlert = () => {
+export default function Popup(props) {
   return (
-    <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
-      Here is a gentle confirmation that your action was successful.
-    </Alert>
+    <div>
+      <Snackbar open={props.state} autoHideDuration={5000} onClose={props.handleClose} >
+        <Alert
+          onClose={props.handleClose}
+          severity={props.event}
+          variant="filled"
+          sx={{ width: '100%' }}
+        >
+          {props.text}
+        </Alert>
+      </Snackbar>
+    </div>
   );
 }
-export default SimpleAlert

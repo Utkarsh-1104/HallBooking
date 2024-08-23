@@ -1,7 +1,8 @@
+import React from "react"
 import { useRecoilState } from "recoil"
-import { designationAtom, fnameAtom, lnameAtom, passwordAtom, roleAtom, usernameAtom } from "../../atoms/adminRegisterAtoms"
+import { designationAtom, eventAtom, fnameAtom, lnameAtom, passwordAtom, roleAtom, textAtom, usernameAtom } from "../../atoms/adminRegisterAtoms"
 import axios from 'axios'
-import SimpleAlert from "../../ui/Alert"
+import Popup from '../../ui/Alert.jsx'
 
 const AdminRegister = () => {
 
@@ -12,8 +13,21 @@ const AdminRegister = () => {
     const [role, setrole] = useRecoilState(roleAtom)
     const [designation, setdesignation] = useRecoilState(designationAtom)
 
+    const [result, setResult] = useRecoilState(eventAtom)
+    const [msg, setMsg] = useRecoilState(textAtom)
+
+    const [open, setOpen] = React.useState(false);
+    
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+        setOpen(false);
+    };
+ 
     async function handleSubmit(e) {
         e.preventDefault();
+
 
         if ( (fname.toLowerCase() != fname.toUpperCase()) ) {
             if ( (lname.toLowerCase() != lname.toUpperCase()) ) {
@@ -21,16 +35,24 @@ const AdminRegister = () => {
                     if ( (password.toLowerCase() != password.toUpperCase()) && password.length >= 6 ) {
                         postAdmin();
                     } else {
-                        alert('Password must be atleast 6 characters')
+                        setOpen(true);
+                        setResult('error');
+                        setMsg('Password must be atleast 6 characters.');
                     } 
                 } else {
-                    alert('Username must be atleast 6 characters')
+                    setOpen(true);
+                    setResult('error');
+                    setMsg('Username must be atleast 6 characters.');
                 }
             } else {
-                alert('Last name should be string')
+                setOpen(true);
+                setResult('error');
+                setMsg('Last name should be string.');
             }
         } else {
-            alert('First name should be string')
+            setOpen(true);
+            setResult('error');
+            setMsg('First name should be string.');
         }
 
         async function postAdmin() {
@@ -43,8 +65,9 @@ const AdminRegister = () => {
                     role: (role === "") ? 'admin' : role,
                     designation: designation
                 })
-                alert('Admin registered successfully');
-                <SimpleAlert />
+                setOpen(true);
+                setResult('success');
+                setMsg('Admin registered successfully.');
             } catch (e) {
                 console.log(e);
             }
@@ -62,6 +85,7 @@ const AdminRegister = () => {
         <div className="h-fit w-fit flex flex-col items-center ">
             <h1 className="text-3xl ">Add Admins</h1>
             <p className="text-xl font-[100] pt-2 ">Add new admins to the system.</p>
+            <Popup state={open} handleClose={handleClose} event={result} text={msg} />
             <form className="flex flex-col items-center" action="" method="">
                 <div className="flex gap-6 mt-8">
                     <input type="text" placeholder="First Name" className="w-80 h-12 ps-3 bg-[#363636] border-2 rounded-md focus:border-orange-600 focus:outline-none " value={fname} onChange={ (e) => (setfname(e.target.value)) } />
