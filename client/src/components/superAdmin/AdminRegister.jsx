@@ -28,7 +28,6 @@ const AdminRegister = () => {
     async function handleSubmit(e) {
         e.preventDefault();
 
-
         if ( (fname.toLowerCase() != fname.toUpperCase()) ) {
             if ( (lname.toLowerCase() != lname.toUpperCase()) ) {
                 if ( (username.toLowerCase() != username.toUpperCase()) && username.length >= 6 ) {
