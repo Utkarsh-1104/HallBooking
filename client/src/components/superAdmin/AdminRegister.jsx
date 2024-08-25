@@ -63,7 +63,6 @@ const AdminRegister = () => {
                     role: (role === "") ? 'admin' : role,
                     designation: designation
                 });
-                console.log(response);
                 if (response.data.status === 200) {
                     setOpen(true);
                     setResult('success');
