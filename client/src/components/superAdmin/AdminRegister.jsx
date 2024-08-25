@@ -90,7 +90,7 @@ const AdminRegister = () => {
         <div className="text-white px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto">
                 <div className="h-fit w-full flex flex-col items-center ">
-                    <h1 className="text-3xl md:text-4xl lg:text-5xl">Add Admins</h1>
+                    <h1 className="text-3xl md:text-4xl lg:text-5xl">Add Admins.</h1>
                     <p className="text-xl font-[100] pt-2 text-center">Add new admins to the system.</p>
                     <Popup state={open} handleClose={handleClose} event={result} text={msg} />
                     <form className="flex flex-col items-center w-full" action="" method="">
