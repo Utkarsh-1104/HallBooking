@@ -56,7 +56,7 @@ const AdminRegister = () => {
 
         async function postAdmin() {
             try {
-                await axios.post('http://localhost:3000/postadmins', {
+                const response = await axios.post('http://localhost:3000/postadmins', {
                     fname: fname,
                     lname: lname,
                     username: username,
@@ -64,9 +64,16 @@ const AdminRegister = () => {
                     role: (role === "") ? 'admin' : role,
                     designation: designation
                 })
-                setOpen(true);
-                setResult('success');
-                setMsg('Admin registered successfully.');
+                console.log(response);
+                if (response.data.status === 200) {
+                    setOpen(true);
+                    setResult('success');
+                    setMsg('Admin registered successfully.');
+                } else {
+                    setOpen(true);
+                    setResult('error');
+                    setMsg(response.data.msg);
+                }
             } catch (e) {
                 console.log(e);
             }
@@ -95,7 +102,7 @@ const AdminRegister = () => {
                     <input type="password" name="adminPass" placeholder="Password" id="adminPass" className="w-80 h-12 ps-3 bg-[#363636] border-2 rounded-md focus:border-orange-600 focus:outline-none" value={password} onChange={ (e) => (setpassword(e.target.value)) } />
                 </div>
                 <div className="flex gap-6 mt-6 ">
-                    <select name="role" id="role" className="w-80 h-12 ps-3 mb-4 bg-[#363636] border-2 rounded-md focus:border-orange-600 focus:outline-none " defaultValue="admin" value={role} onChange={ (e) => (setrole(e.target.value)) }>
+                    <select name="role" id="role" className="w-80 h-12 ps-3 mb-4 bg-[#363636] border-2 rounded-md focus:border-orange-600 focus:outline-none " value={role} onChange={ (e) => (setrole(e.target.value)) }>
                         <option value="admin">Admin</option>
                         <option value="superadmin">Super Admin</option>
                     </select>
