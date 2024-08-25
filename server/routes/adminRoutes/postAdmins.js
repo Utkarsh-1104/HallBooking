@@ -14,6 +14,7 @@ router.post('/', async (req, res) => {
         const existingAdmin = await Admin.findOne({
             username: req.body.username
         })
+        
         if (existingAdmin) {
             return res.json({
                 msg: 'This username is taken / Admin already exists.',
