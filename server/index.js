@@ -1,5 +1,7 @@
 import express from 'express'
 import cors from 'cors'
+import authMiddleware from './middlewares/authMiddleware.js'
+
 import getHalls from './routes/hallRoutes/getHalls.js'
 import postHalls from './routes/hallRoutes/postHalls.js'
 import bookHall from './routes/hallRoutes/bookHall.js'
@@ -14,6 +16,7 @@ import updateAdmins from './routes/adminRoutes/updateAdmins.js'
 const app = express()
 app.use(express.json())
 app.use(cors())
+app.use(authMiddleware) 
 
 app.use('/gethalls', getHalls)
 app.use('/posthall', postHalls)

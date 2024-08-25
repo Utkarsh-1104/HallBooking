@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
         const existingAdmin = await Admin.findOne({
             username: req.body.username
         })
-        
+
         if (existingAdmin) {
             return res.json({
                 msg: 'This username is taken / Admin already exists.',
@@ -32,10 +32,9 @@ router.post('/', async (req, res) => {
         })
         await admin.save()
 
-        const userid = admin._id
-
         const token = jwt.sign({
-            userid,
+            userid: admin._id,
+            role: admin.role
         }, process.env.JWT_SECRET)
 
         res.json({
