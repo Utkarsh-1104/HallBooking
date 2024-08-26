@@ -1,12 +1,14 @@
 import express from 'express'
 import cors from 'cors'
-//import authMiddleware from './middlewares/authMiddleware.js'
+import authMiddleware from './middlewares/authMiddleware.js'
 
 import getHalls from './routes/hallRoutes/getHalls.js'
 import postHalls from './routes/hallRoutes/postHalls.js'
 import bookHall from './routes/hallRoutes/bookHall.js'
 import updateHall from './routes/hallRoutes/updateHalls.js'
 import removeHall from './routes/hallRoutes/removeHall.js'
+
+import loginAdmin from './routes/authRoutes/loginAdmin.js'
 
 import getAdmins from './routes/adminRoutes/getAdmins.js'
 import postAdmins from './routes/adminRoutes/postAdmins.js'
@@ -23,6 +25,8 @@ app.use('/posthall', postHalls)
 app.use('/bookhall', bookHall)
 app.use('/updatehall', updateHall)
 app.use('/removehall', removeHall)
+
+app.use('/loginadmin', loginAdmin)
 
 app.use('/getadmins', getAdmins)
 app.use('/postadmins', postAdmins)
