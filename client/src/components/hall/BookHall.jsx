@@ -1,7 +1,8 @@
 import { useRecoilValue } from "recoil"
 import { hallAtom } from "../../atoms/getHallsAtom"
 
-const BookHall = () => {
+const BookHall = () => { 
+    
     const halls = useRecoilValue(hallAtom)
     return (
         <div className="text-white px-4 sm:px-6 lg:px-8">
