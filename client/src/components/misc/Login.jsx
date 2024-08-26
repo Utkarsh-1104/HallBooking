@@ -33,8 +33,9 @@ const Login = () => {
       setOpen(true)
       setStatus('success')
       setMsg(response.data.msg)
+      localStorage.setItem('token', response.data.token)
       const page = response.data.role === 'superadmin' ? 'superadminpage' : 'adminpage'
-      navigate(`/${page}?id=${response.data.id}&fname=${response.data.fname}&lname=${response.data.lname}&designation=${response.data.designation}&role=${response.data.role}`)
+      navigate(`/${page}?id=${response.data.id}&role=${response.data.role}`)
       setUsername('')
       setPassword('')
     } else {
