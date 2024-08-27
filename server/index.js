@@ -33,7 +33,7 @@ app.use('/admindashboard', adminAuthMiddleware, adminDashboard)
 app.use('/superadmindashboard', superAdminAuthMiddleware, superAdminDashboard)
 
 app.use('/getadmins', getAdmins)
-app.use('/postadmins', postAdmins)
+app.use('/postadmins', superAdminAuthMiddleware, postAdmins)
 app.use('/removeadmins', removeAdmins)
 app.use('/updateadmins', updateAdmins)
 

@@ -2,6 +2,7 @@ import { useRecoilValue } from "recoil"
 import BookHall from "../hall/BookHall"
 import { adminAccessAtom } from "../../atoms/accessAtom"
 import { useNavigate } from "react-router-dom"
+import Unauthorized from "../../ui/Unauthorized"
 // import { useEffect, useState } from "react"
 // import axios from "axios"
 
@@ -29,7 +30,7 @@ const AdminDashboard = () => {
   
   return (
     <div className="bg-black h-screen font-[Roboto] flex flex-col items-center justify-center ">
-      {(auth.msg === "Authorized") ? <Dashboard /> : <h1 className="text-white text-xl " >Unauthorized user. Login to continue.</h1>}
+      {(auth.msg === "Authorized") ? <Dashboard /> : <Unauthorized /> }
     </div>
   )
 }

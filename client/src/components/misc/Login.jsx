@@ -51,7 +51,7 @@ const Login = () => {
         <h1 className="text-3xl text-white ">Login</h1>
         <p className="text-xl font-light text-blue-100 text-center pt-2">Welcome <span className="underline underline-offset-4">user</span>, please login to continue.</p>
         <Popup state={open} handleClose={handleClose} event={status} text={msg} />
-        <form className="w-full flex flex-col items-center mt-6" onSubmit={handleSubmit}>
+        <form className="w-full flex flex-col items-center mt-6 text-white" onSubmit={handleSubmit}>
           <input
             type="text"
             placeholder="Username"
