@@ -10,7 +10,7 @@ const SuperAdminDashboard = () => {
   const access = useRecoilValue(superAdminAccessAtom)
 
   return (
-    <div className='bg-black h-screen font-[Roboto]r '>
+    <div className='bg-black h-screen font-[Roboto] '>
       { (access.msg === 'Authorized') ?  <Dashboard /> : <Unauthorized /> }
     </div>
   )

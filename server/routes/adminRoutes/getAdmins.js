@@ -17,4 +17,24 @@ router.get("/", async (req, res) => {
     }
 );
 
+router.get("/:id", async (req, res) => {
+    try {
+        await db();
+        const admin = await Admin.findById(req.params.id);
+        if (!admin) {
+            return res.json({
+                msg: "Admin not found",
+                status: 404
+            });
+        }
+        res.send(admin)
+    } catch (error) {
+        return res.json({
+            msg: error.message,
+            status: 400
+        });
+    }
+    }
+);
+
 export default router;

@@ -14,7 +14,7 @@ const Navbar = () => {
   return (
     <div>
       <nav className="bg-[#454343] text-white px-4 sm:px-8 md:px-16 py-4 flex justify-between items-center">
-        <h1 className="font-[Poppins] text-2xl sm:text-3xl">Navbar</h1>
+        <h1 className="font-[Poppins] text-2xl sm:text-3xl">LNCT Halls</h1>
         <div className="md:hidden">
           <button onClick={toggleMenu}>
             {isOpen ? <CloseIcon style={{ fontSize: 28 }} /> : <MenuIcon style={{ fontSize: 28 }} />}

@@ -93,7 +93,7 @@ const AdminRegister = () => {
     }
 
     return (
-        <div className="text-white px-4 sm:px-6 lg:px-8">
+        <div className="bg-black h-screen flex items-center justify-center text-white px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto">
                 <div className="h-fit w-full flex flex-col items-center ">
                     <h1 className="text-[1.65rem] md:text-3xl lg:text-3xl">Add Admins.</h1>
