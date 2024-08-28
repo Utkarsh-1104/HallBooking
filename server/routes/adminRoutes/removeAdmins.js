@@ -9,12 +9,12 @@ router.delete('/:id', async (req, res) => {
         await db()
         await Admin.deleteOne({_id: id})
         return res.json({
-            msg: 'admin deleted',
+            msg: 'Admin deleted successfully.',
             status: 200
         })
     } catch (error) {
         res.json({
-            msg: "admin not deleted",
+            msg: "Some error occurerd, admin not deleted.",
             status: 400
         })
     }

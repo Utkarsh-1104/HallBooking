@@ -10,7 +10,7 @@ const SuperAdminDashboard = () => {
   const access = useRecoilValue(superAdminAccessAtom)
   const reload = setTimeout(() => {
     window.location.reload()
-  }, 500);
+  }, 1000);
   
   clearTimeout(reload)
 

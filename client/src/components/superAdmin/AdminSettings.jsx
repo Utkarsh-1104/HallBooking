@@ -38,7 +38,7 @@ function Settings() {
         Existing Admins
       </h1>
       <hr className="mx-auto w-full sm:w-[80%] h-[1.5px] bg-[#373647] border-0 rounded mt-6" />
-      <div className="flex flex-col gap-7 items-center justify-center my-10 overflow-y-auto">
+      <div className="flex flex-col gap-4 items-center justify-center my-10 overflow-y-auto">
         {admins.map(admin => (
           <ExistingAdmins
             key={admin._id}
