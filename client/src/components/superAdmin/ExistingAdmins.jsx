@@ -16,19 +16,19 @@ const ExistingAdmins = (props) => {
       <div className='flex gap-2 sm:gap-4 flex-wrap justify-center'>
         <button 
           className='w-full sm:w-28 h-8 border flex items-center justify-center gap-2 py-4 hover:bg-white hover:text-black'
-          onClick={() => { navigate(`/superadminpage/adminsettings/viewadmin:${id}`); }}
+          onClick={() => { navigate(`/superadminpage/adminsettings/viewadmin?id=${id}`); }}
         >
           View <VisibilityIcon fontSize='small' />
         </button>
         <button 
           className='w-full sm:w-28 h-8 border flex items-center justify-center gap-2 py-4 hover:bg-white hover:text-black'
-          onClick={() => { navigate(`/superadminpage/adminsettings/editadmin:${id}`); }}
+          onClick={() => { navigate(`/superadminpage/adminsettings/editadmin?id=${id}`); }}
         >
           Edit <EditIcon fontSize='small' />
         </button>
         <button 
           className='w-full sm:w-28 h-8 border flex items-center justify-center gap-2 py-4 hover:bg-white hover:text-black'
-          onClick={() => { navigate(`/superadminpage/adminsettings/deleteadmin:${id}`); }}
+          onClick={() => { navigate(`/superadminpage/adminsettings/deleteadmin?id=${id}`); }}
         >
           Delete <PersonRemoveIcon fontSize='small' />
         </button>

@@ -20,7 +20,6 @@ function Settings() {
   const navigate = useNavigate();
 
   const admins = useRecoilValue(adminsAtom);
-  console.log(admins);
 
   return (
     <div className="p-4 sm:p-8">
@@ -39,17 +38,15 @@ function Settings() {
         Existing Admins
       </h1>
       <hr className="mx-auto w-full sm:w-[80%] h-[1.5px] bg-[#373647] border-0 rounded mt-6" />
-      <div className="box-border overflow-x-hidden">
-        <div className="flex flex-col gap-7 items-center justify-center my-10 overflow-y-auto">
-          {admins.map(admin => (
-            <ExistingAdmins
-              key={admin._id}
-              id={admin._id}
-              fname={admin.fname}
-              lname={admin.lname}
-            />
-          ))}
-        </div>
+      <div className="flex flex-col gap-7 items-center justify-center my-10 overflow-y-auto">
+        {admins.map(admin => (
+          <ExistingAdmins
+            key={admin._id}
+            id={admin._id}
+            fname={admin.fname}
+            lname={admin.lname}
+          />
+        ))}
       </div>
     </div>
   );

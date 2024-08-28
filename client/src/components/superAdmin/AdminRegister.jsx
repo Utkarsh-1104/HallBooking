@@ -94,10 +94,10 @@ const AdminRegister = () => {
 
     return (
         <div className="bg-black xl:h-screen flex items-center justify-center text-white px-4 sm:px-6 lg:px-8 h-full py-10 ">
-            <div className="max-w-3xl mx-auto">
+            <div className="w-[40%] mx-auto bg-[#1C1C1C] py-6 px-10 ">
                 <div className="h-fit w-full flex flex-col items-center ">
                     <h1 className="text-[1.65rem] md:text-3xl lg:text-3xl">Add Admins.</h1>
-                    <p className="text-xl font-[100] pt-2 text-center">Add new admins to the system.</p>
+                    <p className="text-xl font-[100] pt-2 text-center text-blue-100 ">Add new admins to the system.</p>
                     <Popup state={open} handleClose={handleClose} event={result} text={msg} />
                     <form className="flex flex-col items-center w-full" action="" method="">
                         <div className="flex flex-col sm:flex-row sm:gap-6 mt-8 w-full">
