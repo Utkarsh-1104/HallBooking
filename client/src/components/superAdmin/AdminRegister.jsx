@@ -62,7 +62,14 @@ const AdminRegister = () => {
                     password: password,
                     role: (role === "") ? 'admin' : role,
                     designation: designation
-                });
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`
+                    }
+                }
+            );
+                console.log(response.data);
                 if (response.data.status === 200) {
                     setOpen(true);
                     setResult('success');

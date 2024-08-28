@@ -17,7 +17,7 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path="/home" element={<LandingPage />} />
+          <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Suspense fallback="...loading"><Login /></Suspense>} />
           <Route path="/adminpage" element={<Suspense fallback="...loading"><AdminDashboard /></Suspense>} />
           <Route path="/superadminpage" element={<Suspense fallback={"...loading"}><SuperAdminPage /></Suspense> }></Route>
