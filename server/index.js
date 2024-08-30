@@ -35,7 +35,7 @@ app.use('/superadmindashboard', superAdminAuthMiddleware, superAdminDashboard)
 app.use('/getadmins',superAdminAuthMiddleware, getAdmins)
 app.use('/postadmins', superAdminAuthMiddleware, postAdmins)
 app.use('/removeadmins', superAdminAuthMiddleware, removeAdmins)
-app.use('/updateadmins', updateAdmins)
+app.use('/updateadmins', superAdminAuthMiddleware, updateAdmins)
 
 app.get('/', (req, res) => {
     res.json({ message: 'Server running' })
