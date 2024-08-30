@@ -20,6 +20,7 @@ function Settings() {
   const navigate = useNavigate();
 
   const halls = useRecoilValue(hallAtom);
+  console.log(halls);
 
   return (
     <div className="p-4 sm:p-8">
@@ -28,7 +29,7 @@ function Settings() {
           <h1 className="text-xl sm:text-3xl text-center">Want to add new hall?</h1>
           <button
             className="text-lg sm:text-xl mt-4 sm:mt-0 sm:ml-auto w-full sm:w-36 h-10 text-white border flex items-center justify-center gap-2 rounded-sm hover:bg-white hover:text-black"
-            onClick={() => { navigate('/superadminpage/adminsettings/addadmin'); }}
+            onClick={() => { navigate('/superadminpage/adminsettings/addhall'); }}
           >
             Add <MeetingRoomIcon fontSize="small" />
           </button>

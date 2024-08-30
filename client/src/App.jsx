@@ -9,6 +9,7 @@ const HallSettings = React.lazy(() => import('./components/superAdmin/HallSettin
 const AdminRegister = React.lazy(() => import('./components/superAdmin/AdminRegister'))
 const ViewSingleAdmin = React.lazy(() => import('./components/superAdmin/ViewSingleAdmin'))
 const EditAdminsPage = React.lazy(() => import('./components/superAdmin/EditAdmin'))
+const AddHall = React.lazy(() => import('./components/superAdmin/AddHall'))
 import Navbar from './components/misc/Navbar'
 import { Suspense } from "react"
 import { RecoilRoot } from "recoil"
@@ -29,6 +30,7 @@ function App() {
           <Route path="/superadminpage/adminsettings/addadmin" element={<Suspense fallback={"...loading"}><AdminRegister /></Suspense> }></Route>
           <Route path="/superadminpage/adminsettings/viewadmin" element={<Suspense fallback={"...loading"}><ViewSingleAdmin /></Suspense> }></Route>
           <Route path="/superadminpage/adminsettings/editadmin" element={<Suspense fallback={"...loading"}><EditAdminsPage /></Suspense> }></Route>
+          <Route path="/superadminpage/adminsettings/addhall" element={<Suspense fallback={"...loading"}><AddHall /></Suspense> }></Route>
         </Routes>
       </BrowserRouter>
     </RecoilRoot>

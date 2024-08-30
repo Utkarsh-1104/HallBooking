@@ -6,6 +6,16 @@ const router = express.Router();
 router.post('/', async (req, res) => {
     try {
         await db()
+        const existingHall = await Hall.findOne({
+            hall_name: req.body.hall_name
+        })
+
+        if (existingHall) {
+            return res.json({
+                msg: 'Hall already exists',
+                status: 400
+            })
+        }
         const hall = await new Hall({
             hall_name: req.body.hall_name,
             hall_capacity: req.body.hall_capacity,
