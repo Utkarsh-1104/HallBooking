@@ -23,7 +23,7 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-app.use('/gethalls', authMiddleware, getHalls)
+app.use('/gethalls', getHalls)
 app.use('/posthall', superAdminAuthMiddleware, postHalls)
 app.use('/bookhall', bookHall)
 app.use('/updatehall', updateHall)

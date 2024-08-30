@@ -1,0 +1,78 @@
+/* eslint-disable react/prop-types */
+import { useRecoilValue } from "recoil";
+import { superAdminAccessAtom } from "../../atoms/accessAtom";
+import Unauthorized from "../../ui/Unauthorized";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useSearchParams } from "react-router-dom";
+
+
+const ViewSingleHall = () => {
+    const access = useRecoilValue(superAdminAccessAtom);
+    return (
+      <div className="bg-black h-screen font-[Roboto]">
+        {(access.msg === 'Authorized') ? <ViewHall /> : <Unauthorized />}
+      </div>
+    );
+}
+
+function ViewHall() {
+
+    const [hall, setHall] = useState({});
+    const [searchParams] = useSearchParams();
+    const id = searchParams.get('id');
+
+    useEffect(() => {
+        async function singeAdmin() {
+            try {
+                const res = await axios.get(`http://localhost:3000/gethalls/${id}`)
+                setHall(res.data);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        singeAdmin();
+    }, [id])
+
+    return (
+        <div className="h-screen p-4 sm:p-8">
+            <h1 className='text-white font-[Poppins] text-xl sm:text-3xl text-center sm:text-left ps-0 sm:ps-40 pt-16'>
+                View hall details
+            </h1>
+            <hr className="mx-auto w-full sm:w-[80%] h-[1.5px] bg-[#373647] border-0 rounded mt-6" />
+            <div className="min-h-[60%] flex items-center justify-center">
+                <div className="flex flex-col justify-between items-stretch bg-[#1C1C1C] text-white text-2xl gap-3 p-6 sm:px-8 rounded-md">
+                    <h1>Hall name: {hall.hall_name}</h1>
+                    <h1>Hall Capacity: {hall.hall_capacity}</h1>
+                    <h1>Hall Bookings: </h1>
+                    <div className="flex flex-wrap gap-4" >
+                        {hall.hall_availability && hall.hall_availability.map((booking) => (
+                            <HallBookings
+                            key={booking._id}
+                            date={booking.date}
+                            from={booking.time_from}
+                            to={booking.time_to}
+                            booked_by={booking.booked_by}
+                            event_name={booking.event_name}
+                            />
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+function HallBookings(props) {
+    return (
+        <div className="flex flex-col items-center justify-center border p-4 ">
+            <h1>Date: {props.date} </h1>
+            <h1>From: {props.from} </h1>
+            <h1>To: {props.to} </h1>
+            <h1>Booked by: {props.booked_by} </h1>
+            <h1>Event: {props.event_name} </h1>
+        </div>
+    );
+}
+
+export default ViewSingleHall

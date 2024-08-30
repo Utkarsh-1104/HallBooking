@@ -35,7 +35,7 @@ const ExistingHalls = (props) => {
       <div className='flex gap-2 sm:gap-4 flex-wrap justify-center'>
         <button 
           className='w-full sm:w-28 h-8 border flex items-center justify-center gap-2 py-4 hover:bg-white hover:text-black'
-          onClick={() => { navigate(`/superadminpage/adminsettings/viewadmin?id=${id}`); }}
+          onClick={() => { navigate(`/superadminpage/hallsettings/viewhall?id=${id}`); }}
           >
           View <VisibilityIcon fontSize='small' />
         </button>

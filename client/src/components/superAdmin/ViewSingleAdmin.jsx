@@ -41,7 +41,7 @@ function ViewAdmin() {
     return (
         <div className="h-full p-4 sm:p-8">
             <h1 className='text-white font-[Poppins] text-xl sm:text-3xl text-center sm:text-left ps-0 sm:ps-40 pt-16'>
-                View Admin
+                View Admin Details
             </h1>
             <hr className="mx-auto w-full sm:w-[80%] h-[1.5px] bg-[#373647] border-0 rounded mt-6" />
             <div className="h-[60%] flex items-center justify-center">
