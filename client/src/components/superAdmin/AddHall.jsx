@@ -1,16 +1,13 @@
 import React from "react";
 import { useRecoilState } from "recoil";
-import { designationAtom, eventAtom, fnameAtom, lnameAtom, passwordAtom, roleAtom, textAtom, usernameAtom } from "../../atoms/adminRegisterAtoms";
 import axios from 'axios';
 import Popup from '../../ui/Alert.jsx';
+import { hallCapacityAtom, hallNameAtom } from "../../atoms/addHallAtom.js";
+import { eventAtom, textAtom } from "../../atoms/adminRegisterAtoms.js";
 
-const AdminRegister = () => {
-    const [fname, setfname] = useRecoilState(fnameAtom);
-    const [lname, setlname] = useRecoilState(lnameAtom);
-    const [username, setusername] = useRecoilState(usernameAtom);
-    const [password, setpassword] = useRecoilState(passwordAtom);
-    const [role, setrole] = useRecoilState(roleAtom);
-    const [designation, setdesignation] = useRecoilState(designationAtom);
+const AddHall = () => {
+    const [hallName, setHallName] = useRecoilState(hallNameAtom);
+    const [hallCapacity, setHallCapacity] = useRecoilState(hallCapacityAtom);
 
     const [result, setResult] = useRecoilState(eventAtom);
     const [msg, setMsg] = useRecoilState(textAtom);
@@ -27,41 +24,26 @@ const AdminRegister = () => {
     async function handleSubmit(e) {
         e.preventDefault();
 
-        if ((fname.toLowerCase() !== fname.toUpperCase())) {
-            if ((lname.toLowerCase() !== lname.toUpperCase())) {
-                if ((username.toLowerCase() !== username.toUpperCase()) && username.length >= 6) {
-                    if (password.length >= 6) {
-                        postAdmin();
-                    } else {
-                        setOpen(true);
-                        setResult('error');
-                        setMsg('Password must be at least 6 characters.');
-                    }
-                } else {
-                    setOpen(true);
-                    setResult('error');
-                    setMsg('Username must be at least 6 characters.');
-                }
+        if ((hallName.toLowerCase() !== hallName.toUpperCase())) {
+            if (!isNaN(hallCapacity)) {
+                postHall();
+               
             } else {
                 setOpen(true);
                 setResult('error');
-                setMsg('Last name should be a string.');
+                setMsg('Hall capacity should be a number.');
             }
         } else {
             setOpen(true);
             setResult('error');
-            setMsg('First name should be a string.');
+            setMsg('Hall name should be a string.');
         }
 
-        async function postAdmin() {
+        async function postHall() {
             try {
-                const response = await axios.post('http://localhost:3000/postadmins', {
-                    fname: fname,
-                    lname: lname,
-                    username: username,
-                    password: password,
-                    role: (role === "") ? 'admin' : role,
-                    designation: designation
+                const response = await axios.post('http://localhost:3000/posthall', {
+                    hall_name: hallName,
+                    hall_capacity: hallCapacity,
                 },
                 {
                     headers: {
@@ -83,12 +65,8 @@ const AdminRegister = () => {
                 console.log(e);
             }
 
-            setfname('');
-            setlname('');
-            setusername('');
-            setpassword('');
-            setrole('');
-            setdesignation('');
+            setHallName('');
+            setHallCapacity('');
         }
     }
 
@@ -103,16 +81,20 @@ const AdminRegister = () => {
               type="text"
               placeholder="Hall Name"
               className="w-full h-12 px-3 mt-4 mb-4 bg-[#363636] border-2 rounded-md focus:border-orange-600 focus:outline-none"
-              value={username}
-              
+              value={hallName}
+              onChange={(e) => {
+                setHallName(e.target.value);
+              }}
             />
             <input
               type="number"
               placeholder="Hall Capacity"
               id="superPass"
               className="w-full h-12 px-3 bg-[#363636] border-2 rounded-md focus:border-orange-600 focus:outline-none"
-              value={password}
-       
+              value={hallCapacity}
+                onChange={(e) => {
+                    setHallCapacity(e.target.value);
+                }}
             />
             <button
               className="w-full h-16 mt-6 text-2xl text-white bg-black border border-white rounded hover:bg-white hover:text-black focus:outline-none"
@@ -126,4 +108,4 @@ const AdminRegister = () => {
     );
 }
 
-export default AdminRegister;
+export default AddHall;

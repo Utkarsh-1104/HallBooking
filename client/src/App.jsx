@@ -10,6 +10,7 @@ const AdminRegister = React.lazy(() => import('./components/superAdmin/AdminRegi
 const ViewSingleAdmin = React.lazy(() => import('./components/superAdmin/ViewSingleAdmin'))
 const EditAdminsPage = React.lazy(() => import('./components/superAdmin/EditAdmin'))
 const AddHall = React.lazy(() => import('./components/superAdmin/AddHall'))
+import Loader from "./ui/Loader"
 import Navbar from './components/misc/Navbar'
 import { Suspense } from "react"
 import { RecoilRoot } from "recoil"
@@ -22,15 +23,15 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/login" element={<Suspense fallback="...loading"><Login /></Suspense>} />
-          <Route path="/adminpage" element={<Suspense fallback="...loading"><AdminDashboard /></Suspense>} />
-          <Route path="/superadminpage" element={<Suspense fallback={"...loading"}><SuperAdminPage /></Suspense> }></Route>
-          <Route path="/superadminpage/adminsettings" element={<Suspense fallback={"...loading"}><AdminSettings /></Suspense> }></Route>
-          <Route path="/superadminpage/hallsettings" element={<Suspense fallback={"...loading"}><HallSettings /></Suspense> }></Route>
-          <Route path="/superadminpage/adminsettings/addadmin" element={<Suspense fallback={"...loading"}><AdminRegister /></Suspense> }></Route>
-          <Route path="/superadminpage/adminsettings/viewadmin" element={<Suspense fallback={"...loading"}><ViewSingleAdmin /></Suspense> }></Route>
-          <Route path="/superadminpage/adminsettings/editadmin" element={<Suspense fallback={"...loading"}><EditAdminsPage /></Suspense> }></Route>
-          <Route path="/superadminpage/adminsettings/addhall" element={<Suspense fallback={"...loading"}><AddHall /></Suspense> }></Route>
+          <Route path="/login" element={<Suspense fallback={<Loader />}><Login /></Suspense>} />
+          <Route path="/adminpage" element={<Suspense fallback={<Loader />}><AdminDashboard /></Suspense>} />
+          <Route path="/superadminpage" element={<Suspense fallback={<Loader />}><SuperAdminPage /></Suspense> }></Route>
+          <Route path="/superadminpage/adminsettings" element={<Suspense fallback={<Loader />}><AdminSettings /></Suspense> }></Route>
+          <Route path="/superadminpage/hallsettings" element={<Suspense fallback={<Loader />}><HallSettings /></Suspense> }></Route>
+          <Route path="/superadminpage/adminsettings/addadmin" element={<Suspense fallback={<Loader />}><AdminRegister /></Suspense> }></Route>
+          <Route path="/superadminpage/adminsettings/viewadmin" element={<Suspense fallback={<Loader />}><ViewSingleAdmin /></Suspense> }></Route>
+          <Route path="/superadminpage/adminsettings/editadmin" element={<Suspense fallback={<Loader />}><EditAdminsPage /></Suspense> }></Route>
+          <Route path="/superadminpage/adminsettings/addhall" element={<Suspense fallback={<Loader />}><AddHall /></Suspense> }></Route>
         </Routes>
       </BrowserRouter>
     </RecoilRoot>

@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import adminAuthMiddleware from './middlewares/adminAuthMiddleware.js'
 import superAdminAuthMiddleware from './middlewares/superAdminAuthMiddleware.js'
+import authMiddleware from './middlewares/authMiddleware.js'
 
 import getHalls from './routes/hallRoutes/getHalls.js'
 import postHalls from './routes/hallRoutes/postHalls.js'
@@ -22,8 +23,8 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-app.use('/gethalls', getHalls)
-app.use('/posthall', postHalls)
+app.use('/gethalls', authMiddleware, getHalls)
+app.use('/posthall', superAdminAuthMiddleware, postHalls)
 app.use('/bookhall', bookHall)
 app.use('/updatehall', updateHall)
 app.use('/removehall', removeHall)

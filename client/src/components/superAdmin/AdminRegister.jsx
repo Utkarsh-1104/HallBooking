@@ -93,11 +93,11 @@ const AdminRegister = () => {
     }
 
     return (
-        <div className="bg-black xl:h-screen flex items-center justify-center text-white px-4 sm:px-6 lg:px-8 h-full py-10 ">
-            <div className="w-[40%] mx-auto bg-[#1C1C1C] py-6 px-10 ">
+        <div className="bg-black flex items-center justify-center text-white px-4 sm:px-6 lg:px-8 h-full py-10 min-h-screen">
+            <div className="w-full max-w-lg mx-auto bg-[#1C1C1C] py-6 px-6 sm:px-10 rounded-lg">
                 <div className="h-fit w-full flex flex-col items-center ">
-                    <h1 className="text-[1.65rem] md:text-3xl lg:text-3xl">Add Admins.</h1>
-                    <p className="text-xl font-[100] pt-2 text-center text-blue-100 ">Add new admins to the system.</p>
+                    <h1 className="text-[1.5rem] md:text-2xl lg:text-3xl text-center">Add Admins</h1>
+                    <p className="text-base md:text-lg lg:text-xl font-[100] pt-2 text-center text-blue-100">Add new admins to the system.</p>
                     <Popup state={open} handleClose={handleClose} event={result} text={msg} />
                     <form className="flex flex-col items-center w-full" action="" method="">
                         <div className="flex flex-col sm:flex-row sm:gap-6 mt-8 w-full">
@@ -115,7 +115,7 @@ const AdminRegister = () => {
                             </select>
                             <input type="text" placeholder="Designation" className="w-full sm:w-1/2 h-12 ps-3 bg-[#363636] border-2 rounded-md focus:border-orange-600 focus:outline-none " value={designation} onChange={(e) => (setdesignation(e.target.value))} />
                         </div>
-                        <button className="w-full sm:w-96 h-16 mt-10 text-2xl text-white bg-black border border-white rounded hover:bg-white hover:text-black focus:outline-none " type="submit" onClick={handleSubmit}>Register Admin</button>
+                        <button className="w-full sm:w-96 h-16 mt-10 text-lg sm:text-xl lg:text-2xl text-white bg-black border border-white rounded hover:bg-white hover:text-black focus:outline-none " type="submit" onClick={handleSubmit}>Register Admin</button>
                     </form>
                 </div>
             </div>
