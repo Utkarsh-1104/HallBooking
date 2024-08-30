@@ -9,12 +9,12 @@ router.delete('/:id', async (req, res) => {
         await db()
         await Hall.deleteOne({_id: id})
         return res.json({
-            msg: 'hall deleted',
+            msg: 'Hall deleted successfully.',
             status: 200
         })
     } catch (error) {
         res.json({
-            msg: "hall not deleted",
+            msg: "Hall not deleted, some error occurred.",
             status: 400
         })
     }

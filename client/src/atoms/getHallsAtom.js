@@ -6,7 +6,11 @@ export const hallAtom = atom({
     default: selector({
         key: "getHallsSelector",
         get: async () => {
-            const halls = await axios.get('http://localhost:3000/gethalls')
+            const halls = await axios.get('http://localhost:3000/gethalls', {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            })
             return halls.data
         }
     }, Array)

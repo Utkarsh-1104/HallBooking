@@ -16,7 +16,7 @@ const adminAuthMiddleware = async (req, res, next) => {
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        if(decoded.role === 'admin') {
+        if(decoded.role === 'admin' || decoded.role === 'superadmin') {
             req.userId = decoded.userid;
             req.fname = decoded.fname;
             req.lname = decoded.lname;
