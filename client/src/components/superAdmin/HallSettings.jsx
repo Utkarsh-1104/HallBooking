@@ -20,7 +20,6 @@ function Settings() {
   const navigate = useNavigate();
 
   const halls = useRecoilValue(hallAtom);
-  console.log(halls);
 
   return (
     <div className="p-4 sm:p-8">

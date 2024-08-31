@@ -7,14 +7,21 @@ router.patch('/:id', async (req, res) => {
     const id = req.params.id
     try {
         await db() 
+        const hallToBeUpdated = await Hall.findOne({_id: id})
+        if (!hallToBeUpdated) {
+            return res.json({
+                msg: 'Hall not found',
+                status: 404
+            })
+        }
         await Hall.updateOne(
             {
                 _id: id
             },
             {
                 "$set": {
-                    hall_name: req.body.hall_name,
-                    hall_capacity: req.body.hall_capacity,
+                    hall_name: req.body.hall_name || hallToBeUpdated.hall_name,
+                    hall_capacity: req.body.hall_capacity || hallToBeUpdated.hall_capacity,
                 }
             }
         )

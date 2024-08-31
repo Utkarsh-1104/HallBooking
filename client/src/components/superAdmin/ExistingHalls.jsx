@@ -41,7 +41,7 @@ const ExistingHalls = (props) => {
         </button>
         <button 
           className='w-full sm:w-28 h-8 border flex items-center justify-center gap-2 py-4 hover:bg-white hover:text-black'
-          onClick={() => { navigate(`/superadminpage/adminsettings/editadmin?id=${id}`); }}
+          onClick={() => { navigate(`/superadminpage/hallsettings/edithall?id=${id}`); }}
           >
           Edit <EditIcon fontSize='small' />
         </button>
@@ -71,6 +71,11 @@ async function deleteAdmin(id, setOpen, setResult, setMsg) {
     setOpen(true);
     setResult('success');
     setMsg(res.msg + " Please refresh the page.");
+    
+    const refrest = setTimeout(() => {
+      window.location.reload();
+      clearTimeout(refrest);
+    }, 2000);
   } else {
     setOpen(true);
     setResult('error');

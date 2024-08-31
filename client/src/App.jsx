@@ -11,6 +11,7 @@ const ViewSingleAdmin = React.lazy(() => import('./components/superAdmin/ViewSin
 const EditAdminsPage = React.lazy(() => import('./components/superAdmin/EditAdmin'))
 const AddHall = React.lazy(() => import('./components/superAdmin/AddHall'))
 const ViewSingleHall = React.lazy(() => import('./components/superAdmin/ViewSingleHall'))
+const EditHallsPage = React.lazy(() => import('./components/superAdmin/EditHall'))
 import Loader from "./ui/Loader"
 import Navbar from './components/misc/Navbar'
 import { Suspense } from "react"
@@ -34,6 +35,7 @@ function App() {
           <Route path="/superadminpage/adminsettings/editadmin" element={<Suspense fallback={<Loader />}><EditAdminsPage /></Suspense> }></Route>
           <Route path="/superadminpage/adminsettings/addhall" element={<Suspense fallback={<Loader />}><AddHall /></Suspense> }></Route>
           <Route path="/superadminpage/hallsettings/viewhall" element={<Suspense fallback={<Loader />}><ViewSingleHall /></Suspense> }></Route>
+          <Route path="/superadminpage/hallsettings/edithall" element={<Suspense fallback={<Loader />}><EditHallsPage /></Suspense> }></Route>
         </Routes>
       </BrowserRouter>
     </RecoilRoot>

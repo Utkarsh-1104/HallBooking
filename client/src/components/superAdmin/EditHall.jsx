@@ -1,11 +1,24 @@
 import React from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import axios from 'axios';
 import Popup from '../../ui/Alert.jsx';
 import { hallCapacityAtom, hallNameAtom } from "../../atoms/addHallAtom.js";
 import { eventAtom, textAtom } from "../../atoms/adminRegisterAtoms.js";
+import { superAdminAccessAtom } from "../../atoms/accessAtom.js";
+import Unauthorized from "../../ui/Unauthorized.jsx";
+import { useSearchParams } from "react-router-dom";
 
-const AddHall = () => {
+const EditHallsPage = () => {
+    const access = useRecoilValue(superAdminAccessAtom);
+
+    return (
+        <div>
+            {(access.msg === 'Authorized') ? <EditHall /> : <Unauthorized />}
+        </div>
+    );
+}
+
+const EditHall = () => {
     const [hallName, setHallName] = useRecoilState(hallNameAtom);
     const [hallCapacity, setHallCapacity] = useRecoilState(hallCapacityAtom);
 
@@ -21,12 +34,15 @@ const AddHall = () => {
         setOpen(false);
     };
 
+    const [searchParams] = useSearchParams();
+    const id = searchParams.get('id');
+
     async function handleSubmit(e) {
         e.preventDefault();
 
-        if ((hallName.toLowerCase() !== hallName.toUpperCase())) {
-            if (!isNaN(hallCapacity)) {
-                postHall();
+        if (hallName === "" || (hallName.toLowerCase() !== hallName.toUpperCase())) {
+            if (hallCapacity || (!isNaN(hallCapacity))) {
+                edithall(id);
                
             } else {
                 setOpen(true);
@@ -36,12 +52,12 @@ const AddHall = () => {
         } else {
             setOpen(true);
             setResult('error');
-            setMsg('Hall name should be a string.');
+            setMsg('New hall name should be a string.');
         }
 
-        async function postHall() {
+        async function edithall(id) {
             try {
-                const response = await axios.post('http://localhost:3000/posthall', {
+                const response = await axios.patch(`http://localhost:3000/updatehall/${id}`, {
                     hall_name: hallName,
                     hall_capacity: hallCapacity,
                 },
@@ -50,11 +66,11 @@ const AddHall = () => {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }
                 });
-                
+
                 if (response.data.status === 200) {
                     setOpen(true);
                     setResult('success');
-                    setMsg('Hall added successfully.');
+                    setMsg('Hall updated successfully.');
                 } else {
                     setOpen(true);
                     setResult('error');
@@ -72,13 +88,13 @@ const AddHall = () => {
     return (
         <div className="bg-black min-h-screen flex items-center justify-center p-4 sm:p-6">
         <div className="w-full max-w-lg bg-[#1c1c1c] rounded-lg p-6 flex flex-col items-center">
-          <h1 className="text-3xl text-white ">Add Halls.</h1>
-          <p className="text-xl font-light text-blue-100 text-center pt-2">Add new halls to the system.</p>
+          <h1 className="text-3xl text-white ">Edit Halls.</h1>
+          <p className="text-xl font-light text-blue-100 text-center pt-2">Edit existing hall in the system.</p>
           <Popup state={open} handleClose={handleClose} event={result} text={msg} />
           <form className="w-full flex flex-col items-center mt-6 text-white" onSubmit={handleSubmit}>
             <input
               type="text"
-              placeholder="Hall Name"
+              placeholder="New Hall Name"
               className="w-full h-12 px-3 mt-4 mb-4 bg-[#363636] border-2 rounded-md focus:border-orange-600 focus:outline-none"
               value={hallName}
               onChange={(e) => {
@@ -87,7 +103,7 @@ const AddHall = () => {
             />
             <input
               type="number"
-              placeholder="Hall Capacity"
+              placeholder="New Hall Capacity"
               id="superPass"
               className="w-full h-12 px-3 bg-[#363636] border-2 rounded-md focus:border-orange-600 focus:outline-none"
               value={hallCapacity}
@@ -99,7 +115,7 @@ const AddHall = () => {
               className="w-full h-16 mt-6 text-2xl text-white bg-black border border-white rounded hover:bg-white hover:text-black focus:outline-none"
               type="submit"
             >
-              Add Hall
+              Edit Hall
             </button>
           </form>
         </div>
@@ -107,4 +123,4 @@ const AddHall = () => {
     );
 }
 
-export default AddHall;
+export default EditHallsPage;

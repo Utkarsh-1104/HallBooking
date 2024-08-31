@@ -11,7 +11,7 @@ router.patch('/:id', async (req, res) => {
         const adminToBeUpdated = await Admin.findOne({_id: id})
         if (!adminToBeUpdated) {
             return res.json({
-                msg: 'admin not found',
+                msg: 'Admin not found.',
                 status: 404
             })
         }

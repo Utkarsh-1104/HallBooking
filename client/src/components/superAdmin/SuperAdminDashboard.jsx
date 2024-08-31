@@ -8,11 +8,10 @@ import Unauthorized from "../../ui/Unauthorized"
 const SuperAdminDashboard = () => {
 
   const access = useRecoilValue(superAdminAccessAtom)
-  const reload = setTimeout(() => {
-    window.location.reload()
-  }, 1000);
-  
-  clearTimeout(reload)
+  // const reload = setTimeout(() => {
+  //   window.location.reload()
+  //   clearTimeout(reload)
+  // }, 1000);
 
   return (
     <div className='bg-black h-screen font-[Roboto] '>

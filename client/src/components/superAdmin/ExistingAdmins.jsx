@@ -71,6 +71,12 @@ async function deleteAdmin(id, setOpen, setResult, setMsg) {
     setOpen(true);
     setResult('success');
     setMsg(res.msg + " Please refresh the page.");
+
+    const refresh = setTimeout(() => {
+      window.location.reload();
+      clearTimeout(refresh);
+    }, 2000);
+    
   } else {
     setOpen(true);
     setResult('error');
