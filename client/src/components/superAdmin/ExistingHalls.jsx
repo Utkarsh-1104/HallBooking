@@ -20,12 +20,12 @@ const ExistingHalls = (props) => {
 
   const [open, setOpen] = useState(false);
 
-    const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-        setOpen(false);
-    };
+  const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+          return;
+      }
+      setOpen(false);
+  };
 
   return (
     <>

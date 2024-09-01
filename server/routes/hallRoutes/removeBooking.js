@@ -1,30 +1,43 @@
 import express from 'express'
 import { db } from '../../db/db.js'
 import Hall from '../../schema/hallSchema.js'
+import e from 'express'
 const router = express.Router()
 
-router.get('/:id', async (req, res) => {
+router.post('/:id', async (req, res) => {
     const id = req.params.id
+    const booking_id = req.body.booking_id
+    console.log(id);
+    console.log(booking_id);
     try {
         const result = await Hall.updateOne(
             {_id: id},
             {
                 $pull: {
                     hall_availability: {
-                        _id: req.body.booking_id
+                        booking_id: booking_id
                     }
                 }
             }
         )
         if (result.modifiedCount > 0) {
-            console.log('Booking removed successfully.');
+            res.json({
+                msg: 'Booking removed successfully',
+                status: 200
+            })
         } else {
-            console.log('No matching booking found.');
+            res.json({
+                msg: 'No matching booking found.',
+                status: 404
+            })
         }
     } catch (error) {
+        console.log(error);
         res.json({
             msg: "Some error occured. Couldn't remove booking",
             status: 400
         })
     }
 })
+
+export default router

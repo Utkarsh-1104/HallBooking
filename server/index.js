@@ -9,6 +9,7 @@ import postHalls from './routes/hallRoutes/postHalls.js'
 import bookHall from './routes/hallRoutes/bookHall.js'
 import updateHall from './routes/hallRoutes/updateHalls.js'
 import removeHall from './routes/hallRoutes/removeHall.js'
+import removeBooking from './routes/hallRoutes/removeBooking.js'
 
 import loginAdmin from './routes/authRoutes/loginAdmin.js'
 import adminDashboard from './routes/authRoutes/adminDashboard.js'
@@ -28,6 +29,7 @@ app.use('/posthall', superAdminAuthMiddleware, postHalls)
 app.use('/bookhall', bookHall)
 app.use('/updatehall', superAdminAuthMiddleware, updateHall)
 app.use('/removehall', superAdminAuthMiddleware, removeHall)
+app.use('/removebooking', superAdminAuthMiddleware, removeBooking)
 
 app.use('/loginadmin', loginAdmin)
 app.use('/admindashboard', adminAuthMiddleware, adminDashboard)

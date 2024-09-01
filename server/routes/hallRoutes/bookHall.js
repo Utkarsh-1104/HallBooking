@@ -4,6 +4,7 @@ import Hall from "../../schema/hallSchema.js";
 const router = express.Router();
 
 router.patch('/:date', async (req, res) => {
+    const date = req.params.date
     try {
         await db()
         const all_halls = await Hall.find()

@@ -11,7 +11,8 @@ const hallSchema = new mongoose.Schema({
         time_from: String,
         time_to: String,
         event_name: String,
-        booked_by: String
+        booked_by: String,
+        booking_id: String
     }]
 })
 
