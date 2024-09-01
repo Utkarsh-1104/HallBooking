@@ -7,8 +7,6 @@ const router = express.Router()
 router.post('/:id', async (req, res) => {
     const id = req.params.id
     const booking_id = req.body.booking_id
-    console.log(id);
-    console.log(booking_id);
     try {
         const result = await Hall.updateOne(
             {_id: id},
@@ -32,7 +30,6 @@ router.post('/:id', async (req, res) => {
             })
         }
     } catch (error) {
-        console.log(error);
         res.json({
             msg: "Some error occured. Couldn't remove booking",
             status: 400
