@@ -1,53 +1,57 @@
 import { useRecoilValue } from "recoil"
-import BookHall from "../hall/BookHall"
 import { adminAccessAtom } from "../../atoms/accessAtom"
 import { useNavigate } from "react-router-dom"
-import Unauthorized from "../../ui/Unauthorized"
-// import { useEffect, useState } from "react"
-// import axios from "axios"
+import Unauthorized from "../../ui/Unauthorized";
+import AddHomeIcon from '@mui/icons-material/AddHome';
+import { hallAtom } from "../../atoms/getHallsAtom";
+import HallForAdmin from "./HallForAdmin";
 
 const AdminDashboard = () => {
-  // const [auth, setAuth] = useState({})
-
-  // useEffect(() => {
-  //   async function checkAuth() {
-  //     try {
-  //       const access = await axios.get('http://localhost:3000/admindashboard', {
-  //         headers: {
-  //           Authorization: `Bearer ${localStorage.getItem('token')}`
-  //         }
-  //       })
-  //       setAuth(access.data)
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  //   checkAuth()
-  // })
 
   const auth = useRecoilValue(adminAccessAtom) 
   console.log(auth);
   
   return (
-    <div className="bg-black h-screen font-[Roboto] flex flex-col items-center justify-center ">
+    <div className="bg-black min-h-screen font-[Roboto] ">
       {(auth.msg === "Authorized") ? <Dashboard /> : <Unauthorized /> }
     </div>
   )
 }
 
 function Dashboard() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  const halls = useRecoilValue(hallAtom);
+
   return (
-    <div>
-      <h1 className="text-white text-center font-[Poppins] ">Admin Page</h1>
-      <BookHall />
-      <button className="w-32 h-10 bg-slate-500 text-white rounded-md " onClick={ async () => {
-        localStorage.removeItem('token')
-        navigate("/login")
-        window.location.reload()
-      }} >Logout</button>
+    <div className="p-4 sm:p-8">
+      <div className="flex flex-col items-center justify-center">
+        <div className="w-full max-w-4xl flex flex-col sm:flex-row items-center border text-white mt-10 py-8 px-6 sm:px-16">
+          <h1 className="text-xl sm:text-3xl text-center">Want to book a hall?</h1>
+          <button
+            className="text-lg sm:text-xl mt-4 sm:mt-0 sm:ml-auto w-full sm:w-36 h-10 text-white border flex items-center justify-center gap-2 rounded-sm hover:bg-white hover:text-black"
+            onClick={() => { navigate('/superadminpage/adminsettings/addhall'); }}
+          >
+            Book <AddHomeIcon fontSize="small" />
+          </button>
+        </div>
+      </div>
+      <h1 className='text-white font-[Poppins] text-xl sm:text-3xl text-center sm:text-left ps-0 sm:ps-40 pt-16'>
+        Existing Halls
+      </h1>
+      <hr className="mx-auto w-full sm:w-[80%] h-[1.5px] bg-[#373647] border-0 rounded mt-6" />
+      <div className="flex flex-col gap-4 items-center justify-center my-10 overflow-y-auto">
+        {halls.map(hall => (
+          <HallForAdmin
+            key={hall._id}
+            id={hall._id}
+            hall_name={hall.hall_name}
+          />
+        ))}
+
+      </div>
     </div>
-  )
+  );
 }
 
 export default AdminDashboard

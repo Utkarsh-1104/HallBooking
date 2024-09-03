@@ -47,7 +47,7 @@ const ExistingHalls = (props) => {
         </button>
         <button 
           className='w-full sm:w-28 h-8 border flex items-center justify-center gap-2 py-4 hover:bg-white hover:text-black'
-          onClick={deleteAdmin.bind(this, id, setOpen, setResult, setMsg)}
+          onClick={deleteHall.bind(this, id, setOpen, setResult, setMsg)}
           >
           Delete <DeleteForeverIcon fontSize='small' />
         </button>
@@ -57,7 +57,7 @@ const ExistingHalls = (props) => {
   );
 };
 
-async function deleteAdmin(id, setOpen, setResult, setMsg) {
+async function deleteHall(id, setOpen, setResult, setMsg) {
   
   const response = await axios.delete(`http://localhost:3000/removehall/${id}`,
     {
