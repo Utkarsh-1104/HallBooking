@@ -14,7 +14,7 @@ import Popup from "../../ui/Alert";
 const ViewSingleHall = () => {
     const access = useRecoilValue(superAdminAccessAtom);
     return (
-      <div className="bg-black h-screen font-[Roboto]">
+      <div className="bg-black min-h-screen font-[Roboto]">
         {(access.msg === 'Authorized') ? <ViewHall /> : <Unauthorized />}
       </div>
     );
@@ -39,12 +39,12 @@ function ViewHall() {
     }, [id])
 
     return (
-        <div className="h-screen p-4 sm:p-8">
-            <h1 className='text-white font-[Poppins] text-xl sm:text-3xl text-center sm:text-left ps-0 sm:ps-40 pt-16'>
-                View hall details
+        <div className="h-fit p-4 ">
+            <h1 className='text-white font-[Poppins] text-xl sm:text-3xl text-center sm:text-left ps-0 pt-16 sm:ps-40 '>
+                View Hall Details
             </h1>
             <hr className="mx-auto w-full sm:w-[80%] h-[1.5px] bg-[#373647] border-0 rounded mt-6" />
-            <div className="min-h-[80%] flex flex-wrap items-center justify-center">
+            <div className="min-h-[80%] flex flex-wrap items-center justify-center my-10 overflow-y-auto">
                 <div className="flex flex-col justify-between items-stretch bg-[#1C1C1C] text-white text-2xl gap-3 p-6 sm:px-8 rounded-md">
                     <h1>Hall name: {hall.hall_name}</h1>
                     <h1>Hall Capacity: {hall.hall_capacity}</h1>
