@@ -4,17 +4,18 @@ import Hall from "../../schema/hallSchema.js";
 const router = express.Router();
 
 router.patch('/:date', async (req, res) => {
-    const date = req.params.date
+    const Req_date = req.params.date
     try {
         await db()
         const all_halls = await Hall.find()
-        let hall_bookings = []
+        let available_halls = []
         all_halls.map(hall => {
             hall.hall_availability.map(booking => {
-                hall_bookings.push(booking)
+                available_halls = hall.hall_availability.filter(booking => booking.date !== Req_date)
             })
         })
-        res.send(hall_bookings)
+        available_halls = 
+        res.send(available_halls)
         // await Hall.updateOne (
         //     { 
         //         hall_name: req.params.name 
@@ -35,7 +36,7 @@ router.patch('/:date', async (req, res) => {
             status: 400
         })
     }
-    res.json({ msg: 'patch halls' })
+    //res.json({ msg: 'patch halls' })
 })
 
 export default router;
