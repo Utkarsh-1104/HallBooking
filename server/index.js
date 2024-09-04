@@ -10,6 +10,7 @@ import bookHall from './routes/hallRoutes/bookHall.js'
 import updateHall from './routes/hallRoutes/updateHalls.js'
 import removeHall from './routes/hallRoutes/removeHall.js'
 import removeBooking from './routes/hallRoutes/removeBooking.js'
+import availableHalls from './routes/hallRoutes/getAvailableHalls.js'
 
 import loginAdmin from './routes/authRoutes/loginAdmin.js'
 import adminDashboard from './routes/authRoutes/adminDashboard.js'
@@ -26,6 +27,7 @@ app.use(cors())
 
 app.use('/gethalls', getHalls)
 app.use('/posthall', superAdminAuthMiddleware, postHalls)
+app.use('/availablehalls', availableHalls)
 app.use('/bookhall', bookHall)
 app.use('/updatehall', superAdminAuthMiddleware, updateHall)
 app.use('/removehall', superAdminAuthMiddleware, removeHall)
