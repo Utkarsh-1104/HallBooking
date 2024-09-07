@@ -7,7 +7,8 @@ const hallSchema = new mongoose.Schema({
     },
     hall_capacity: Number,
     hall_availability: [{
-        date: String,
+        date_from: String,
+        date_to: String,
         time_from: String,
         time_to: String,
         event_name: String,
