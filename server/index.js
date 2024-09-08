@@ -27,7 +27,7 @@ app.use(cors())
 
 app.use('/gethalls', getHalls)
 app.use('/posthall', superAdminAuthMiddleware, postHalls)
-app.use('/availablehalls', availableHalls)
+app.use('/availablehalls', authMiddleware, availableHalls)
 app.use('/bookhall', bookHall)
 app.use('/updatehall', superAdminAuthMiddleware, updateHall)
 app.use('/removehall', superAdminAuthMiddleware, removeHall)
