@@ -30,7 +30,7 @@ function Dashboard() {
           <h1 className="text-xl sm:text-3xl text-center">Want to book a hall?</h1>
           <button
             className="text-lg sm:text-xl mt-4 sm:mt-0 sm:ml-auto w-full sm:w-36 h-10 text-white border flex items-center justify-center gap-2 rounded-sm hover:bg-white hover:text-black"
-            onClick={() => { navigate('/superadminpage/adminsettings/addhall'); }}
+            onClick={() => { navigate('/bookhall'); }}
           >
             Book <AddHomeIcon fontSize="small" />
           </button>
