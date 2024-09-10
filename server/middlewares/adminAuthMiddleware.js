@@ -20,6 +20,7 @@ const adminAuthMiddleware = async (req, res, next) => {
             req.userId = decoded.userid;
             req.fname = decoded.fname;
             req.lname = decoded.lname;
+            req.username = decoded.username;
             req.designation = decoded.designation;
             req.role = decoded.role;
             next();

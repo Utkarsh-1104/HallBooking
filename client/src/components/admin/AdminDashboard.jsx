@@ -49,6 +49,11 @@ function Dashboard() {
         ))}
 
       </div>
+      <button className="w-32 h-10 bg-slate-500 text-white rounded-md " onClick={ async () => {
+        localStorage.removeItem('token')
+        navigate("/login")
+        window.location.reload()
+      }} >Logout</button>
     </div>
   );
 }

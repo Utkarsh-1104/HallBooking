@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useRecoilState, useRecoilValue } from "recoil";
 import { adminAccessAtom } from "../../atoms/accessAtom";
 import Unauthorized from "../../ui/Unauthorized";
@@ -10,15 +11,14 @@ import { useNavigate } from "react-router-dom";
 
 const AvailableHalls = () => {
   const auth = useRecoilValue(adminAccessAtom)
-  
   return (
     <div className="bg-black min-h-screen font-[Roboto] ">
-      {(auth.msg === "Authorized") ? <BookDetails /> : <Unauthorized /> }
+      {(auth.msg === "Authorized") ? <BookDetails auth={auth} /> : <Unauthorized /> }
     </div>
   )
 }
 
-function BookDetails() {
+function BookDetails(props) {
   const [dateFrom, setDateFrom] = useRecoilState(dateFromAtom)
   const [dateTo, setDateTo] = useRecoilState(dateToAtom)
   const [timeFrom, setTimeFrom] = useRecoilState(timeFromAtom)
@@ -70,7 +70,7 @@ function BookDetails() {
   }
 
   const navigate = useNavigate();
-  const admin_id = localStorage.getItem('token');
+  console.log(props.auth);
 
   return (
     <div className="min-h-screen bg-black text-white p-8 font-[Roboto]">
@@ -135,7 +135,7 @@ function BookDetails() {
               <h3 className="text-2xl font-bold mb-3">{hall.hall_name}</h3>
               <div className="flex justify-between items-center">
                 <p className="text-lg">Capacity: {hall.hall_capacity} guests</p>
-                <button className="py-2 px-6 bg-gradient-to-r from-green-700 to-blue-700 text-white font-bold rounded-full shadow-md hover:from-green-500 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 transform hover:scale-105 transition duration-300 ease-in-out" onClick={() => { navigate(`/bookhall/?id=${hall._id}/?admin_id=${admin_id}`); }} >
+                <button className="py-2 px-6 bg-gradient-to-r from-green-700 to-blue-700 text-white font-bold rounded-full shadow-md hover:from-green-500 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 transform hover:scale-105 transition duration-300 ease-in-out" onClick={() => { navigate(`/bookhall/?hall_id=${hall._id}/?admin_id=${props.auth.id}`); }} >
                   Book Now
                 </button>
               </div>

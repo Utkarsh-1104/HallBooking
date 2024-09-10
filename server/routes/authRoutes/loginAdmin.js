@@ -22,6 +22,7 @@ router.post('/', async (req, res) => {
                         userid: admin._id,
                         fname: admin.fname,
                         lname: admin.lname,
+                        username: admin.username,
                         designation: admin.designation,
                         role: admin.role
                     }, process.env.JWT_SECRET)
@@ -30,6 +31,7 @@ router.post('/', async (req, res) => {
                         fname: admin.fname,
                         lname: admin.lname,
                         id: admin._id,
+                        username: admin.username,
                         designation: admin.designation,
                         role: admin.role,
                         token: token,
