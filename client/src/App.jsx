@@ -13,7 +13,7 @@ const AddHall = React.lazy(() => import('./components/superAdmin/AddHall'))
 const ViewSingleHall = React.lazy(() => import('./components/superAdmin/ViewSingleHall'))
 const EditHallsPage = React.lazy(() => import('./components/superAdmin/EditHall'))
 const SingleHallForAdmin = React.lazy(() => import('./components/admin/SingleHallForAdmin'))
-const BookHall = React.lazy(() => import('./components/hall/BookHall'))
+const AvailableHalls = React.lazy(() => import('./components/hall/AvailableHalls'))
 import Loader from "./ui/Loader"
 import Navbar from './components/misc/Navbar'
 import { Suspense } from "react"
@@ -39,7 +39,7 @@ function App() {
           <Route path="/superadminpage/hallsettings/viewhall" element={<Suspense fallback={<Loader />}><ViewSingleHall /></Suspense> }></Route>
           <Route path="/superadminpage/hallsettings/edithall" element={<Suspense fallback={<Loader />}><EditHallsPage /></Suspense> }></Route>
           <Route path="/adminpage/hallsettings/viewhalladmin" element={<Suspense fallback={<Loader />}><SingleHallForAdmin /></Suspense> }></Route>
-          <Route path="/bookhall" element={<Suspense fallback={<Loader />}><BookHall /></Suspense> }></Route>
+          <Route path="/availablehalls" element={<Suspense fallback={<Loader />}><AvailableHalls /></Suspense> }></Route>
         </Routes>
       </BrowserRouter>
     </RecoilRoot>
