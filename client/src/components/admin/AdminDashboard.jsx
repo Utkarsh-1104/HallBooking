@@ -9,7 +9,6 @@ import HallForAdmin from "./HallForAdmin";
 const AdminDashboard = () => {
 
   const auth = useRecoilValue(adminAccessAtom) 
-  console.log(auth);
   
   return (
     <div className="bg-black min-h-screen font-[Roboto] ">

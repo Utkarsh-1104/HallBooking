@@ -22,8 +22,7 @@ function BookDetails() {
   const [dateTo, setDateTo] = useRecoilState(dateToAtom)
   const [timeFrom, setTimeFrom] = useRecoilState(timeFromAtom)
   const [timeTo, setTimeTo] = useRecoilState(timeToAtom)
-
-  let availableHalls = []
+  const [availableHalls, setAvailableHalls] = useState([])
   const [showResults, setShowResults] = useState(false)
 
   const [result, setResult] = useRecoilState(eventAtom);
@@ -60,15 +59,13 @@ function BookDetails() {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
       });
-      availableHalls = response.data;
+      setAvailableHalls(response.data.available_halls)
       setShowResults(true)
-      console.log(availableHalls);
     } catch (error) {
       setOpen(true);
       setResult('error');
       setMsg('An error occurred. Please try again.');
     }
-    console.log(dateFrom, dateTo, timeFrom, timeTo);
   }
 
   return (
