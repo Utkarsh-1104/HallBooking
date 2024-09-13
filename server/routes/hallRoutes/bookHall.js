@@ -3,8 +3,23 @@ import { db } from "../../db/db.js";
 import Hall from "../../schema/hallSchema.js";
 const router = express.Router();
 
-router.patch('/:id', async (req, res) => {
-    const id = req.params.id
+function randomIdGenerator() {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    const length = 12;
+    const charactersLength = characters.length;
+
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    return result;
+}
+
+router.patch('/:hall_id', async (req, res) => {
+    const id = req.params.hall_id
+    const { date_from, date_to, time_from, time_to, event_name, booked_by, admin_booking_id } = req.body
+    const booking_id = randomIdGenerator()
     try {
         await db()
         await Hall.updateOne (
@@ -13,12 +28,21 @@ router.patch('/:id', async (req, res) => {
             }, 
             { 
                 "$push": {
-                    hall_availability: req.body 
+                    hall_availability: {
+                        date_from: date_from,
+                        date_to: date_to,
+                        time_from: time_from,
+                        time_to: time_to,
+                        event_name: event_name,
+                        booked_by: booked_by,
+                        booking_id: booking_id,
+                        admin_booking_id: admin_booking_id
+                    } 
                 }
             }
         )
         return res.json({
-            msg: 'hall updated',
+            msg: 'hall booked',
             status: 200
         })  
     } catch (error) {

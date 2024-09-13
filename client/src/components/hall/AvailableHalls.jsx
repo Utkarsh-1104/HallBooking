@@ -135,7 +135,7 @@ function BookDetails(props) {
               <h3 className="text-2xl font-bold mb-3">{hall.hall_name}</h3>
               <div className="flex justify-between items-center">
                 <p className="text-lg">Capacity: {hall.hall_capacity} guests</p>
-                <button className="py-2 px-6 bg-gradient-to-r from-green-700 to-blue-700 text-white font-bold rounded-full shadow-md hover:from-green-500 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 transform hover:scale-105 transition duration-300 ease-in-out" onClick={() => { navigate(`/bookhall/?hall_id=${hall._id}/?admin_id=${props.auth.id}`); }} >
+                <button className="py-2 px-6 bg-gradient-to-r from-green-700 to-blue-700 text-white font-bold rounded-full shadow-md hover:from-green-500 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 transform hover:scale-105 transition duration-300 ease-in-out" onClick={() => { navigate(`/bookhall/?hall_id=${hall._id}&admin_id=${props.auth.id}&date_from=${dateFrom}&date_to=${dateTo}&time_from=${timeFrom}&time_to=${timeTo}`); }} >
                   Book Now
                 </button>
               </div>

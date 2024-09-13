@@ -84,7 +84,6 @@ const EditAdmin = () => {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }
                 });
-                console.log(response.data);
                 if (response.data.status === 200) {
                     setOpen(true);
                     setResult('success');
@@ -94,7 +93,6 @@ const EditAdmin = () => {
                     setResult('error');
                     setMsg(response.data.msg);
                 }
-                console.log(fname, lname, username, password, role, designation);
             } catch (e) {
                 console.log(e);
             }
