@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useRecoilValue } from "recoil"
 import { adminAccessAtom } from "../../atoms/accessAtom"
 import { useNavigate } from "react-router-dom"
@@ -12,12 +13,12 @@ const AdminDashboard = () => {
   
   return (
     <div className="bg-gradient-to-br from-gray-900 via-purple-900 to-violet-800 min-h-screen font-[Roboto] text-white">
-      {(auth.msg === "Authorized") ? <Dashboard /> : <Unauthorized /> }
+      {(auth.msg === "Authorized") ? <Dashboard auth={auth} /> : <Unauthorized /> }
     </div>
   )
 }
 
-function Dashboard() {
+function Dashboard(props) {
   const navigate = useNavigate();
   const halls = useRecoilValue(hallAtom);
 
@@ -29,7 +30,7 @@ function Dashboard() {
         </h1>
         <button
           className="p-2 sm:px-4 sm:py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-md transition-all duration-300 ease-in-out transform hover:from-purple-600 hover:to-pink-600 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 flex items-center justify-center"
-          onClick={() => navigate(`/myprofile`)}
+          onClick={() => navigate(`/myprofile/?id=${props.auth.id}`)}
         >
           <PersonIcon className="sm:mr-2" />
           <span className="hidden sm:inline">My Profile</span>

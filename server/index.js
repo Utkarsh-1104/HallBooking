@@ -20,6 +20,7 @@ import getAdmins from './routes/adminRoutes/getAdmins.js'
 import postAdmins from './routes/adminRoutes/postAdmins.js'
 import removeAdmins from './routes/adminRoutes/removeAdmins.js'
 import updateAdmins from './routes/adminRoutes/updateAdmins.js'
+import getProfile from './routes/adminRoutes/getProfile.js'
 
 const app = express()
 app.use(express.json())
@@ -41,6 +42,7 @@ app.use('/getadmins',superAdminAuthMiddleware, getAdmins)
 app.use('/postadmins', superAdminAuthMiddleware, postAdmins)
 app.use('/removeadmins', superAdminAuthMiddleware, removeAdmins)
 app.use('/updateadmins', superAdminAuthMiddleware, updateAdmins)
+app.use('/getprofile', authMiddleware, getProfile)
 
 app.get('/', (req, res) => {
     res.json({ message: 'Server running' })
