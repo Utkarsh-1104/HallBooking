@@ -72,20 +72,20 @@ function BookDetails(props) {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-800 text-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-800 via-neutral-700 to-zinc-700 text-gray-100 py-12 px-4 sm:px-6 lg:px-8">
       <Popup result={result} msg={msg} open={open} handleClose={handleClose} />
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
             Find Available Halls
           </h1>
-          <p className="mt-2 text-sm text-gray-400">Select your dates and times to search for available halls</p>
+          <p className="mt-2 text-base text-gray-400">Select your dates and time to search for available halls</p>
         </div>
 
-        <form onSubmit={handleSearch} className="mb-8 bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-lg rounded-xl p-6 shadow-2xl">
-          <div className="grid grid-cols-2 gap-4 mb-4">
+        <form onSubmit={handleSearch} className="mb-8 bg-[#c7c2c2] bg-opacity-50 backdrop-filter backdrop-blur-lg rounded-xl p-6 shadow-2xl">
+          <div className="grid grid-cols-2 gap-4 mb-4 text-black">
             <div className="space-y-2">
-              <label htmlFor="dateFrom" className="text-sm font-medium text-gray-300">
+              <label htmlFor="dateFrom" className="text-lg font-medium">
                 Date From
               </label>
               <input
@@ -97,7 +97,7 @@ function BookDetails(props) {
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="dateTo" className="text-sm font-medium text-gray-300">
+              <label htmlFor="dateTo" className="text-lg font-medium">
                 Date To
               </label>
               <input
@@ -109,9 +109,9 @@ function BookDetails(props) {
               />
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4 mb-6">
+          <div className="grid grid-cols-2 gap-4 mb-6 text-black">
             <div className="space-y-2">
-              <label htmlFor="timeFrom" className="text-sm font-medium text-gray-300">
+              <label htmlFor="timeFrom" className="text-lg font-medium">
                 Time From
               </label>
               <input
@@ -123,7 +123,7 @@ function BookDetails(props) {
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="timeTo" className="text-sm font-medium text-gray-300">
+              <label htmlFor="timeTo" className="text-lg font-medium">
                 Time To
               </label>
               <input
@@ -137,7 +137,7 @@ function BookDetails(props) {
           </div>
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold py-3 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:from-purple-600 hover:to-pink-600 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50"
+            className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-3 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:from-purple-700 hover:to-pink-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50"
             onClick={handleSearch}
           >
             Search Available Halls
