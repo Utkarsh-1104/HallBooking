@@ -40,7 +40,7 @@ const AdminRegister = () => {
                 } else {
                     setOpen(true);
                     setResult('error');
-                    setMsg('Username must be at least 6 characters.');
+                    setMsg('Username must be a string and at least 6 characters.');
                 }
             } else {
                 setOpen(true);

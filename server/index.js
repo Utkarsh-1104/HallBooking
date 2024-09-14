@@ -21,6 +21,7 @@ import postAdmins from './routes/adminRoutes/postAdmins.js'
 import removeAdmins from './routes/adminRoutes/removeAdmins.js'
 import updateAdmins from './routes/adminRoutes/updateAdmins.js'
 import getProfile from './routes/adminRoutes/getProfile.js'
+import editProfile from './routes/adminRoutes/editProfile.js'
 
 const app = express()
 app.use(express.json())
@@ -29,7 +30,7 @@ app.use(cors())
 app.use('/gethalls', getHalls)
 app.use('/posthall', superAdminAuthMiddleware, postHalls)
 app.use('/availablehalls', authMiddleware, availableHalls)
-app.use('/bookhall', bookHall)
+app.use('/bookhall', authMiddleware, bookHall)
 app.use('/updatehall', superAdminAuthMiddleware, updateHall)
 app.use('/removehall', superAdminAuthMiddleware, removeHall)
 app.use('/removebooking', superAdminAuthMiddleware, removeBooking)
@@ -43,6 +44,7 @@ app.use('/postadmins', superAdminAuthMiddleware, postAdmins)
 app.use('/removeadmins', superAdminAuthMiddleware, removeAdmins)
 app.use('/updateadmins', superAdminAuthMiddleware, updateAdmins)
 app.use('/getprofile', authMiddleware, getProfile)
+app.use('/editprofile', authMiddleware, editProfile)
 
 app.get('/', (req, res) => {
     res.json({ message: 'Server running' })
