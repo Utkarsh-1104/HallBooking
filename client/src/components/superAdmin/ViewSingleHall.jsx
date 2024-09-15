@@ -55,7 +55,8 @@ function ViewHall() {
                             key={booking._id}
                             hall_id={hall._id}
                             booking_id={booking.booking_id}
-                            date={booking.date}
+                            date_from={booking.date_from}
+                            date_to={booking.date_to}
                             from={booking.time_from}
                             to={booking.time_to}
                             booked_by={booking.booked_by}
@@ -86,7 +87,8 @@ function HallBookings(props) {
             <Popup state={open} handleClose={handleClose} event={result} text={msg} />
             <div className="flex items-start justify-start gap-6 border p-4 ">
                 <div>
-                    <h1>Date: {props.date} </h1>
+                    <h1>Date From: {props.date_from} </h1>
+                    <h1>Date To: {props.date_to} </h1>
                     <h1>From: {props.from} </h1>
                     <h1>To: {props.to} </h1>
                     <h1>Booked by: {props.booked_by} </h1>
