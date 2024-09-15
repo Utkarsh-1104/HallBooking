@@ -72,9 +72,9 @@ async function deleteHall(id, setOpen, setResult, setMsg) {
     setResult('success');
     setMsg(res.msg + " Please refresh the page.");
     
-    const refrest = setTimeout(() => {
+    const refresh = setTimeout(() => {
       window.location.reload();
-      clearTimeout(refrest);
+      clearTimeout(refresh);
     }, 2000);
   } else {
     setOpen(true);

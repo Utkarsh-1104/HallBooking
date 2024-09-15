@@ -17,6 +17,7 @@ const AvailableHalls = React.lazy(() => import('./components/hall/AvailableHalls
 const BookHall = React.lazy(() => import('./components/hall/BookHall'))
 const MyProfile = React.lazy(() => import('./components/misc/Profile'))
 const EditProfile = React.lazy(() => import('./components/admin/EditProfile'))
+const MyBookings = React.lazy(() => import('./components/misc/MyBookings'))
 import Loader from "./ui/Loader"
 import Navbar from './components/misc/Navbar'
 import { Suspense } from "react"
@@ -46,6 +47,7 @@ function App() {
           <Route path="/bookhall" element={<Suspense fallback={<Loader />}><BookHall /></Suspense> }></Route>
           <Route path="/myprofile" element={<Suspense fallback={<Loader />}><MyProfile /></Suspense> }></Route>
           <Route path="/editprofile" element={<Suspense fallback={<Loader />}><EditProfile /></Suspense>}></Route>
+          <Route path="/mybookings" element={<Suspense fallback={<Loader />}><MyBookings /></Suspense> }></Route>
         </Routes>
       </BrowserRouter>
     </RecoilRoot>

@@ -11,6 +11,7 @@ import updateHall from './routes/hallRoutes/updateHalls.js'
 import removeHall from './routes/hallRoutes/removeHall.js'
 import removeBooking from './routes/hallRoutes/removeBooking.js'
 import availableHalls from './routes/hallRoutes/getAvailableHalls.js'
+import getBookedHalls from './routes/hallRoutes/getBookedHalls.js'
 
 import loginAdmin from './routes/authRoutes/loginAdmin.js'
 import adminDashboard from './routes/authRoutes/adminDashboard.js'
@@ -33,7 +34,8 @@ app.use('/availablehalls', authMiddleware, availableHalls)
 app.use('/bookhall', authMiddleware, bookHall)
 app.use('/updatehall', superAdminAuthMiddleware, updateHall)
 app.use('/removehall', superAdminAuthMiddleware, removeHall)
-app.use('/removebooking', superAdminAuthMiddleware, removeBooking)
+app.use('/removebooking', authMiddleware, removeBooking)
+app.use('/getbookedhalls', getBookedHalls)
 
 app.use('/loginadmin', loginAdmin)
 app.use('/admindashboard', adminAuthMiddleware, adminDashboard)

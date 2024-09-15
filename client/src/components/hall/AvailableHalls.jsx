@@ -146,7 +146,7 @@ function BookDetails(props) {
         {showResults && (
         <div className="bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-lg rounded-xl p-6 shadow-2xl">
           <h2 className="text-2xl font-bold mb-4 text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-pink-600">
-              Available Halls
+            Available Halls
           </h2>
           {availableHalls.length > 0 ? (
               <ul className="space-y-4">
