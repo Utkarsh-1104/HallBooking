@@ -40,8 +40,8 @@ function EditDetails() {
   async function updateDetails(e) {
     e.preventDefault()
 
-    if ((newUsername.toLowerCase() !== newUsername.toUpperCase()) && newUsername.length >= 6) {
-      if (newPassword.length >= 6) {
+    if (newUsername === "" || ((newUsername.toLowerCase() !== newUsername.toUpperCase()) && newUsername.length >= 6)) {
+      if (newPassword === "" || newPassword.length >= 6) {
         editProfile();
       } else {
         setOpen(true);
@@ -57,7 +57,7 @@ function EditDetails() {
 
     async function editProfile() {
       try {
-        const response = await axios.post(`http://localhost:3000/editprofile/${admin_id}`, {
+        const response = await axios.patch(`http://localhost:3000/editprofile/${admin_id}`, {
           newUsername: newUsername,
           newPassword: newPassword
         }, {
@@ -65,11 +65,12 @@ function EditDetails() {
             Authorization: `Bearer ${localStorage.getItem('token')}`
           }
         })
-        console.log(response.data)
+        setOpen(true);
+        setResult('success');
+        setMsg(response.data.msg);
       } catch (error) {
         console.error(error)
       }
-      console.log(newUsername, newPassword) ;
     }
   }
 

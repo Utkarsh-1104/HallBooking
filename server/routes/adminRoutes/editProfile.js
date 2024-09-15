@@ -31,12 +31,12 @@ router.patch('/:id', async (req, res) => {
         });
         
         return res.json({
-            msg: 'admin details updated',
+            msg: 'Admin details updated successfully.',
             status: 200
         })
     } catch (error) {
         res.json({
-            msg: "admin not updated",
+            msg: "An error occurred.",
             status: 400
         })
     }
