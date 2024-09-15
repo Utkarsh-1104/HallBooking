@@ -6,8 +6,8 @@ import { common } from '@mui/material/colors'
 const LongComp = (props) => {
   const navigate = useNavigate()
   return (
-      <div className="w-[80%] flex gap-7 justify-center items-center ">
-        <div className="w-[4.5rem] bg-[#363636] text-center p-2 rounded-xl">
+      <div className="w-[100%] flex gap-7 justify-center items-center ">
+        <div className="w-[4.5rem] text-center p-2 rounded-xl">
           { (props.icon === "MeetingRoomIcon") ? <MeetingRoomIcon sx={{ color: common.white, fontSize: 40}} /> : <GroupsIcon sx={{ color: common.white, fontSize: 40}} /> }
         </div>
         <div className="">

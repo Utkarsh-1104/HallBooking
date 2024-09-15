@@ -9,7 +9,7 @@ const Profile = () => {
     const auth = useRecoilValue(adminAccessAtom) 
   
     return (
-      <div className="bg-gradient-to-br from-gray-900 via-purple-900 to-violet-800 min-h-screen font-[Roboto] text-white">
+      <div className=" min-h-screen font-[Roboto] text-white">
         {(auth.msg === "Authorized") ? <MyProfile /> : <Unauthorized /> }
       </div>
     )

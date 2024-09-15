@@ -23,8 +23,8 @@ function Dashboard(props) {
   const halls = useRecoilValue(hallAtom);
 
   return (
-    <div className="p-10 sm:px-24">
-      <div className="flex flex-col sm:flex-row justify-between items-center mb-8 space-y-4 sm:space-y-0">
+    <div className="py-10 px-6 sm:px-24">
+      <div className="flex sm:flex-row justify-between items-center mb-8 sm:space-y-0">
         <h1 className="text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 text-center sm:text-left">
           Admin Dashboard
         </h1>

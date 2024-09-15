@@ -15,8 +15,8 @@ router.patch('/:id', async (req, res) => {
                 status: 404
             })
         }
-        
-        bcrypt.hash(req.body.newPassword, 10, async function(err, hash) {
+        const newPassword = req.body.newPassword;
+        if (newPassword.length === 0) {
             await Admin.updateOne(
                 {
                     _id: id
@@ -24,12 +24,24 @@ router.patch('/:id', async (req, res) => {
                 {
                     "$set": {
                         username: req.body.newUsername || adminToBeUpdated.username,
-                        password: hash || adminToBeUpdated.password,
                     }
                 }
             )
-        });
-        
+        } else {
+            bcrypt.hash(req.body.newPassword, 10, async function(err, hash) {
+                await Admin.updateOne(
+                    {
+                        _id: id
+                    },
+                    {
+                        "$set": {
+                            username: req.body.newUsername || adminToBeUpdated.username,
+                            password: hash || adminToBeUpdated.password,
+                        }
+                    }
+                )
+            });
+        }
         return res.json({
             msg: 'Admin details updated successfully.',
             status: 200

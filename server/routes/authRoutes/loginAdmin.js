@@ -40,14 +40,14 @@ router.post('/', async (req, res) => {
                     })
                 } else {
                     res.json({
-                        msg: 'Invalid username/password',
+                        msg: 'Invalid password',
                         status: 400
                     })
                 }
             });
         } else {
             res.json({
-                msg: 'Invalid username/password',
+                msg: 'Invalid username',
                 status: 400
             })
         }
