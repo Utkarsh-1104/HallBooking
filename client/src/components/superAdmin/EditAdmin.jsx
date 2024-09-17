@@ -107,33 +107,71 @@ const EditAdmin = () => {
     }
 
     return (
-        <div className="bg-black flex items-center justify-center text-white px-4 sm:px-6 lg:px-8 h-full py-10 min-h-screen">
-            <div className="w-full max-w-lg mx-auto bg-[#1C1C1C] py-6 px-4 sm:px-6 lg:px-10 rounded-lg">
-                <div className="h-fit w-full flex flex-col items-center">
-                    <h1 className="text-[1.65rem] md:text-2xl lg:text-3xl text-center">Edit Admin</h1>
-                    <p className="text-base md:text-lg lg:text-xl font-[100] pt-2 text-center text-blue-100">Edit existing admin in the system.</p>
-                    <Popup state={open} handleClose={handleClose} event={result} text={msg} />
-                    <form className="flex flex-col items-center w-full" action="" method="">
-                        <div className="flex flex-col sm:flex-row sm:gap-4 md:gap-6 mt-8 w-full">
-                            <input type="text" placeholder="First Name" className="w-full sm:w-1/2 h-12 ps-3 bg-[#363636] border-2 rounded-md focus:border-orange-600 focus:outline-none " value={fname} onChange={(e) => (setfname(e.target.value))} />
-                            <input type="text" placeholder="Last Name" className="w-full sm:w-1/2 h-12 mt-4 sm:mt-0 ps-3 bg-[#363636] border-2 rounded-md focus:border-orange-600 focus:outline-none " value={lname} onChange={(e) => (setlname(e.target.value))} />
-                        </div>
-                        <div className="flex flex-col sm:flex-row sm:gap-4 md:gap-6 mt-6 w-full">
-                            <input type="text" placeholder="Username" className="w-full sm:w-1/2 h-12 ps-3 bg-[#363636] border-2 rounded-md focus:border-orange-600 focus:outline-none " value={username} onChange={(e) => (setusername(e.target.value))} />
-                            <input type="password" name="adminPass" placeholder="Password" id="adminPass" className="w-full sm:w-1/2 h-12 mt-4 sm:mt-0 ps-3 bg-[#363636] border-2 rounded-md focus:border-orange-600 focus:outline-none" value={password} onChange={(e) => (setpassword(e.target.value))} />
-                        </div>
-                        <div className="flex flex-col sm:flex-row sm:gap-4 md:gap-6 mt-6 w-full">
-                            <select name="role" id="role" className="w-full sm:w-1/2 h-12 ps-3 mb-4 sm:mb-0 bg-[#363636] border-2 rounded-md focus:border-orange-600 focus:outline-none " value={role} onChange={(e) => (setrole(e.target.value))}>
-                                <option value="admin">Admin</option>
-                                <option value="superadmin">Super Admin</option>
-                            </select>
-                            <input type="text" placeholder="Designation" className="w-full sm:w-1/2 h-12 ps-3 bg-[#363636] border-2 rounded-md focus:border-orange-600 focus:outline-none " value={designation} onChange={(e) => (setdesignation(e.target.value))} />
-                        </div>
-                        <button className="w-full sm:w-96 h-12 sm:h-14 lg:h-16 mt-10 text-lg sm:text-xl lg:text-2xl text-white bg-black border border-white rounded hover:bg-white hover:text-black focus:outline-none transition-colors duration-300" type="submit" onClick={handleSubmit}>Update Admin</button>
-                    </form>
+        <>
+            <Popup state={open} handleClose={handleClose} event={result} text={msg} />
+            <div className="bg-gradient-to-br from-gray-900 via-purple-900 to-violet-800 min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+                <div className="w-full max-w-lg">
+                    <div className="bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-lg rounded-xl p-8 shadow-2xl">
+                        <h1 className="text-3xl font-bold text-center mb-2 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">Edit Admin</h1>
+                        <p className="text-lg text-blue-100 text-center mb-6">Edit existing admin in the system.</p>
+                        <form className="space-y-6" onSubmit={handleSubmit} >
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label htmlFor="fname" className="block text-xl font-medium text-gray-300 mb-1">
+                                        First Name
+                                    </label>
+                                    <input type="text" placeholder="Enter first name" className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent " value={fname} onChange={(e) => (setfname(e.target.value))} />
+                                </div>
+                                <div>
+                                    <label htmlFor="fname" className="block text-xl font-medium text-gray-300 mb-1">
+                                        First Name
+                                    </label>
+                                    <input type="text" placeholder="Enter last name" className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent " value={lname} onChange={(e) => (setlname(e.target.value))} />
+                                </div>
+                            </div>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label htmlFor="fname" className="block text-xl font-medium text-gray-300 mb-1">
+                                        Username
+                                    </label>
+                                    <input type="text" placeholder="Enter username" className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent " value={username} onChange={(e) => (setusername(e.target.value))} />
+                                </div>
+                                <div>
+                                    <label htmlFor="adminPass" className="block text-xl font-medium text-gray-300 mb-1">
+                                        Password
+                                    </label>
+                                    <input type="password" name="adminPass" placeholder="Enter password" id="adminPass" className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" value={password} onChange={(e) => (setpassword(e.target.value))} />
+                                </div>
+                            </div>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label htmlFor="fname" className="block text-xl font-medium text-gray-300 mb-1">
+                                        Role
+                                    </label>
+                                    <select name="role" id="role" className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent " value={role} onChange={(e) => (setrole(e.target.value))}>
+                                        <option value="admin">Admin</option>
+                                        <option value="superadmin">Super Admin</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label htmlFor="fname" className="block text-xl font-medium text-gray-300 mb-1">
+                                        Designation
+                                    </label>
+                                    <input type="text" placeholder="Enter designation" className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent " value={designation} onChange={(e) => (setdesignation(e.target.value))} />
+                                </div>
+                            </div>
+                            <button 
+                                className="w-full text-lg px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-md transition-all duration-300 ease-in-out transform hover:from-purple-600 hover:to-pink-600 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50" 
+                                type="submit" 
+                                onClick={handleSubmit}
+                            >
+                                Update Admin
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
 

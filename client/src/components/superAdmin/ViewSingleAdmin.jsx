@@ -8,7 +8,7 @@ import { useSearchParams } from "react-router-dom";
 const ViewSingleAdmin = () => {
     const access = useRecoilValue(superAdminAccessAtom);
     return (
-      <div className="bg-gradient-to-br from-gray-900 via-purple-900 to-violet-800 min-h-screen font-[Roboto] text-white">
+      <div className="min-h-screen font-[Roboto] text-white">
         {(access.msg === 'Authorized') ? <ViewAdmin /> : <Unauthorized />}
       </div>
     );
@@ -37,11 +37,11 @@ function ViewAdmin() {
     }, [id])
 
     return (
-        <div className="container mx-auto px-4 py-8">
-            <h1 className='text-3xl font-bold mb-8 text-center sm:text-left text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600'>
+        <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-800 flex items-center justify-center p-4">
+            <div className="bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-lg rounded-xl p-8 shadow-2xl">
+            <h1 className='text-3xl font-bold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 '>
                 View Admin Details
             </h1>
-            <hr className="w-full h-px bg-gray-600 border-0 rounded mb-8" />
             <div className="flex items-center justify-center">
                 <div className="w-full max-w-2xl bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-lg rounded-xl p-8 shadow-2xl">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -53,6 +53,7 @@ function ViewAdmin() {
                     </div>
                 </div>
             </div>
+            </div>
         </div>
     );
 }
@@ -60,8 +61,8 @@ function ViewAdmin() {
 function AdminDetailItem({ label, value }) {
     return (
         <div className="mb-4">
-            <h2 className="text-sm font-medium text-gray-400">{label}</h2>
-            <p className="text-lg font-semibold mt-1">{value}</p>
+            <h2 className="text-2xl font-medium text-amber-400">{label}</h2>
+            <p className="text-[1.5rem] mt-1">{value}</p>
         </div>
     );
 }
