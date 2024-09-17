@@ -4,6 +4,7 @@ import Unauthorized from "../../ui/Unauthorized";
 import { useNavigate } from "react-router-dom";
 import ExistingHalls from "./ExistingHalls";
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
+import AddHomeIcon from '@mui/icons-material/AddHome';
 import { hallAtom } from "../../atoms/getHallsAtom";
 
 const HallSettings = () => {
@@ -33,7 +34,7 @@ function Settings() {
               className="w-full sm:w-auto px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-md transition-all duration-300 ease-in-out transform hover:from-purple-600 hover:to-pink-600 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 flex items-center justify-center"
               onClick={() => navigate('/availablehalls')}
             >
-              Book
+              Book <AddHomeIcon className="ml-2" fontSize="small" />
             </button>
           </div>
         </div>

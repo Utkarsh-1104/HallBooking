@@ -50,10 +50,10 @@ function Dashboard(props) {
         </div>
       </div>
 
-      <h2 className='text-2xl font-bold mb-4'>Existing Halls</h2>
-      <hr className="w-full h-px bg-gray-600 border-0 rounded mb-6" />
+      <h2 className='text-2xl mb-4'>Existing Halls</h2>
+      <hr className="w-full h-px bg-gray-600 border-0 rounded mb-8" />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="flex flex-col gap-4 items-center justify-center">
         {halls.map(hall => (
           <HallForAdmin
             key={hall._id}

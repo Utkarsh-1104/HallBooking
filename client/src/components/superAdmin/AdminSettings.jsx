@@ -10,7 +10,7 @@ const AdminSettings = () => {
   
   const access = useRecoilValue(superAdminAccessAtom);
   return (
-    <div className="bg-black min-h-screen font-[Roboto]">
+    <div className="bg-gradient-to-br from-gray-900 via-purple-900 to-violet-800 min-h-screen font-[Roboto] text-white">
       {(access.msg === 'Authorized') ? <Settings /> : <Unauthorized />}
     </div>
   );
@@ -22,23 +22,27 @@ function Settings() {
   const admins = useRecoilValue(adminsAtom);
 
   return (
-    <div className="p-4 sm:p-8">
-      <div className="flex flex-col items-center justify-center">
-        <div className="w-full max-w-4xl flex flex-col sm:flex-row items-center border text-white mt-10 py-8 px-6 sm:px-16">
-          <h1 className="text-xl sm:text-3xl text-center">Want to add new admin?</h1>
+    <div className="py-10 px-6 sm:px-24">
+      <h1 className="text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 text-center sm:text-left mb-8">
+        Admin Settings
+      </h1>
+      <div className="bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-lg rounded-xl p-6 shadow-2xl mb-12">
+        <div className="flex flex-col sm:flex-row items-center justify-between">
+          <h2 className="text-xl sm:text-2xl mb-4 sm:mb-0">Want to add new admin?</h2>
           <button
-            className="text-lg sm:text-xl mt-4 sm:mt-0 sm:ml-auto w-full sm:w-36 h-10 text-white border flex items-center justify-center gap-2 rounded-sm hover:bg-white hover:text-black"
+            className="w-full sm:w-auto px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-md transition-all duration-300 ease-in-out transform hover:from-purple-600 hover:to-pink-600 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 flex items-center justify-center"
             onClick={() => { navigate('/superadminpage/adminsettings/addadmin'); }}
           >
-            Add <PersonAddAlt1Icon fontSize="small" />
+            <span>Add</span>
+            <PersonAddAlt1Icon className="ml-2" fontSize="small" />
           </button>
         </div>
       </div>
-      <h1 className='text-white font-[Poppins] text-xl sm:text-3xl text-center sm:text-left ps-0 sm:ps-40 pt-16'>
-        Existing Admins
-      </h1>
-      <hr className="mx-auto w-full sm:w-[80%] h-[1.5px] bg-[#373647] border-0 rounded mt-6" />
-      <div className="flex flex-col gap-4 items-center justify-center my-10 overflow-y-auto">
+
+      <h2 className='text-2xl mb-4'>Existing Admins</h2>
+      <hr className="w-full h-px bg-gray-600 border-0 rounded mb-6" />
+
+      <div className="flex flex-col gap-4 items-center justify-center">
         {admins.map(admin => (
           <ExistingAdmins
             key={admin._id}
