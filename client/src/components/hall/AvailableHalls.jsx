@@ -150,14 +150,14 @@ function BookDetails(props) {
           </h2>
           {availableHalls.length > 0 ? (
               <ul className="space-y-4">
-                {availableHalls.map((hall) => (
+                {availableHalls.map((hall) => ( 
                   <li key={hall.id} className="flex items-center justify-between bg-gray-700 p-4 rounded-lg">
                     <div>
                       <h3 className="text-lg font-semibold">{hall.hall_name}</h3>
                       <p className="text-sm text-gray-400">Capacity: {hall.hall_capacity}</p>
                     </div>
                     <button
-                      onClick={() => { navigate(`/bookhall/?hall_id=${hall._id}&admin_id=${props.auth.id}&date_from=${dateFrom}&date_to=${dateTo}&time_from=${timeFrom}&time_to=${timeTo}`); }}
+                      onClick={() => { navigate(`/bookhall/?hall_id=${hall._id}&hall_name=${hall.hall_name}&admin_id=${props.auth.id}&date_from=${dateFrom}&date_to=${dateTo}&time_from=${timeFrom}&time_to=${timeTo}&fname=${props.auth.fname}&lname=${props.auth.lname}`); }}
                       className="bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold py-2 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:from-purple-600 hover:to-pink-600 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50"
                     >
                       Book Now

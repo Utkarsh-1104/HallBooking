@@ -35,19 +35,19 @@ const ExistingHalls = (props) => {
           <h1 className="text-xl sm:text-2xl tracking-wide font-bold mb-4 sm:mb-0">{name}</h1>
           <div className='flex flex-wrap justify-center gap-2 sm:gap-4'>
             <button 
-              className='w-full sm:w-auto px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-md transition-all duration-300 ease-in-out transform hover:from-purple-600 hover:to-pink-600 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 flex items-center justify-center'
+              className='w-full sm:w-auto px-5 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-md transition-all duration-300 ease-in-out transform hover:from-purple-600 hover:to-pink-600 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 flex items-center justify-center'
               onClick={() => { navigate(`/superadminpage/hallsettings/viewhall?id=${id}`); }}
             >
               View <VisibilityIcon className="ml-2" fontSize='small' />
             </button>
             <button 
-              className='w-full sm:w-auto px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-md transition-all duration-300 ease-in-out transform hover:from-purple-600 hover:to-pink-600 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 flex items-center justify-center'
+              className='w-full sm:w-auto px-5 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-md transition-all duration-300 ease-in-out transform hover:from-purple-600 hover:to-pink-600 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 flex items-center justify-center'
               onClick={() => { navigate(`/superadminpage/hallsettings/edithall?id=${id}`); }}
             >
               Edit <EditIcon className="ml-2" fontSize='small' />
             </button>
             <button 
-              className='w-full sm:w-auto px-4 py-2 bg-gradient-to-r from-red-500 to-pink-500 text-white font-bold rounded-md transition-all duration-300 ease-in-out transform hover:from-red-600 hover:to-pink-600 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 flex items-center justify-center'
+              className='w-full sm:w-auto px-5 py-2 bg-gradient-to-r from-red-500 to-pink-500 text-white font-bold rounded-md transition-all duration-300 ease-in-out transform hover:from-red-600 hover:to-pink-600 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 flex items-center justify-center'
               onClick={() => deleteHall(id, setOpen, setResult, setMsg)}
             >
               Delete <DeleteForeverIcon className="ml-2" fontSize='small' />

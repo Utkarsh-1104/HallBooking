@@ -1,11 +1,12 @@
 import { useRecoilState, useRecoilValue } from "recoil"
 import { adminAccessAtom } from "../../atoms/accessAtom"
 import Unauthorized from "../../ui/Unauthorized"
- import { useSearchParams } from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 import { useState } from "react"
 import { eventAtom, textAtom } from "../../atoms/adminRegisterAtoms"
 import Popup from "../../ui/Alert"
 import axios from "axios"
+import { capitalize } from "@mui/material"
 
 const BookHall = () => {
     const auth = useRecoilValue(adminAccessAtom) 
@@ -20,15 +21,19 @@ const BookHall = () => {
 
 function BookHallFunction() {
   const [searchParams] = useSearchParams()
+  const hall_name = searchParams.get('hall_name')
   const hall_id = searchParams.get('hall_id')
   const admin_id = searchParams.get('admin_id')
   const time_from = searchParams.get('time_from')
   const time_to = searchParams.get('time_to')
   const date_from = searchParams.get('date_from')
   const date_to = searchParams.get('date_to')
+  const fname = searchParams.get('fname')
+  const lname = searchParams.get('lname')
+  const booked_by = capitalize(fname) + " " + capitalize(lname)
 
   const [eventName, setEventName] = useState('')
-  const [bookedBy, setBookedBy] = useState('')
+  const [noOfAttendees, setNoOfAttendees] = useState('')
 
   const [result, setResult] = useRecoilState(eventAtom);
   const [msg, setMsg] = useRecoilState(textAtom);
@@ -45,14 +50,8 @@ function BookHallFunction() {
   function handleBook(e) {
     e.preventDefault()
     if ((eventName.toLowerCase() !== eventName.toUpperCase())) {
-      if ((bookedBy.toLowerCase() !== bookedBy.toUpperCase())) {
-        postEvent();
-        console.log(time_from, time_to, date_from, date_to, eventName, bookedBy, admin_id);
-      } else {
-        setOpen(true);
-        setResult('error');
-        setMsg('Booked by should be a string.');
-      }
+      postEvent();
+      console.log(time_from, time_to, date_from, date_to, eventName, booked_by, admin_id);
     } else {
       setOpen(true);
       setResult('error');
@@ -68,8 +67,9 @@ function BookHallFunction() {
           date_from: date_from,
           date_to: date_to,
           event_name: eventName,
-          booked_by: bookedBy,
-          admin_booking_id: admin_id
+          booked_by: booked_by,
+          admin_booking_id: admin_id,
+          number_of_attendees: noOfAttendees 
         },
         {
           headers: {
@@ -98,7 +98,7 @@ function BookHallFunction() {
       <div className="max-w-md w-full space-y-8 bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-lg rounded-xl p-8 shadow-2xl">
         <div className="text-center">
           <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
-            Book Your Event
+            Book Your Event at {hall_name}
           </h1>
           <p className="mt-2 text-sm text-gray-400">Fill in the details to reserve your spot.</p>
         </div>
@@ -169,16 +169,29 @@ function BookHallFunction() {
             />
           </div>
           <div className="space-y-2">
+            <label htmlFor="noOfAttendees" className="text-sm font-medium text-gray-300">
+              Number of Attendees
+            </label>
+            <input
+              type="number"
+              id="noOfAttendees"
+              value={noOfAttendees}
+              onChange={(e) => setNoOfAttendees(e.target.value)}
+              placeholder="Enter number of attendees"
+              className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+            />
+          </div>
+          <div className="space-y-2">
             <label htmlFor="bookedBy" className="text-sm font-medium text-gray-300">
               Booked By
             </label>
             <input
               type="text"
               id="bookedBy"
-              value={bookedBy}
-              onChange={(e) => setBookedBy(e.target.value)}
+              value={booked_by}
               placeholder="Enter your name"
               className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              readOnly
             />
           </div>
           <button
