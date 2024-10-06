@@ -21,7 +21,7 @@ function ViewHallAdmin() {
     useEffect(() => {
         async function singeAdmin() {
             try {
-                const res = await axios.get(`http://localhost:3000/gethalls/${id}`)
+                const res = await axios.get(`https://lncthalls-server.onrender.com/gethalls/${id}`)
                 setHall(res.data);
             } catch (error) {
                 console.log(error);

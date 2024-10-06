@@ -6,7 +6,7 @@ export const adminAccessAtom = atom({
     default: selector({
         key: 'adminAccessSelector',
         get: async () => {
-            const access = await axios.get('http://localhost:3000/admindashboard', {
+            const access = await axios.get('https://lncthalls-server.onrender.com/admindashboard', {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
@@ -21,7 +21,7 @@ export const superAdminAccessAtom = atom({
     default: selector({
         key: 'superAdminAccessSelector',
         get: async () => {
-            const access = await axios.get('http://localhost:3000/superadmindashboard', {
+            const access = await axios.get('https://lncthalls-server.onrender.com/superadmindashboard', {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }

@@ -41,7 +41,7 @@ function MyBookingsPage() {
 
     useEffect(() => {
         async function getBookings() {
-            const response = await axios.get(`http://localhost:3000/getbookedhalls/${admin_id}`, {
+            const response = await axios.get(`https://lncthalls-server.onrender.com/getbookedhalls/${admin_id}`, {
                 headers: {
                   Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
@@ -99,7 +99,7 @@ function MyBookingsPage() {
 
 async function deleteBooking(hall_id, booking_id, setOpen, setResult, setMsg) {
   try {
-      const response = await axios.post(`http://localhost:3000/removebooking/${hall_id}`,
+      const response = await axios.post(`https://lncthalls-server.onrender.com/removebooking/${hall_id}`,
       {
         booking_id: booking_id
       },

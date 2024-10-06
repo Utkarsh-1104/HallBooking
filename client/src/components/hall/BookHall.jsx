@@ -61,7 +61,7 @@ function BookHallFunction() {
 
     async function postEvent() {
       try {
-        const response = await axios.patch(`http://localhost:3000/bookhall/${hall_id}`, {
+        const response = await axios.patch(`https://lncthalls-server.onrender.com/bookhall/${hall_id}`, {
           time_from: time_from,
           time_to: time_to,
           date_from: date_from,

@@ -16,6 +16,17 @@ const hallSchema = new mongoose.Schema({
         booking_id: String,
         admin_booking_id: String,
         number_of_attendees: Number
+    }],
+    hall_booking_reqs: [{
+        date_from: String,
+        date_to: String,
+        time_from: String,
+        time_to: String,
+        event_name: String,
+        booked_by: String,
+        booking_id: String,
+        admin_booking_id: String,
+        number_of_attendees: Number
     }]
 })
 

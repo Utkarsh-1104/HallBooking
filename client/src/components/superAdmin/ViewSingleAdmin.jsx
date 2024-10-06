@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useRecoilValue } from "recoil";
 import { superAdminAccessAtom } from "../../atoms/accessAtom";
 import Unauthorized from "../../ui/Unauthorized";
@@ -22,7 +23,7 @@ function ViewAdmin() {
     useEffect(() => {
         async function singleAdmin() {
             try {
-                const res = await axios.get(`http://localhost:3000/getadmins/${id}`,
+                const res = await axios.get(`https://lncthalls-server.onrender.com/getadmins/${id}`,
                     {
                         headers: {
                             Authorization: `Bearer ${localStorage.getItem('token')}`

@@ -57,7 +57,7 @@ function EditDetails() {
 
     async function editProfile() {
       try {
-        const response = await axios.patch(`http://localhost:3000/editprofile/${admin_id}`, {
+        const response = await axios.patch(`https://lncthalls-server.onrender.com/editprofile/${admin_id}`, {
           newUsername: newUsername,
           newPassword: newPassword
         }, {

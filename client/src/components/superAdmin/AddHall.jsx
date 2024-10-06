@@ -38,7 +38,7 @@ const AddHall = () => {
 
         async function postHall() {
             try {
-                const response = await axios.post('http://localhost:3000/posthall', {
+                const response = await axios.post('https://lncthalls-server.onrender.com/posthall', {
                     hall_name: hallName,
                     hall_capacity: hallCapacity,
                 },

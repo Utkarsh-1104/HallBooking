@@ -27,7 +27,7 @@ function ViewHall() {
   useEffect(() => {
     async function singleHall() {
       try {
-        const res = await axios.get(`http://localhost:3000/gethalls/${id}`)
+        const res = await axios.get(`https://lncthalls-server.onrender.com/gethalls/${id}`)
         setHall(res.data);
       } catch (error) {
         console.log(error);
@@ -119,7 +119,7 @@ function HallBookings(props) {
 
 async function deleteBooking(hall_id, booking_id, setOpen, setResult, setMsg) {
   try {
-    const response = await axios.post(`http://localhost:3000/removebooking/${hall_id}`,
+    const response = await axios.post(`https://lncthalls-server.onrender.com/removebooking/${hall_id}`,
       {
         booking_id: booking_id
       },

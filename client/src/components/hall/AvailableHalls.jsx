@@ -49,7 +49,7 @@ function BookDetails(props) {
     }
 
     try {
-      const response = await axios.post('http://localhost:3000/availablehalls', {
+      const response = await axios.post('https://lncthalls-server.onrender.com/availablehalls', {
         date_from: dateFrom,
         date_to: dateTo,
         time_from: timeFrom,

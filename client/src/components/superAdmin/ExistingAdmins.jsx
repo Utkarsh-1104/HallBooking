@@ -61,7 +61,7 @@ const ExistingAdmins = (props) => {
 
 async function deleteAdmin(id, setOpen, setResult, setMsg) {
   
-  const response = await axios.delete(`http://localhost:3000/removeadmins/${id}`,
+  const response = await axios.delete(`https://lncthalls-server.onrender.com/removeadmins/${id}`,
     {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`
