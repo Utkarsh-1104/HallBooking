@@ -61,7 +61,7 @@ const ExistingHalls = (props) => {
 
 async function deleteHall(id, setOpen, setResult, setMsg) {
   try {
-    const response = await axios.delete(`https://lncthalls-server.onrender.com/removehall/${id}`, {
+    const response = await axios.delete(`http://localhost:3000/removehall/${id}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`
       }

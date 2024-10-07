@@ -24,7 +24,7 @@ const Login = () => {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const response = await axios.post("https://lncthalls-server.onrender.com/loginadmin", {
+    const response = await axios.post("http://localhost:3000/loginadmin", {
       username,
       password
     });

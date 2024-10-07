@@ -57,7 +57,7 @@ const EditHall = () => {
 
         async function edithall(id) {
             try {
-                const response = await axios.patch(`https://lncthalls-server.onrender.com/updatehall/${id}`, {
+                const response = await axios.patch(`http://localhost:3000/updatehall/${id}`, {
                     hall_name: hallName,
                     hall_capacity: hallCapacity,
                 },

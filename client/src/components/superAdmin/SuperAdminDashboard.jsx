@@ -8,7 +8,7 @@ import PersonIcon from '@mui/icons-material/Person';
 
 const SuperAdminDashboard = () => {
   const auth = useRecoilValue(superAdminAccessAtom)
-
+  console.log(auth);
   return (
     <div className='bg-gradient-to-br from-gray-900 via-purple-900 to-violet-800 min-h-screen font-[Roboto] text-white'>
       { (auth.msg === 'Authorized') ?  <Dashboard auth={auth} /> : <Unauthorized /> }

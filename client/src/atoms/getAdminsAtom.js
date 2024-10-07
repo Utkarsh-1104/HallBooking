@@ -6,7 +6,7 @@ export const adminsAtom = atom({
     default: selector({
         key: 'adminsAtomSelector',
         get: async () => {
-            const admins = await axios.get('https://lncthalls-server.onrender.com/getadmins',
+            const admins = await axios.get('http://localhost:3000/getadmins',
                 {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`

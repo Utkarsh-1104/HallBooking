@@ -71,7 +71,7 @@ const EditAdmin = () => {
 
         async function editAdmin(id) {
             try {
-                const response = await axios.patch(`https://lncthalls-server.onrender.com/updateadmins/${id}`, {
+                const response = await axios.patch(`http://localhost:3000/updateadmins/${id}`, {
                     fname: fname,
                     lname: lname,
                     username: username,

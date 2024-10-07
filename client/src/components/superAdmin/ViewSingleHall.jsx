@@ -27,7 +27,7 @@ function ViewHall() {
   useEffect(() => {
     async function singleHall() {
       try {
-        const res = await axios.get(`https://lncthalls-server.onrender.com/gethalls/${id}`)
+        const res = await axios.get(`http://localhost:3000/gethalls/${id}`)
         setHall(res.data);
       } catch (error) {
         console.log(error);
@@ -60,6 +60,7 @@ function ViewHall() {
               to={booking.time_to}
               booked_by={booking.booked_by}
               event_name={booking.event_name}
+              number_of_attendees={booking.number_of_attendees}
             />
           ))
         ) : (
@@ -102,6 +103,7 @@ function HallBookings(props) {
         {isExpanded && (
           <div className="mt-4 space-y-2 border-t border-gray-700 pt-4">
             <p className="text-xl"><span>Booked by:</span> {props.booked_by}</p>
+            <p className="text-xl"><span>Number of participants: </span>{props.number_of_attendees}</p>
             <p className="text-xl"><span>Booking ID:</span> {props.booking_id}</p>
             <button
               onClick={() => deleteBooking(props.hall_id, props.booking_id, setOpen, setResult, setMsg)}
@@ -119,7 +121,7 @@ function HallBookings(props) {
 
 async function deleteBooking(hall_id, booking_id, setOpen, setResult, setMsg) {
   try {
-    const response = await axios.post(`https://lncthalls-server.onrender.com/removebooking/${hall_id}`,
+    const response = await axios.post(`http://localhost:3000/removebooking/${hall_id}`,
       {
         booking_id: booking_id
       },

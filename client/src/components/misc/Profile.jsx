@@ -23,7 +23,7 @@ function MyProfile() {
   useEffect(() => {
     async function getProfile() {
 
-      const response = await axios.get(`https://lncthalls-server.onrender.com/getprofile/${admin_id}`, {
+      const response = await axios.get(`http://localhost:3000/getprofile/${admin_id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }

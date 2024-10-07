@@ -20,7 +20,7 @@ router.post('/:id', async (req, res) => {
         )
         if (result.modifiedCount > 0) {
             res.json({
-                msg: 'Booking removed successfully',
+                msg: 'Booking removed successfully.',
                 status: 200
             })
         } else {
@@ -31,7 +31,7 @@ router.post('/:id', async (req, res) => {
         }
     } catch (error) {
         res.json({
-            msg: "Some error occured. Couldn't remove booking",
+            msg: "Some error occured. Couldn't remove booking.",
             status: 400
         })
     }

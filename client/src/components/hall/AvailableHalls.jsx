@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 const AvailableHalls = () => {
   const auth = useRecoilValue(adminAccessAtom)
+  console.log(auth);
   return (
     <div className="bg-black min-h-screen font-[Roboto] ">
       {(auth.msg === "Authorized") ? <BookDetails auth={auth} /> : <Unauthorized /> }
@@ -25,6 +26,7 @@ function BookDetails(props) {
   const [timeTo, setTimeTo] = useRecoilState(timeToAtom)
   const [availableHalls, setAvailableHalls] = useState([])
   const [showResults, setShowResults] = useState(false)
+  console.log(props.auth);
 
   const [result, setResult] = useRecoilState(eventAtom);
   const [msg, setMsg] = useRecoilState(textAtom);
@@ -49,7 +51,7 @@ function BookDetails(props) {
     }
 
     try {
-      const response = await axios.post('https://lncthalls-server.onrender.com/availablehalls', {
+      const response = await axios.post('http://localhost:3000/availablehalls', {
         date_from: dateFrom,
         date_to: dateTo,
         time_from: timeFrom,
@@ -157,7 +159,7 @@ function BookDetails(props) {
                       <p className="text-sm text-gray-400">Capacity: {hall.hall_capacity}</p>
                     </div>
                     <button
-                      onClick={() => { navigate(`/bookhall/?hall_id=${hall._id}&hall_name=${hall.hall_name}&admin_id=${props.auth.id}&date_from=${dateFrom}&date_to=${dateTo}&time_from=${timeFrom}&time_to=${timeTo}&fname=${props.auth.fname}&lname=${props.auth.lname}`); }}
+                      onClick={() => { navigate(`/bookhall/?hall_id=${hall._id}&hall_name=${hall.hall_name}&admin_id=${props.auth.id}&date_from=${dateFrom}&date_to=${dateTo}&time_from=${timeFrom}&time_to=${timeTo}&fname=${props.auth.fname}&lname=${props.auth.lname}&role=${props.auth.role}`); }}
                       className="bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold py-2 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:from-purple-600 hover:to-pink-600 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50"
                     >
                       Book Now

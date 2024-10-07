@@ -10,7 +10,7 @@ import Popup from '../../ui/Alert'
 
 const EditProfile = () => {
     const auth = useRecoilValue(adminAccessAtom) 
-  
+    console.log(auth);
     return (
       <div className="bg-gradient-to-br from-gray-900 via-purple-900 to-violet-800 min-h-screen font-[Roboto] text-white">
         {(auth.msg === "Authorized") ? <EditDetails /> : <Unauthorized /> }
@@ -57,7 +57,7 @@ function EditDetails() {
 
     async function editProfile() {
       try {
-        const response = await axios.patch(`https://lncthalls-server.onrender.com/editprofile/${admin_id}`, {
+        const response = await axios.patch(`http://localhost:3000/editprofile/${admin_id}`, {
           newUsername: newUsername,
           newPassword: newPassword
         }, {

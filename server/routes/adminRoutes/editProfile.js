@@ -43,7 +43,7 @@ router.patch('/:id', async (req, res) => {
             });
         }
         return res.json({
-            msg: 'Admin details updated successfully.',
+            msg: 'Profile updated successfully.',
             status: 200
         })
     } catch (error) {

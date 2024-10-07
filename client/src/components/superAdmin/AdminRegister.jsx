@@ -55,7 +55,7 @@ const AdminRegister = () => {
 
         async function postAdmin() {
             try {
-                const response = await axios.post('https://lncthalls-server.onrender.com/postadmins', {
+                const response = await axios.post('http://localhost:3000/postadmins', {
                     fname: fname,
                     lname: lname,
                     username: username,

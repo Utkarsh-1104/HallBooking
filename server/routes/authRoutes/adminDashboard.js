@@ -10,6 +10,7 @@ router.get('/', (req, res) => {
         lname: req.lname,
         username: req.username,
         designation: req.designation,
+        role: req.role,
         status: 200
     })
 })

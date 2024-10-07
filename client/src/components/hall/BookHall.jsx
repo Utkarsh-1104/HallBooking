@@ -30,10 +30,11 @@ function BookHallFunction() {
   const date_to = searchParams.get('date_to')
   const fname = searchParams.get('fname')
   const lname = searchParams.get('lname')
+  const role = searchParams.get('role')
   const booked_by = capitalize(fname) + " " + capitalize(lname)
 
   const [eventName, setEventName] = useState('')
-  const [noOfAttendees, setNoOfAttendees] = useState('')
+  const [noOfParticipants, setNoOfParticipants] = useState('')
 
   const [result, setResult] = useRecoilState(eventAtom);
   const [msg, setMsg] = useRecoilState(textAtom);
@@ -61,7 +62,7 @@ function BookHallFunction() {
 
     async function postEvent() {
       try {
-        const response = await axios.patch(`https://lncthalls-server.onrender.com/bookhall/${hall_id}`, {
+        const response = await axios.patch(`http://localhost:3000/bookhall/${hall_id}`, {
           time_from: time_from,
           time_to: time_to,
           date_from: date_from,
@@ -69,7 +70,7 @@ function BookHallFunction() {
           event_name: eventName,
           booked_by: booked_by,
           admin_booking_id: admin_id,
-          number_of_attendees: noOfAttendees 
+          number_of_attendees: noOfParticipants 
         },
         {
           headers: {
@@ -79,7 +80,7 @@ function BookHallFunction() {
         if (response.data.status === 200) {
           setOpen(true);
           setResult('success');
-          setMsg('Hall updated successfully.');
+          setMsg('Hall booked successfully.');
       } else {
           setOpen(true);
           setResult('error');
@@ -169,15 +170,15 @@ function BookHallFunction() {
             />
           </div>
           <div className="space-y-2">
-            <label htmlFor="noOfAttendees" className="text-sm font-medium text-gray-300">
-              Number of Attendees
+            <label htmlFor="noOfParticipants" className="text-sm font-medium text-gray-300">
+              Number of Participants
             </label>
             <input
               type="number"
-              id="noOfAttendees"
-              value={noOfAttendees}
-              onChange={(e) => setNoOfAttendees(e.target.value)}
-              placeholder="Enter number of attendees"
+              id="noOfParticipants"
+              value={noOfParticipants}
+              onChange={(e) => setNoOfParticipants(e.target.value)}
+              placeholder="Enter number of participants"
               className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
             />
           </div>
