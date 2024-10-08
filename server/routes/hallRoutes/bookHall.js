@@ -18,34 +18,61 @@ function randomIdGenerator() {
 
 router.patch('/:hall_id', async (req, res) => {
     const id = req.params.hall_id
-    const { date_from, date_to, time_from, time_to, event_name, booked_by, admin_booking_id, number_of_attendees } = req.body
+    const { date_from, date_to, time_from, time_to, event_name, booked_by, admin_booking_id, number_of_attendees, role } = req.body
     const booking_id = randomIdGenerator()
     try {
         await db()
-        await Hall.updateOne (
-            { 
-                _id: id 
-            }, 
-            { 
-                "$push": {
-                    hall_availability: {
-                        date_from: date_from,
-                        date_to: date_to,
-                        time_from: time_from,
-                        time_to: time_to,
-                        event_name: event_name,
-                        booked_by: booked_by,
-                        booking_id: booking_id,
-                        admin_booking_id: admin_booking_id,
-                        number_of_attendees: number_of_attendees
-                    } 
+        if(role === "admin" && (id === "6703bfa0bdf6ef86a0ab7f51" || id === "66d1fe65a58995a923a5bf56")) {
+            await Hall.updateOne (
+                { 
+                    _id: id 
+                }, 
+                { 
+                    "$push": {
+                        hall_booking_reqs: {
+                            date_from: date_from,
+                            date_to: date_to,
+                            time_from: time_from,
+                            time_to: time_to,
+                            event_name: event_name,
+                            booked_by: booked_by,
+                            booking_id: booking_id,
+                            admin_booking_id: admin_booking_id,
+                            number_of_attendees: number_of_attendees
+                        } 
+                    }
                 }
-            }
-        )
-        return res.json({
-            msg: 'hall booked',
-            status: 200
-        })  
+            )
+            return res.json({
+                msg: 'Hall booking request sent.',
+                status: 200
+            })  
+        } else {
+            await Hall.updateOne (
+                { 
+                    _id: id 
+                }, 
+                { 
+                    "$push": {
+                        hall_availability: {
+                            date_from: date_from,
+                            date_to: date_to,
+                            time_from: time_from,
+                            time_to: time_to,
+                            event_name: event_name,
+                            booked_by: booked_by,
+                            booking_id: booking_id,
+                            admin_booking_id: admin_booking_id,
+                            number_of_attendees: number_of_attendees
+                        } 
+                    }
+                }
+            )
+            return res.json({
+                msg: 'hall booked',
+                status: 200
+            })  
+        }
     } catch (error) {
         return res.json({
             msg: error.message,

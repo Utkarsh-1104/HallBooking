@@ -70,13 +70,15 @@ function BookHallFunction() {
           event_name: eventName,
           booked_by: booked_by,
           admin_booking_id: admin_id,
-          number_of_attendees: noOfParticipants 
+          number_of_attendees: noOfParticipants,
+          role: role
         },
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`
           }
         });
+        console.log(time_from, time_to, date_from, date_to, booked_by, admin_id, eventName, noOfParticipants, role);
         if (response.data.status === 200) {
           setOpen(true);
           setResult('success');
