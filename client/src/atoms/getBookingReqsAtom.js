@@ -20,7 +20,13 @@ export const bookingRequests = atom({
                     reqs.push(req)
                 }
             });
-            return reqs
+            const final_reqs = []
+            reqs.forEach(req => {
+                req.forEach(indi_req => {
+                    final_reqs.push(indi_req)
+                })
+            })
+            return final_reqs
         }
     })
 })
