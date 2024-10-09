@@ -45,7 +45,7 @@ function Settings() {
             <h2 className="text-xl sm:text-2xl mb-4 sm:mb-0">View booking requests</h2>
             <button
               className="w-full sm:w-auto px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-md transition-all duration-300 ease-in-out transform hover:from-purple-600 hover:to-pink-600 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 flex items-center justify-center"
-              onClick={() => navigate('/availablehalls')}
+              onClick={() => navigate('/superadminpage/bookingrequests')}
             >
               View <VisibilityIcon className="ml-2" fontSize="small" />
             </button>

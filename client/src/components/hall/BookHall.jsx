@@ -52,7 +52,6 @@ function BookHallFunction() {
     e.preventDefault()
     if ((eventName.toLowerCase() !== eventName.toUpperCase())) {
       postEvent();
-      console.log(time_from, time_to, date_from, date_to, eventName, booked_by, admin_id);
     } else {
       setOpen(true);
       setResult('error');
@@ -71,7 +70,8 @@ function BookHallFunction() {
           booked_by: booked_by,
           admin_booking_id: admin_id,
           number_of_attendees: noOfParticipants,
-          role: role
+          role: role,
+          hall_name: hall_name
         },
         {
           headers: {
@@ -82,7 +82,7 @@ function BookHallFunction() {
         if (response.data.status === 200) {
           setOpen(true);
           setResult('success');
-          setMsg('Hall booked successfully.');
+          setMsg(response.data.msg);
       } else {
           setOpen(true);
           setResult('error');

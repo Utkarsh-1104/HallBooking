@@ -26,8 +26,16 @@ const hallSchema = new mongoose.Schema({
         booked_by: String,
         booking_id: String,
         admin_booking_id: String,
-        number_of_attendees: Number
+        number_of_attendees: Number,
+        hall_name: String,
+        booking_req_at: {
+            type: Date,
+            default: Date.now
+        }
     }]
+},
+{
+    timestamps: true
 })
 
 const Hall = mongoose.models.Hall || mongoose.model('Hall', hallSchema)
