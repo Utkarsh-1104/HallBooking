@@ -21,7 +21,6 @@ export default function BookingRequests() {
           }
         }
       )
-      console.log(response.data)
       if (response.data.status === 200) {
         setOpen(true)
         setResult('success')
@@ -42,9 +41,42 @@ export default function BookingRequests() {
     }
   }
 
+  const handleDelete = async (hall_name, id) => {
+    try {
+      const response = await axios.put(`http://localhost:3000/deletebookingreq`,
+        {
+          hall_name: hall_name,
+          reqId: id
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            "Authorization": `Bearer ${localStorage.getItem('token')}`
+          }
+        }
+      )
+      if (response.data.status === 200) {
+        setOpen(true)
+        setResult('success')
+        setMsg('Booking request deleted.')
+
+        setTimeout(() => {
+          window.location.reload()
+        }, 1500);
+
+      } else {
+        setOpen(true)
+        setResult('error')
+        setMsg(response.data.msg)
+      }
+    } catch (error) {
+      setOpen(true)
+      setResult('error')
+      setMsg("An error occured. Please try again.")
+    }
+  }
 
   const bookingReqs = useRecoilValue(bookingRequests) 
-  console.log(bookingReqs);
 
   const [result, setResult] = useRecoilState(eventAtom);
   const [msg, setMsg] = useRecoilState(textAtom);
