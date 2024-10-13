@@ -70,7 +70,7 @@ router.patch('/:hall_id', async (req, res) => {
                 }
             )
             return res.json({
-                msg: 'hall booked',
+                msg: 'Hall booked successfully.',
                 status: 200
             })  
         }

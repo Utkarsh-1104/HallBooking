@@ -25,7 +25,9 @@ const adminSchema = new mongoose.Schema({
         type: String,
         default: 'ADMIN'
     },
-    designation: String
+    designation: String,
+    college: String,
+    branch: String
 })
 const Admin = mongoose.models.Admin ||  mongoose.model('Admin', adminSchema)
 
