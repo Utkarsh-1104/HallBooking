@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
         return res.json({
             msg: 'hall saved',
             status: 200
-        })
+        }) 
     } catch (error) {
         return res.json({
             msg: error.message,

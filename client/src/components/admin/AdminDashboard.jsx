@@ -12,7 +12,7 @@ const AdminDashboard = () => {
   const auth = useRecoilValue(adminAccessAtom) 
   
   return (
-    <div className="bg-gradient-to-br from-slate-100 to-slate-400 min-h-screen font-[Roboto] text-gray-800">
+    <div className="bg-gradient-to-br from-slate-100 to-slate-400 min-h-screen text-gray-800">
       {(auth.msg === "Authorized") ? <Dashboard auth={auth} /> : <Unauthorized /> }
     </div>
   )
@@ -37,7 +37,7 @@ function Dashboard(props) {
         </button>
       </div>
 
-      <div className="bg-white rounded-xl p-6 shadow-lg mb-8">
+      <div className="bg-[#dddddd] rounded-xl p-6 shadow-2xl mb-8">
         <div className="flex flex-col sm:flex-row items-center justify-between">
           <h2 className="text-xl sm:text-2xl mb-4 sm:mb-0 text-gray-700">Want to book a hall?</h2>
           <button

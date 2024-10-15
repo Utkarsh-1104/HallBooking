@@ -12,7 +12,7 @@ const EditProfile = () => {
     const auth = useRecoilValue(adminAccessAtom) 
     console.log(auth);
     return (
-      <div className="bg-gradient-to-br from-gray-900 via-purple-900 to-violet-800 min-h-screen font-[Roboto] text-white">
+      <div className="bg-gradient-to-br from-slate-100 to-slate-400 min-h-screen text-white">
         {(auth.msg === "Authorized") ? <EditDetails /> : <Unauthorized /> }
       </div>
     )
@@ -76,36 +76,40 @@ function EditDetails() {
 
 
   return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-800 flex items-center justify-center p-4 font-[Roboto] ">
-        <Popup state={open} handleClose={handleClose} event={result} text={msg} />
-        <div className="bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg rounded-3xl shadow-2xl w-full max-w-md p-8">
-          <h1 className="text-4xl font-bold text-center text-white mb-8 drop-shadow-md">Edit Profile</h1>
+    <div className="min-h-screen bg-gradient-to-br from-slate-100 to-slate-400 flex items-center justify-center p-4 ">
+      <Popup state={open} handleClose={handleClose} event={result} text={msg} />
+      <div className="bg-white rounded-2xl shadow-2xl overflow-hidden w-full max-w-md">
+        <div className="bg-blue-600 py-6 px-8 text-white">
+          <h1 className="text-[2rem] font-bold">Edit Profile</h1>
+          <p className='text-blue-100 text-base'>Leave the field empty for the details you dont wanna update.</p>
+        </div>
+        <div className="p-8">
           <form onSubmit={updateDetails} className="space-y-6">
             <div>
-              <label htmlFor="username" className="block text-blue-100 text-xl font-medium mb-2">New Username</label>
+              <label htmlFor="username" className="block text-lg font-medium text-gray-700">New Username</label>
               <input
                 type="text"
                 id="username"
                 name="username"
-                className="w-full px-4 py-3 rounded-full bg-white bg-opacity-20 text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50"
+                className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                 placeholder="Enter new username"
                 onChange={(e) => setNewUsername(e.target.value)}
               />
             </div>
             <div>
-              <label htmlFor="password" className="block text-blue-100 text-xl font-medium mb-2">New Password</label>
+              <label htmlFor="password" className="block text-lg font-medium text-gray-700">New Password</label>
               <input
                 type="password"
                 id="password"
                 name="password"
-                className="w-full px-4 py-3 rounded-full bg-white bg-opacity-20 text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50"
+                className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                 placeholder="Enter new password"
                 onChange={(e) => setNewPassword(e.target.value)}
               />
             </div>
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 text-white py-3 px-6 rounded-full font-semibold transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50 shadow-lg flex items-center justify-center space-x-2"
+              className="w-full flex items-center justify-center gap-2 py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out"
               onClick={updateDetails}
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -116,6 +120,7 @@ function EditDetails() {
           </form>
         </div>
       </div>
+    </div>
   )
 }
 

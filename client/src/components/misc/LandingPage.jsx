@@ -6,19 +6,6 @@ const LandingPage = () => {
   const navigate = useNavigate()
   return (
     <div className="max-h-screen flex flex-col bg-gray-50">
-      {/* Header */}
-      {/* <header className="bg-white shadow-sm sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <div className="flex items-center">
-            <img src="/placeholder.svg?height=40&width=40" alt="LNCT Logo" className="h-10 w-auto" />
-            <span className="ml-2 text-xl font-semibold text-gray-900">LNCT Group</span>
-          </div>
-          <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out">
-            Login
-          </button>
-        </div>
-      </header> */}
-
       {/* Main Content */}
       <main className="flex-grow max-h-fit lg:mb-[4.7rem] ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:pt-20 py-12">
