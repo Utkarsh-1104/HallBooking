@@ -4,9 +4,20 @@ import axios from 'axios'
 import Popup from '../../ui/Alert'
 import { useState } from 'react'
 import { eventAtom, textAtom } from '../../atoms/adminRegisterAtoms'
-
+import { superAdminAccessAtom } from '../../atoms/accessAtom'
+import Unauthorized from '../../ui/Unauthorized'
 
 export default function BookingRequests() {
+  const access = useRecoilValue(superAdminAccessAtom);
+  return (
+    <div className="bg-gradient-to-br from-gray-900 via-purple-900 to-violet-800 min-h-screen font-[Roboto] text-white">
+      {(access.msg === 'Authorized') ? <BookingRequestsPage /> : <Unauthorized />}
+    </div>
+  );
+}
+
+
+function BookingRequestsPage() {
   const handleApprove = async (hall_name, id) => {
     try {
       const response = await axios.put(`http://localhost:3000/approvebooking`,

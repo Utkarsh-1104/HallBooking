@@ -7,7 +7,7 @@ export default function Loader() {
     <div>
       <Backdrop
         sx={(theme) => ({ color: '#fff', zIndex: theme.zIndex.drawer + 1 })}
-        open={open}
+        open={true}
       >
         <CircularProgress color="inherit" />
       </Backdrop>
