@@ -12,7 +12,7 @@ const AdminDashboard = () => {
   const auth = useRecoilValue(adminAccessAtom) 
   
   return (
-    <div className="bg-gradient-to-br from-gray-900 via-purple-900 to-violet-800 min-h-screen font-[Roboto] text-white">
+    <div className="bg-gradient-to-br from-slate-100 to-slate-400 min-h-screen font-[Roboto] text-gray-800">
       {(auth.msg === "Authorized") ? <Dashboard auth={auth} /> : <Unauthorized /> }
     </div>
   )
@@ -25,11 +25,11 @@ function Dashboard(props) {
   return (
     <div className="py-10 px-6 sm:px-24">
       <div className="flex sm:flex-row justify-between items-center mb-8 sm:space-y-0">
-        <h1 className="text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 text-center sm:text-left">
+        <h1 className="text-2xl sm:text-3xl font-bold text-center sm:text-left">
           Admin Dashboard
         </h1>
         <button
-          className="p-2 sm:px-4 sm:py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-md transition-all duration-300 ease-in-out transform hover:from-purple-600 hover:to-pink-600 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 flex items-center justify-center"
+          className="p-2 sm:px-4 sm:py-2 bg-blue-600 text-white font-bold rounded-md transition-all duration-300 ease-in-out transform hover:bg-blue-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 flex items-center justify-center"
           onClick={() => navigate(`/myprofile/?id=${props.auth.id}`)}
         >
           <PersonIcon className="sm:mr-2" />
@@ -37,11 +37,11 @@ function Dashboard(props) {
         </button>
       </div>
 
-      <div className="bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-lg rounded-xl p-6 shadow-2xl mb-8">
+      <div className="bg-white rounded-xl p-6 shadow-lg mb-8">
         <div className="flex flex-col sm:flex-row items-center justify-between">
-          <h2 className="text-xl sm:text-2xl mb-4 sm:mb-0">Want to book a hall?</h2>
+          <h2 className="text-xl sm:text-2xl mb-4 sm:mb-0 text-gray-700">Want to book a hall?</h2>
           <button
-            className="w-full sm:w-auto px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-md transition-all duration-300 ease-in-out transform hover:from-purple-600 hover:to-pink-600 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 flex items-center justify-center"
+            className="w-full sm:w-auto px-6 py-2 bg-blue-600 text-white font-bold rounded-md transition-all duration-300 ease-in-out transform hover:bg-blue-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 flex items-center justify-center"
             onClick={() => navigate('/availablehalls')}
           >
             <span>Book</span>
@@ -50,10 +50,10 @@ function Dashboard(props) {
         </div>
       </div>
 
-      <h2 className='text-2xl mb-4'>Existing Halls</h2>
-      <hr className="w-full h-px bg-gray-600 border-0 rounded mb-8" />
+      <h2 className='text-2xl mb-4 text-gray-700'>Existing Halls</h2>
+      <hr className="w-full h-[1.5px] bg-gray-900 border-0 rounded mb-8" />
 
-      <div className="flex flex-col gap-4 items-center justify-center">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {halls.map(hall => (
           <HallForAdmin
             key={hall._id}
