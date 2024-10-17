@@ -6,15 +6,17 @@ import { common } from '@mui/material/colors'
 const LongComp = (props) => {
   const navigate = useNavigate()
   return (
-      <div className="w-[100%] flex gap-7 justify-center items-center ">
-        <div className="w-[4.5rem] text-center p-2 rounded-xl">
-          { (props.icon === "MeetingRoomIcon") ? <MeetingRoomIcon sx={{ color: common.white, fontSize: 40}} /> : <GroupsIcon sx={{ color: common.white, fontSize: 40}} /> }
+      <div className="flex flex-col gap-6 sm:flex-row items-center justify-between">
+        <div className="flex items-center justify-center">
+          <div className="w-[4.5rem] text-center p-2 rounded-xl">
+            { (props.icon === "MeetingRoomIcon") ? <MeetingRoomIcon sx={{ color: common.gray, fontSize: 50}} /> : <GroupsIcon sx={{ color: common.gray, fontSize: 50}} /> }
+          </div>
+          <div className="ml-3">
+            <h3 className="text-2xl font-bold text-gray-700">{props.title}</h3>
+            <p className="text-lg font-medium text-gray-600">{props.msg}</p>
+          </div>
         </div>
-        <div className="">
-          <h3 className="text-2xl text-white font-medium">{props.title}</h3>
-          <p className="text-lg font-medium text-[#959595]">{props.msg}</p>
-        </div>
-        <button className="w-44 h-10 text-white border rounded-sm xl:ms-auto hover:bg-white hover:text-black" onClick={() => {navigate(`/superadminpage/${props.page}`)}} >Go to Page</button>
+        <button className="w-full sm:w-auto px-6 py-2 bg-blue-600 text-white font-bold rounded-md transition-all duration-300 ease-in-out transform hover:bg-blue-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 flex items-center justify-center" onClick={() => {navigate(`/superadminpage/${props.page}`)}} >Go to Page</button>
       </div>
   )
 }

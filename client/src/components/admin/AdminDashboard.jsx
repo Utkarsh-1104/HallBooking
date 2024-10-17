@@ -39,7 +39,7 @@ function Dashboard(props) {
 
       <div className="bg-[#dddddd] rounded-xl p-6 shadow-2xl mb-8">
         <div className="flex flex-col sm:flex-row items-center justify-between">
-          <h2 className="text-xl sm:text-2xl mb-4 sm:mb-0 text-gray-700">Want to book a hall?</h2>
+          <h2 className="text-xl sm:text-2xl mb-4 sm:mb-0 text-gray-700 font-medium">Want to book a hall?</h2>
           <button
             className="w-full sm:w-auto px-6 py-2 bg-blue-600 text-white font-bold rounded-md transition-all duration-300 ease-in-out transform hover:bg-blue-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 flex items-center justify-center"
             onClick={() => navigate('/availablehalls')}
