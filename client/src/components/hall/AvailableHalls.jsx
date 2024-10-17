@@ -8,6 +8,7 @@ import { eventAtom, textAtom } from "../../atoms/adminRegisterAtoms";
 import Popup from "../../ui/Alert";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import SearchIcon from '@mui/icons-material/Search';
 
 const AvailableHalls = () => {
   const auth = useRecoilValue(adminAccessAtom)
@@ -139,9 +140,10 @@ function BookDetails(props) {
           </div>
           <button
             type="submit"
-            className="w-full text-lg bg-blue-600 text-white font-bold py-3 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:bg-blue-600 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+            className="w-full flex justify-center items-center gap-2 text-lg bg-blue-600 text-white font-bold py-3 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:bg-blue-600 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
             onClick={handleSearch}
           >
+            <SearchIcon className="" />
             Search Available Halls
           </button>
         </form>

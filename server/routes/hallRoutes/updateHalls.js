@@ -22,6 +22,8 @@ router.patch('/:id', async (req, res) => {
                 "$set": {
                     hall_name: req.body.hall_name || hallToBeUpdated.hall_name,
                     hall_capacity: req.body.hall_capacity || hallToBeUpdated.hall_capacity,
+                    college: req.body.college || hallToBeUpdated.college,
+                    building: req.body.building || hallToBeUpdated.building
                 }
             }
         )

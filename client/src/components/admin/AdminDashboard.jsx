@@ -29,7 +29,7 @@ function Dashboard(props) {
           Admin Dashboard
         </h1>
         <button
-          className="p-2 sm:px-4 sm:py-2 bg-blue-600 text-white font-bold rounded-md transition-all duration-300 ease-in-out transform hover:bg-blue-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 flex items-center justify-center"
+          className="p-2 sm:px-4 sm:py-2 bg-[#e14733] text-white font-bold rounded-md transition-all duration-300 ease-in-out transform hover:bg-[#b03d2e] hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 flex items-center justify-center"
           onClick={() => navigate(`/myprofile/?id=${props.auth.id}`)}
         >
           <PersonIcon className="sm:mr-2" />

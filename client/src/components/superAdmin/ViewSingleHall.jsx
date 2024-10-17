@@ -100,7 +100,7 @@ function HallBookings(props) {
               {props.from} to {props.to}
             </p>
           </div>
-          <ExpandMoreIcon className={`text-blue-600 transform transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
+          <ExpandMoreIcon fontSize="large" className={`text-blue-600 transform transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
         </div>
         {isExpanded && (
           <div className="mt-4 text-xl space-y-2 border-t border-gray-200 pt-4">
