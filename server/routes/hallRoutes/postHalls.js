@@ -19,7 +19,8 @@ router.post('/', async (req, res) => {
         const hall = await new Hall({
             hall_name: req.body.hall_name,
             hall_capacity: req.body.hall_capacity,
-            hall_availability: req.body.hall_availability
+            building: req.body.building,
+            college: req.body.college
         })
         await hall.save()
         return res.json({
@@ -32,7 +33,6 @@ router.post('/', async (req, res) => {
             status: 400
         })
     }
-    res.json({ msg: 'post halls' })
 })
 
 export default router;

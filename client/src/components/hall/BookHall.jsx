@@ -12,7 +12,7 @@ const BookHall = () => {
     const auth = useRecoilValue(adminAccessAtom) 
   
     return (
-      <div className="bg-black min-h-screen font-[Roboto] ">
+      <div className="bg-gradient-to-br from-slate-100 to-slate-400 min-h-screen text-gray-800 ">
         {(auth.msg === "Authorized") ? <BookHallFunction /> : <Unauthorized /> }
       </div>
     )
@@ -97,18 +97,18 @@ function BookHallFunction() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-800 text-gray-100 py-12 px-4 font-[Poppins] sm:px-6 lg:px-8 flex items-center justify-center">
-      <div className="max-w-md w-full space-y-8 bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-lg rounded-xl p-8 shadow-2xl">
+    <div className="py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
+      <div className="max-w-lg space-y-10 bg-[#dddddd] rounded-xl p-6 shadow-2xl">
         <div className="text-center">
-          <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+          <h1 className="text-3xl font-bold">
             Book Your Event at {hall_name}
           </h1>
-          <p className="mt-2 text-sm text-gray-400">Fill in the details to reserve your spot.</p>
+          <p className="mt-2 text-lg font-medium text-gray-700">Fill in the details to reserve your spot.</p>
         </div>
-        <form onSubmit={handleBook} className="mt-8 space-y-6">
+        <form onSubmit={handleBook} className="space-y-6">
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <label htmlFor="dateFrom" className="text-sm font-medium text-gray-300">
+              <label htmlFor="dateFrom" className="text-base font-bold text-gray-700">
                 Date From
               </label>
               <input
@@ -120,7 +120,7 @@ function BookHallFunction() {
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="dateTo" className="text-sm font-medium text-gray-300">
+              <label htmlFor="dateTo" className="text-base font-bold text-gray-700">
                 Date To
               </label>
               <input
@@ -134,7 +134,7 @@ function BookHallFunction() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <label htmlFor="timeFrom" className="text-sm font-medium text-gray-300">
+              <label htmlFor="timeFrom" className="text-base font-bold text-gray-700">
                 Time From
               </label>
               <input
@@ -146,7 +146,7 @@ function BookHallFunction() {
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="timeTo" className="text-sm font-medium text-gray-300">
+              <label htmlFor="timeTo" className="text-base font-bold text-gray-700">
                 Time To
               </label>
               <input
@@ -159,7 +159,7 @@ function BookHallFunction() {
             </div>
           </div>
           <div className="space-y-2">
-            <label htmlFor="eventName" className="text-sm font-medium text-gray-300">
+            <label htmlFor="eventName" className="text-base font-bold text-gray-700">
               Event Name
             </label>
             <input
@@ -172,7 +172,7 @@ function BookHallFunction() {
             />
           </div>
           <div className="space-y-2">
-            <label htmlFor="noOfParticipants" className="text-sm font-medium text-gray-300">
+            <label htmlFor="noOfParticipants" className="text-base font-bold text-gray-700">
               Number of Participants
             </label>
             <input
@@ -185,7 +185,7 @@ function BookHallFunction() {
             />
           </div>
           <div className="space-y-2">
-            <label htmlFor="bookedBy" className="text-sm font-medium text-gray-300">
+            <label htmlFor="bookedBy" className="text-base font-bold text-gray-700">
               Booked By
             </label>
             <input
@@ -199,7 +199,7 @@ function BookHallFunction() {
           </div>
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold py-3 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:from-purple-600 hover:to-pink-600 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50"
+            className="w-full text-lg bg-blue-600 text-white font-bold py-3 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:bg-blue-800 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-opacity-50"
             onClick={handleBook}
           >
             Book Event

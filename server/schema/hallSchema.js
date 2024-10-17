@@ -6,6 +6,8 @@ const hallSchema = new mongoose.Schema({
         required: [true, 'Hall name is required']
     },
     hall_capacity: Number,
+    college: String,
+    building: String,
     hall_availability: [{
         date_from: String,
         date_to: String,

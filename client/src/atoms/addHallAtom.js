@@ -9,3 +9,13 @@ export const hallCapacityAtom = atom({
     key: 'hallCapacityAtom',
     default: ''
 })
+
+export const hallBuildingAtom = atom({
+    key: 'hallBuildingAtom',
+    default: ''
+})
+
+export const hallCollegeAtom = atom({
+    key: 'hallCollegeAtom',
+    default: ''
+})

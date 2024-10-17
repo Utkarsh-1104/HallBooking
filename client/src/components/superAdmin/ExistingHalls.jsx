@@ -60,33 +60,30 @@ const ExistingHalls = () => {
     <>
       {<Popup state={open} handleClose={handleClose} event={result} text={msg} />}
       {halls.map(hall => (
-        <div key={hall._id} className='w-full flex flex-col sm:flex-row justify-between items-center bg-blue-600 rounded-xl p-6 shadow-2xl text-white sm:px-10'>
-        <div className='flex flex-col sm:flex-row justify-between items-center'>
-          <h1 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-0">{hall.hall_name}</h1>
+        <div key={hall._id} className='w-full flex flex-col sm:flex-row justify-between items-center bg-blue-600 rounded-xl p-6 shadow-2xl text-white'>
+          <h1 className="text-2xl font-bold mb-4 sm:mb-0">{hall.hall_name}</h1>
           <div className='flex flex-wrap justify-center gap-2 sm:gap-4'>
             <button 
-              className='w-full sm:w-auto px-4 py-2 bg-[#E17833] text-white font-bold rounded-md transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 flex items-center justify-center'
+              className='w-full sm:w-auto px-4 py-2 bg-[#E17833] text-white font-bold rounded-md transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-opacity-50 flex items-center justify-center'
               onClick={() => { navigate(`/superadminpage/hallsettings/viewhall?id=${hall._id}`); }}
             >
               View <VisibilityIcon className="ml-2" fontSize='small' />
             </button>
             <button 
-              className='w-full sm:w-auto px-4 py-2 bg-[#E17833] text-white font-bold rounded-md transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 flex items-center justify-center'
+              className='w-full sm:w-auto px-4 py-2 bg-[#E17833] text-white font-bold rounded-md transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-opacity-50 flex items-center justify-center'
               onClick={() => { navigate(`/superadminpage/hallsettings/edithall?id=${hall._id}`); }}
             >
               Edit <EditIcon className="ml-2" fontSize='small' />
             </button>
             <button 
-              className='w-full sm:w-auto px-4 py-2 bg-[#e14733] text-white font-bold rounded-md transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 flex items-center justify-center'
+              className='w-full sm:w-auto px-4 py-2 bg-[#e14733] text-white font-bold rounded-md transition-all duration-300 ease-in-out transform hover:bg-[#b03d2e] hover:scale-105 focus:outline-none focus:ring-2 focus:ring-opacity-50 flex items-center justify-center'
               onClick={() => deleteHall(hall._id, setOpen, setResult, setMsg)}
             >
               Delete <DeleteForeverIcon className="ml-2" fontSize='small' />
             </button>
           </div>
         </div>
-        </div>
       ))}
-      
     </>
   );
 };

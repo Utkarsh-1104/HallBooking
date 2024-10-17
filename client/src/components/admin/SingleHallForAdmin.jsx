@@ -35,9 +35,11 @@ function ViewHallAdmin() {
                 View Hall Details
             </h1>
             <hr className="w-full h-[1.5px] bg-gray-900 border-0 rounded mb-8" />
-            <div className="bg-blue-600 rounded-xl p-6 shadow-lg mb-8">
+            <div className="bg-blue-600 rounded-xl p-6 shadow-xl mb-8">
               <h2 className="text-2xl font-semibold mb-4 text-white">{hall.hall_name}</h2>
               <p className="text-lg mb-2 text-gray-200">Capacity: {hall.hall_capacity}</p>
+              <p className="text-lg mb-2 text-gray-200">Building: {hall.building}</p>
+              <p className="text-lg mb-2 text-gray-200">College: {hall.college}</p>
             </div>
             <h3 className="text-2xl font-semibold mb-4 text-gray-800">Bookings</h3>
             <div className="space-y-4">

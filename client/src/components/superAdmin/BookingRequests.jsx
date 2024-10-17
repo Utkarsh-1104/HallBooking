@@ -10,7 +10,7 @@ import Unauthorized from '../../ui/Unauthorized'
 export default function BookingRequests() {
   const access = useRecoilValue(superAdminAccessAtom);
   return (
-    <div className="bg-gradient-to-br from-gray-900 via-purple-900 to-violet-800 min-h-screen font-[Roboto] text-white">
+    <div className="bg-gradient-to-br from-slate-100 to-slate-400 min-h-screen text-gray-800">
       {(access.msg === 'Authorized') ? <BookingRequestsPage /> : <Unauthorized />}
     </div>
   );
@@ -101,51 +101,45 @@ function BookingRequestsPage() {
     setOpen(false);
   };
   return (
-    <div className="min-h-screen font-[Roboto] bg-gradient-to-br from-purple-100 to-pink-100 p-8">
+    <div className="px-8 py-12 ">
       <Popup state={open} handleClose={handleClose} event={result} text={msg} />
-      <h1 className="text-4xl font-bold text-center text-purple-800 mb-10">Booking Requests</h1>
+      <h1 className="text-4xl font-bold text-center mb-10">Booking Requests</h1>
       {bookingReqs.length === 0 && <h1 className="text-2xl font-semibold text-center text-gray-600">No booking requests found.</h1>}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {bookingReqs.map((booking) => (
           <div key={booking._id} className="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-500 hover:scale-105">
-            <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-4">
-              <h2 className="text-2xl font-semibold text-white">{booking.hall_name}</h2>
-              <p className="text-lg text-white opacity-75">Requested by: {booking.booked_by}</p>
+            <div className="bg-blue-600 p-4">
+              <h2 className="text-2xl font-bold text-white">{booking.hall_name}</h2>
+              <p className="text-lg text-white opacity-85">Requested by: {booking.booked_by}</p>
             </div>
             <div className="p-6">
                 <div className="mb-4">
-                    <p className="text-lg text-gray-600">Date: <span className='font-medium'>{booking.date_from} to {booking.date_to}</span></p>
-                    <p className="font-medium"></p>
+                    <p className="text-xl font-bold text-gray-700">Date: <span className='font-medium'>{booking.date_from} to {booking.date_to}</span></p>
                 </div>
                 <div className="mb-4">
-                    <p className="text-lg text-gray-600">Time: <span className='font-medium'>{booking.time_from} - {booking.time_to}</span></p>
-                    <p className="font-medium"></p>
+                    <p className="text-xl font-bold text-gray-700">Time: <span className='font-medium'>{booking.time_from} - {booking.time_to}</span></p>
                 </div>
                 <div className="mb-4">
-                    <p className="text-lg text-gray-600">Event: <span className='font-medium'>{booking.event_name}</span></p>
-                    <p className="font-medium"></p>
+                    <p className="text-xl font-bold text-gray-700">Event: <span className='font-medium'>{booking.event_name}</span></p>
                 </div>
                 <div className="mb-6">
-                    <p className="text-lg text-gray-600">Participants: <span className='font-medium'>{booking.number_of_attendees} people</span></p>
-                    <p className="font-medium"></p>
+                    <p className="text-xl font-bold text-gray-700">Participants: <span className='font-medium'>{booking.number_of_attendees} people</span></p>
                 </div>
                 <div className="mb-6">
-                    <p className="text-lg text-gray-600">Builidng name: <span className='font-medium'>Lakshmi Narain Block</span></p>
-                    <p className="font-medium"></p>
+                    <p className="text-xl font-bold text-gray-700">Builidng: <span className='font-medium'>{booking.building}</span></p>
                 </div>
                 <div className="mb-6">
-                    <p className="text-lg text-gray-600">College: <span className='font-medium'>LNCT</span></p>
-                    <p className="font-medium"></p>
+                    <p className="text-xl font-bold text-gray-700">College: <span className='font-medium'>{booking.college}</span></p>
                 </div>
                 <button
                     onClick={() => handleApprove(booking.hall_name, booking._id)}
-                    className="w-full bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 mb-4 hover:to-blue-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 transform hover:scale-105"
+                    className="w-full bg-blue-600 mb-4 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-lg transition duration-300 transform hover:scale-105"
                     >
                     Approve Booking
                 </button>
                 <button
                     onClick={() => handleDelete(booking.hall_name, booking._id)}
-                    className="w-full bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 transform hover:scale-105"
+                    className="w-full bg-[#e14733] hover:bg-[#b03d2e] text-white font-bold py-2 px-4 rounded-lg transition duration-300 transform hover:scale-105"
                     >
                     Delete Request
                 </button>

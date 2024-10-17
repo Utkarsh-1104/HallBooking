@@ -13,7 +13,7 @@ const AvailableHalls = () => {
   const auth = useRecoilValue(adminAccessAtom)
   console.log(auth);
   return (
-    <div className="bg-black min-h-screen font-[Roboto] ">
+    <div className="bg-gradient-to-br from-slate-100 to-slate-400 min-h-screen text-gray-800 ">
       {(auth.msg === "Authorized") ? <BookDetails auth={auth} /> : <Unauthorized /> }
     </div>
   )
@@ -74,17 +74,17 @@ function BookDetails(props) {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-800 via-neutral-700 to-zinc-700 text-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="py-12 px-4 sm:px-6 lg:px-8">
       <Popup result={result} msg={msg} open={open} handleClose={handleClose} />
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+          <h1 className="text-4xl font-bold text-center ">
             Find Available Halls
           </h1>
-          <p className="mt-2 text-base text-gray-400">Select your dates and time to search for available halls</p>
+          <p className="mt-2 text-xl font-semibold text-gray-700">Select your dates and time to search for available halls.</p>
         </div>
 
-        <form onSubmit={handleSearch} className="mb-8 bg-[#c7c2c2] bg-opacity-50 backdrop-filter backdrop-blur-lg rounded-xl p-6 shadow-2xl">
+        <form onSubmit={handleSearch} className="mb-8 bg-[#dddddd] rounded-xl p-6 shadow-2xl">
           <div className="grid grid-cols-2 gap-4 mb-4 text-black">
             <div className="space-y-2">
               <label htmlFor="dateFrom" className="text-lg font-medium">
@@ -139,28 +139,28 @@ function BookDetails(props) {
           </div>
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-3 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:from-purple-700 hover:to-pink-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50"
+            className="w-full text-lg bg-blue-600 text-white font-bold py-3 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:bg-blue-600 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
             onClick={handleSearch}
           >
             Search Available Halls
           </button>
         </form>
         {showResults && (
-        <div className="bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-lg rounded-xl p-6 shadow-2xl">
-          <h2 className="text-2xl font-bold mb-4 text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-pink-600">
+        <div className="bg-gray-300 rounded-xl p-6 shadow-2xl">
+          <h2 className="text-2xl font-bold mb-4 text-center text-gray-700 ">
             Available Halls
           </h2>
           {availableHalls.length > 0 ? (
               <ul className="space-y-4">
                 {availableHalls.map((hall) => ( 
-                  <li key={hall.id} className="flex items-center justify-between bg-gray-700 p-4 rounded-lg">
+                  <li key={hall.id} className="flex items-center justify-between bg-blue-600 p-4 rounded-lg">
                     <div>
-                      <h3 className="text-lg font-semibold">{hall.hall_name}</h3>
-                      <p className="text-sm text-gray-400">Capacity: {hall.hall_capacity}</p>
+                      <h3 className="text-xl text-white pb-1 font-bold">{hall.hall_name}</h3>
+                      <p className="text-lg text-gray-100">Capacity: {hall.hall_capacity}</p>
                     </div>
                     <button
                       onClick={() => { navigate(`/bookhall/?hall_id=${hall._id}&hall_name=${hall.hall_name}&admin_id=${props.auth.id}&date_from=${dateFrom}&date_to=${dateTo}&time_from=${timeFrom}&time_to=${timeTo}&fname=${props.auth.fname}&lname=${props.auth.lname}&role=${props.auth.role}`); }}
-                      className="bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold py-2 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:from-purple-600 hover:to-pink-600 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50"
+                      className="bg-[#E17833] text-white font-bold py-2 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:bg-[#E17833] hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#9f5625] focus:ring-opacity-50"
                     >
                       Book Now
                     </button>

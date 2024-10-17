@@ -13,7 +13,7 @@ import Popup from "../../ui/Alert";
 const ViewSingleHall = () => {
   const access = useRecoilValue(superAdminAccessAtom);
   return (
-    <div className="bg-gradient-to-br from-gray-900 via-purple-900 to-violet-800 min-h-screen font-[Roboto] text-white">
+    <div className="bg-gradient-to-br from-slate-100 to-slate-400 min-h-screen font-[Roboto] text-gray-800">
       {(access.msg === 'Authorized') ? <ViewHall /> : <Unauthorized />}
     </div>
   );
@@ -38,15 +38,17 @@ function ViewHall() {
 
   return (
     <div className="container mx-auto xl:px-24 px-6 py-8">
-      <h1 className='text-3xl font-bold mb-8 text-center sm:text-left text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600'>
+      <h1 className='text-3xl font-bold mb-8 text-center sm:text-left text-black'>
         View Hall Details
       </h1>
-      <hr className="w-full h-px bg-gray-600 border-0 rounded mb-8" />
-      <div className=" bg-[#605e5e] bg-opacity-50 backdrop-filter backdrop-blur-lg rounded-xl p-6 shadow-2xl mb-8">
-        <h2 className="text-[1.7rem] font-semibold mb-4">{hall.hall_name}</h2>
-        <p className="text-lg mb-2">Capacity: {hall.hall_capacity}</p>
+      <hr className="w-full h-[1.5px] bg-gray-900 border-0 rounded mb-8" />
+      <div className=" bg-blue-600 rounded-xl p-6 shadow-xl mb-8">
+        <h2 className="text-2xl font-semibold mb-4 text-white">{hall.hall_name}</h2>
+        <p className="text-lg mb-2 text-gray-200">Capacity: {hall.hall_capacity}</p>
+        <p className="text-lg mb-2 text-gray-200">Building: {hall.building}</p>
+        <p className="text-lg mb-2 text-gray-200">College: {hall.college}</p>
       </div>
-      <h3 className="text-[1.6rem] font-semibold mb-4">Bookings</h3>
+      <h3 className="text-2xl font-semibold mb-4 text-gray-800 ">Bookings</h3>
       <div className="space-y-4">
         {hall.hall_availability && hall.hall_availability.length > 0 ? (
           hall.hall_availability.map((booking) => (
@@ -64,7 +66,7 @@ function ViewHall() {
             />
           ))
         ) : (
-          <p className="text-gray-400">No bookings available for this hall.</p>
+          <p className="text-gray-600 text-xl ">No bookings available for this hall.</p>
         )}
       </div>
     </div>
@@ -87,27 +89,27 @@ function HallBookings(props) {
   return (
     <>
       <Popup state={open} handleClose={handleClose} event={result} text={msg} />
-      <div className="bg-[#605e5e] bg-opacity-50 backdrop-filter backdrop-blur-lg rounded-xl p-4 shadow-lg transition-all duration-300 ease-in-out">
+      <div className="bg-white rounded-xl p-4 shadow-lg transition-all duration-300 ease-in-out">
         <div className="flex justify-between items-center cursor-pointer" onClick={() => setIsExpanded(!isExpanded)}>
           <div>
-            <h3 className="text-2xl pb-2">{props.event_name}</h3>
-            <p className="text-xl">
+            <h3 className="text-2xl font-semibold underline decoration-[#E17833] underline-offset-4 text-gray-800 pb-2">{props.event_name}</h3>
+            <p className="text-xl text-gray-600">
               From {props.date_from} - {props.date_to}
             </p>
-            <p className="text-xl text-gray-400">
+            <p className="text-xl text-gray-600">
               {props.from} to {props.to}
             </p>
           </div>
-          <ExpandMoreIcon className={`transform transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
+          <ExpandMoreIcon className={`text-blue-600 transform transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
         </div>
         {isExpanded && (
-          <div className="mt-4 space-y-2 border-t border-gray-700 pt-4">
-            <p className="text-xl"><span>Booked by:</span> {props.booked_by}</p>
-            <p className="text-xl"><span>Number of participants: </span>{props.number_of_attendees}</p>
-            <p className="text-xl"><span>Booking ID:</span> {props.booking_id}</p>
+          <div className="mt-4 text-xl space-y-2 border-t border-gray-200 pt-4">
+            <p className="text-gray-700"><span className="font-semibold" >Booked by:</span> {props.booked_by}</p>
+            <p className="text-gray-700"><span className="font-semibold" >Number of participants: </span>{props.number_of_attendees}</p>
+            <p className="text-gray-700"><span className="font-semibold" >Booking ID:</span> {props.booking_id}</p>
             <button
               onClick={() => deleteBooking(props.hall_id, props.booking_id, setOpen, setResult, setMsg)}
-              className="mt-2 px-4 py-2 bg-gradient-to-r from-red-500 to-pink-500 text-white font-bold rounded-md transition-all duration-300 ease-in-out transform hover:from-red-600 hover:to-pink-600 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 flex items-center justify-center"
+              className=" px-4 py-2 bg-[#e14733] text-lg text-white font-bold rounded-md transition-all duration-300 ease-in-out transform hover:bg-[#b03d2e] hover:scale-105 focus:outline-none focus:ring-2 focus:ring-opacity-50 flex items-center justify-center"
             >
               Delete Booking
               <DeleteForeverIcon className="ml-2" />
