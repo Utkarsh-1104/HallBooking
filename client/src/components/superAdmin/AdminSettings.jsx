@@ -10,7 +10,7 @@ const AdminSettings = () => {
   
   const access = useRecoilValue(superAdminAccessAtom);
   return (
-    <div className="bg-gradient-to-br from-gray-900 via-purple-900 to-violet-800 min-h-screen font-[Roboto] text-white">
+    <div className="bg-gradient-to-br from-slate-100 to-slate-400 min-h-screen text-gray-800">
       {(access.msg === 'Authorized') ? <Settings /> : <Unauthorized />}
     </div>
   );
@@ -22,15 +22,15 @@ function Settings() {
   const admins = useRecoilValue(adminsAtom);
 
   return (
-    <div className="py-10 px-6 sm:px-24">
-      <h1 className="text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 text-center sm:text-left mb-8">
+    <div className="py-10 px-6 sm:px-20">
+      <h1 className="text-2xl sm:text-3xl font-bold text-center sm:text-left mb-8">
         Admin Settings
       </h1>
-      <div className="bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-lg rounded-xl p-6 shadow-2xl mb-12">
+      <div className="bg-[#dddddd] rounded-xl p-6 shadow-2xl mb-12">
         <div className="flex flex-col sm:flex-row items-center justify-between">
-          <h2 className="text-xl sm:text-2xl mb-4 sm:mb-0">Want to add new admin?</h2>
+          <h2 className="text-xl sm:text-2xl mb-4 sm:mb-0 text-gray-700 font-medium">Want to add a new admin?</h2>
           <button
-            className="w-full sm:w-auto px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-md transition-all duration-300 ease-in-out transform hover:from-purple-600 hover:to-pink-600 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 flex items-center justify-center"
+            className="w-full sm:w-auto px-6 py-2 bg-blue-600 text-white font-bold rounded-md transition-all duration-300 ease-in-out transform hover:bg-blue-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 flex items-center justify-center"
             onClick={() => { navigate('/superadminpage/adminsettings/addadmin'); }}
           >
             <span>Add</span>
@@ -39,10 +39,10 @@ function Settings() {
         </div>
       </div>
 
-      <h2 className='text-2xl mb-4'>Existing Admins</h2>
-      <hr className="w-full h-px bg-gray-600 border-0 rounded mb-6" />
+      <h2 className='text-2xl mb-4 text-gray-700'>Existing Admins</h2>
+      <hr className="w-full h-[1.5px] bg-gray-900 border-0 rounded mb-6" />
 
-      <div className="flex flex-col gap-4 items-center justify-center">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {admins.map(admin => (
           <ExistingAdmins
             key={admin._id}

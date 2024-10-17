@@ -29,22 +29,15 @@ router.post('/', async (req, res) => {
                 username: req.body.username,
                 password: hash,
                 role: req.body.role,
-                designation: req.body.designation
+                designation: req.body.designation,
+                college: req.body.college,
+                branch: req.body.branch
             })
             
             await admin.save()
         });
 
-        // const token = jwt.sign({
-        //     userid: admin._id,
-        //     role: admin.role
-        // }, process.env.JWT_SECRET)
-
         res.json({
-            // fname: admin.fname,
-            // lname: admin.lname,
-            // designation: admin.designation,
-            // token: token,
             msg: 'admin saved',
             status: 200
         })

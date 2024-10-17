@@ -30,6 +30,16 @@ export const designationAtom = atom({
     default: ''
 })
 
+export const branchAtom = atom({
+    key: 'branchAtom',
+    default: ''
+})
+
+export const collegeAtom = atom({
+    key: 'collegeAtom',
+    default: ''
+})
+
 export const eventAtom = atom({
     key: 'eventAtom',
     default: ''

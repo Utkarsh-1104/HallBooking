@@ -41,7 +41,7 @@ function Settings() {
   ]
 
   return (
-    <div className="py-10 px-6 sm:px-24">
+    <div className="py-10 px-6 sm:px-20">
       <h1 className="text-2xl sm:text-3xl font-bold text-center sm:text-left mb-8">
         Hall Settings
       </h1>
@@ -61,7 +61,7 @@ function Settings() {
       <h2 className='text-2xl mb-4 text-gray-700'>Existing Halls</h2>
       <hr className="w-full h-[1.5px] bg-gray-900 border-0 rounded mb-8" />
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <ExistingHalls />
       </div>
     </div>
