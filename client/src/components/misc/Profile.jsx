@@ -20,6 +20,8 @@ function MyProfile() {
   const admin_id = searchParams.get('id')
   const [admin, setAdmin] = useState({})
   const navigate = useNavigate()
+  let fini = ""
+  let lini = ""
 
   useEffect(() => {
     async function getProfile() {
@@ -33,16 +35,29 @@ function MyProfile() {
     getProfile()
   }, [admin_id])
 
+  if (admin.fname) {
+    const name = admin.fname.split(" ")
+    fini = name[1]
+  }
+  if (admin.lname) {
+    const lname = admin.lname.split(" ")
+    if (lname.length > 1) {
+      lini = lname[1]
+    } else {
+      lini = admin.lname
+    }
+  }
+
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
       <div className="bg-white rounded-3xl shadow-xl w-full max-w-md p-8">
         <h1 className="text-4xl font-bold text-center text-blue-600 mb-8">My Profile</h1>
         <div className="text-center mb-8">
           <div className="w-32 h-32 mx-auto bg-blue-500 rounded-full flex items-center justify-center text-white text-4xl font-bold shadow-lg">
-            {admin.fname && admin.fname[0]}{admin.lname && admin.lname[0]}
+            {fini && fini[0]}{lini && lini[0]}
           </div>
           <h2 className="text-3xl font-semibold text-gray-800 mt-4">{`${admin.fname} ${admin.lname}`}</h2>
-          <p className="text-xl text-gray-600">{admin.designation}</p>
+          <p className="text-xl text-gray-600">{admin.designation} {admin.branch} {admin.college} </p>
         </div>
         <div className="space-y-6">
           <button 

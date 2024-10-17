@@ -27,7 +27,9 @@ router.patch('/:id', async (req, res) => {
                         lname: req.body.lname || adminToBeUpdated.lname,
                         username: req.body.username || adminToBeUpdated.username,
                         role: req.body.role || adminToBeUpdated.role,
-                        designation: req.body.designation || adminToBeUpdated.designation
+                        designation: req.body.designation || adminToBeUpdated.designation,
+                        branch: req.body.branch || adminToBeUpdated.branch,
+                        college: req.body.college || adminToBeUpdated.college
                     }
                 }
             )
@@ -44,7 +46,9 @@ router.patch('/:id', async (req, res) => {
                             username: req.body.username || adminToBeUpdated.username,
                             password: hash || adminToBeUpdated.password,
                             role: req.body.role || adminToBeUpdated.role,
-                            designation: req.body.designation || adminToBeUpdated.designation
+                            designation: req.body.designation || adminToBeUpdated.designation,
+                            branch: req.body.branch || adminToBeUpdated.branch,
+                            college: req.body.college || adminToBeUpdated.college
                         }
                     }
                 )
