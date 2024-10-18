@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useRecoilState, useRecoilValue } from "recoil"
 import { adminAccessAtom } from "../../atoms/accessAtom"
 import Unauthorized from "../../ui/Unauthorized"
@@ -12,7 +13,7 @@ const BookHall = () => {
     const auth = useRecoilValue(adminAccessAtom) 
   
     return (
-      <div className="bg-gradient-to-br from-slate-100 to-slate-400 min-h-screen text-gray-800 ">
+      <div className="text-gray-800 ">
         {(auth.msg === "Authorized") ? <BookHallFunction /> : <Unauthorized /> }
       </div>
     )
@@ -31,6 +32,8 @@ function BookHallFunction() {
   const fname = searchParams.get('fname')
   const lname = searchParams.get('lname')
   const role = searchParams.get('role')
+  const hall_building = searchParams.get('hall_building')
+  const hall_college = searchParams.get('hall_college')
   const booked_by = capitalize(fname) + " " + capitalize(lname)
 
   const [eventName, setEventName] = useState('')
@@ -51,7 +54,13 @@ function BookHallFunction() {
   function handleBook(e) {
     e.preventDefault()
     if ((eventName.toLowerCase() !== eventName.toUpperCase())) {
-      postEvent();
+      if ( noOfParticipants && noOfParticipants > 0) {
+        postEvent();
+      } else {
+        setOpen(true);
+        setResult('error');
+        setMsg('Number of participants should be greater than 0.');
+      }
     } else {
       setOpen(true);
       setResult('error');
@@ -71,14 +80,16 @@ function BookHallFunction() {
           admin_booking_id: admin_id,
           number_of_attendees: noOfParticipants,
           role: role,
-          hall_name: hall_name
+          hall_name: hall_name,
+          hall_building: hall_building,
+          hall_college: hall_college
         },
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`
           }
         });
-        console.log(time_from, time_to, date_from, date_to, booked_by, admin_id, eventName, noOfParticipants, role);
+        console.log(time_from, time_to, date_from, date_to, booked_by, admin_id, eventName, noOfParticipants, role, hall_name, hall_building, hall_college);
         if (response.data.status === 200) {
           setOpen(true);
           setResult('success');
@@ -97,114 +108,117 @@ function BookHallFunction() {
   }
 
   return (
-    <div className="py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
-      <div className="max-w-lg space-y-10 bg-[#dddddd] rounded-xl p-6 shadow-2xl">
-        <div className="text-center">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-400 p-4 sm:p-6">
+      <div className="w-full max-w-lg bg-white rounded-2xl shadow-2xl overflow-hidden">
+        <div className="bg-blue-600 py-6 px-8 text-white">
           <h1 className="text-3xl font-bold">
             Book Your Event at {hall_name}
           </h1>
-          <p className="mt-2 text-lg font-medium text-gray-700">Fill in the details to reserve your spot.</p>
+          <p className="text-blue-100 text-lg mt-1">Fill in the details to reserve your spot.</p>
         </div>
-        <form onSubmit={handleBook} className="space-y-6">
-          <div className="grid grid-cols-2 gap-4">
+        <div className="p-8">
+          <form onSubmit={handleBook} className="space-y-6">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <label htmlFor="dateFrom" className="text-base font-bold text-gray-700">
+                  Date From
+                </label>
+                <input
+                  type="date"
+                  id="dateFrom"
+                  value={date_from}
+                  className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  readOnly
+                />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="dateTo" className="text-base font-bold text-gray-700">
+                  Date To
+                </label>
+                <input
+                  type="date"
+                  id="dateTo"
+                  value={date_to}
+                  className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  readOnly
+                />
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <label htmlFor="timeFrom" className="text-base font-bold text-gray-700">
+                  Time From
+                </label>
+                <input
+                  type="time"
+                  id="timeFrom"
+                  value={time_from}
+                  className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  readOnly
+                />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="timeTo" className="text-base font-bold text-gray-700">
+                  Time To
+                </label>
+                <input
+                  type="time"
+                  id="timeTo"
+                  value={time_to}
+                  className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  readOnly
+                />
+              </div>
+            </div>
             <div className="space-y-2">
-              <label htmlFor="dateFrom" className="text-base font-bold text-gray-700">
-                Date From
+              <label htmlFor="eventName" className="text-base font-bold text-gray-700">
+                Event Name
               </label>
               <input
-                type="date"
-                id="dateFrom"
-                value={date_from}
-                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                readOnly
+                type="text"
+                id="eventName"
+                value={eventName}
+                onChange={(e) => setEventName(e.target.value)}
+                placeholder="Enter event name"
+                className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="dateTo" className="text-base font-bold text-gray-700">
-                Date To
+              <label htmlFor="noOfParticipants" className="text-base font-bold text-gray-700">
+                Number of Participants
               </label>
               <input
-                type="date"
-                id="dateTo"
-                value={date_to}
-                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                readOnly
-              />
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <label htmlFor="timeFrom" className="text-base font-bold text-gray-700">
-                Time From
-              </label>
-              <input
-                type="time"
-                id="timeFrom"
-                value={time_from}
-                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                readOnly
+                type="number"
+                id="noOfParticipants"
+                value={noOfParticipants}
+                onChange={(e) => setNoOfParticipants(e.target.value)}
+                placeholder="Enter number of participants"
+                className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="timeTo" className="text-base font-bold text-gray-700">
-                Time To
+              <label htmlFor="bookedBy" className="text-base font-bold text-gray-700">
+                Booked By
               </label>
               <input
-                type="time"
-                id="timeTo"
-                value={time_to}
-                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                type="text"
+                id="bookedBy"
+                value={booked_by}
+                placeholder="Enter your name"
+                className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                 readOnly
               />
             </div>
-          </div>
-          <div className="space-y-2">
-            <label htmlFor="eventName" className="text-base font-bold text-gray-700">
-              Event Name
-            </label>
-            <input
-              type="text"
-              id="eventName"
-              value={eventName}
-              onChange={(e) => setEventName(e.target.value)}
-              placeholder="Enter event name"
-              className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-            />
-          </div>
-          <div className="space-y-2">
-            <label htmlFor="noOfParticipants" className="text-base font-bold text-gray-700">
-              Number of Participants
-            </label>
-            <input
-              type="number"
-              id="noOfParticipants"
-              value={noOfParticipants}
-              onChange={(e) => setNoOfParticipants(e.target.value)}
-              placeholder="Enter number of participants"
-              className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-            />
-          </div>
-          <div className="space-y-2">
-            <label htmlFor="bookedBy" className="text-base font-bold text-gray-700">
-              Booked By
-            </label>
-            <input
-              type="text"
-              id="bookedBy"
-              value={booked_by}
-              placeholder="Enter your name"
-              className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-              readOnly
-            />
-          </div>
-          <button
-            type="submit"
-            className="w-full text-lg bg-blue-600 text-white font-bold py-3 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:bg-blue-800 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-opacity-50"
-            onClick={handleBook}
-          >
-            Book Event
-          </button>
-        </form>
+            { role === "admin" ? (hall_name === "Srinivas Ramanujan Auditorium" || hall_name === "Aryabhata Auditorium" ) ? <p className="text-amber-700 font-bold text-lg mt-1">Note: This hall requires a super-admin's approval for booking.</p> : null : null }
+            <button
+              type="submit"
+              className="w-full text-lg bg-blue-600 text-white font-bold py-3 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:bg-blue-800 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-opacity-50"
+              onClick={handleBook}
+            >
+              {role === "admin" && (hall_name === "Srinivas Ramanujan Auditorium" || hall_name === "Aryabhata Auditorium" ) ? "Request Booking" : "Book Event"}
+            </button>
+          </form>
+        </div>
       </div>
       <Popup state={open} handleClose={handleClose} event={result} text={msg} />
     </div>

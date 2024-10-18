@@ -18,7 +18,7 @@ function randomIdGenerator() {
 
 router.patch('/:hall_id', async (req, res) => {
     const id = req.params.hall_id
-    const { date_from, date_to, time_from, time_to, event_name, booked_by, admin_booking_id, number_of_attendees, role, hall_name } = req.body
+    const { date_from, date_to, time_from, time_to, event_name, booked_by, admin_booking_id, number_of_attendees, role, hall_name, hall_building, hall_college } = req.body
     const booking_id = randomIdGenerator()
     try {
         await db()
@@ -39,7 +39,9 @@ router.patch('/:hall_id', async (req, res) => {
                             booking_id: booking_id,
                             admin_booking_id: admin_booking_id,
                             number_of_attendees: number_of_attendees,
-                            hall_name: hall_name
+                            hall_name: hall_name,
+                            hall_building: hall_building,
+                            hall_college: hall_college
                         } 
                     }
                 }

@@ -30,6 +30,8 @@ const hallSchema = new mongoose.Schema({
         admin_booking_id: String,
         number_of_attendees: Number,
         hall_name: String,
+        hall_building: String,
+        hall_college: String,
         booking_req_at: {
             type: Date,
             default: Date.now

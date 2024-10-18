@@ -12,7 +12,6 @@ import SearchIcon from '@mui/icons-material/Search';
 
 const AvailableHalls = () => {
   const auth = useRecoilValue(adminAccessAtom)
-  console.log(auth);
   return (
     <div className="bg-gradient-to-br from-slate-100 to-slate-400 min-h-screen text-gray-800 ">
       {(auth.msg === "Authorized") ? <BookDetails auth={auth} /> : <Unauthorized /> }
@@ -27,7 +26,6 @@ function BookDetails(props) {
   const [timeTo, setTimeTo] = useRecoilState(timeToAtom)
   const [availableHalls, setAvailableHalls] = useState([])
   const [showResults, setShowResults] = useState(false)
-  console.log(props.auth);
 
   const [result, setResult] = useRecoilState(eventAtom);
   const [msg, setMsg] = useRecoilState(textAtom);
@@ -96,7 +94,7 @@ function BookDetails(props) {
                 id="dateFrom"
                 value={dateFrom}
                 onChange={(e) => setDateFrom(e.target.value)}
-                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
               />
             </div>
             <div className="space-y-2">
@@ -108,7 +106,7 @@ function BookDetails(props) {
                 id="dateTo"
                 value={dateTo}
                 onChange={(e) => setDateTo(e.target.value)}
-                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
               />
             </div>
           </div>
@@ -122,7 +120,7 @@ function BookDetails(props) {
                 id="timeFrom"
                 value={timeFrom}
                 onChange={(e) => setTimeFrom(e.target.value)}
-                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
               />
             </div>
             <div className="space-y-2">
@@ -134,7 +132,7 @@ function BookDetails(props) {
                 id="timeTo"
                 value={timeTo}
                 onChange={(e) => setTimeTo(e.target.value)}
-                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
               />
             </div>
           </div>
@@ -149,19 +147,21 @@ function BookDetails(props) {
         </form>
         {showResults && (
         <div className="bg-gray-300 rounded-xl p-6 shadow-2xl">
-          <h2 className="text-2xl font-bold mb-4 text-center text-gray-700 ">
+          <h2 className="text-3xl font-bold mb-4 text-center text-gray-700 ">
             Available Halls
           </h2>
           {availableHalls.length > 0 ? (
               <ul className="space-y-4">
                 {availableHalls.map((hall) => ( 
-                  <li key={hall.id} className="flex items-center justify-between bg-blue-600 p-4 rounded-lg">
-                    <div>
-                      <h3 className="text-xl text-white pb-1 font-bold">{hall.hall_name}</h3>
-                      <p className="text-lg text-gray-100">Capacity: {hall.hall_capacity}</p>
+                  <li key={hall._id} className="w-full flex flex-col sm:flex-row justify-between items-center bg-blue-600 rounded-xl p-3 py-5 sm:p-6 shadow-2xl text-white sm:px-10">
+                    <div className="text-center sm:text-left mb-4 sm:mb-0" >
+                      <h3 className="text-xl font-bold sm:mb-0">{hall.hall_name}</h3>
+                      <p className="text-lg text-gray-200"> <span className="font-semibold">Capacity:</span> {hall.hall_capacity}</p>
+                      { hall.building && <p className="text-lg text-gray-100"> <span className="font-semibold">Building:</span> {hall.building}</p>}  
+                      { hall.college && <p className="text-lg text-gray-100"> <span className="font-semibold">College:</span> {hall.college}</p>}
                     </div>
                     <button
-                      onClick={() => { navigate(`/bookhall/?hall_id=${hall._id}&hall_name=${hall.hall_name}&admin_id=${props.auth.id}&date_from=${dateFrom}&date_to=${dateTo}&time_from=${timeFrom}&time_to=${timeTo}&fname=${props.auth.fname}&lname=${props.auth.lname}&role=${props.auth.role}`); }}
+                      onClick={() => { navigate(`/bookhall/?hall_id=${hall._id}&hall_name=${hall.hall_name}&hall_building=${hall.building}&hall_college=${hall.college}&admin_id=${props.auth.id}&date_from=${dateFrom}&date_to=${dateTo}&time_from=${timeFrom}&time_to=${timeTo}&fname=${props.auth.fname}&lname=${props.auth.lname}&role=${props.auth.role}`); }}
                       className="bg-[#E17833] text-white font-bold py-2 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:bg-[#E17833] hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#9f5625] focus:ring-opacity-50"
                     >
                       Book Now

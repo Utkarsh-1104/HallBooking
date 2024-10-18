@@ -10,7 +10,6 @@ import Popup from '../../ui/Alert'
 
 const EditProfile = () => {
     const auth = useRecoilValue(adminAccessAtom) 
-    console.log(auth);
     return (
       <div className="bg-gradient-to-br from-slate-100 to-slate-400 min-h-screen text-white">
         {(auth.msg === "Authorized") ? <EditDetails /> : <Unauthorized /> }
