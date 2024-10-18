@@ -4,7 +4,9 @@ import Unauthorized from "../../ui/Unauthorized";
 import { useNavigate } from "react-router-dom";
 import ExistingAdmins from "./ExistingAdmins";
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
-import { adminsAtom } from "../../atoms/getAdminsAtom";
+// import { adminsAtom } from "../../atoms/getAdminsAtom"
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const AdminSettings = () => {
   
@@ -19,7 +21,18 @@ const AdminSettings = () => {
 function Settings() {
   const navigate = useNavigate();
 
-  const admins = useRecoilValue(adminsAtom);
+  const [admins, setAdmins]  = useState([])
+  const [filter, setFilter] = useState('')
+
+  useEffect(() => {
+    axios.get(`http://localhost:3000/getadmins?filter=${filter}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    }).then(response => {
+      setAdmins(response.data)
+    })
+  }, [filter])
 
   return (
     <div className="py-10 px-6 sm:px-20">
@@ -39,7 +52,10 @@ function Settings() {
         </div>
       </div>
 
-      <h2 className='text-2xl mb-4 text-gray-700'>Existing Admins</h2>
+      <div className="flex flex-col sm:flex-row items-center gap-3 justify-between mb-4">
+        <h2 className='text-2xl text-gray-700'>Existing Admins</h2>
+        <input type="search" onChange={(e) => {setFilter(e.target.value)}} className="w-[20rem] px-3 py-2 text-black bg-gray-250 border-4 border-blue-400 rounded-md text-base shadow-sm placeholder-gray-700 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" placeholder="Search admin" name="" id="" />
+      </div>
       <hr className="w-full h-[1.5px] bg-gray-900 border-0 rounded mb-6" />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

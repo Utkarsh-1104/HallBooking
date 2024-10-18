@@ -4,10 +4,23 @@ import Admin from '../../schema/AdminSchema.js';
 const router = express.Router();
 
 router.get("/", async (req, res) => {
+    const filter = req.query.filter || "";
+
     try {
         await db();
-        const admins = await Admin.find({});
-        res.send(admins)
+        const admins = await Admin.find({
+            $or: [{
+                fname: {
+                    "$regex": filter
+                }
+            }, {
+                lname: {
+                    "$regex": filter
+                }
+            }]
+        });
+
+        res.json(admins);
     } catch (error) {
         return res.json({
             msg: error.message,
