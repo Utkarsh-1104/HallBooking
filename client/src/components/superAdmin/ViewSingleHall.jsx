@@ -86,6 +86,19 @@ function HallBookings(props) {
     setOpen(false);
   };
 
+  function convertDateFormat(dateString) {
+    const [year, month, day] = dateString.split('-');
+    return `${day}-${month}-${year}`;
+  }
+
+  function convertTimeFormat(timeString) {
+    let [hours, minutes] = timeString.split(':');  
+    hours = parseInt(hours, 10);
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12 || 12;
+    return `${hours}:${minutes} ${ampm}`;
+  }
+
   return (
     <>
       <Popup state={open} handleClose={handleClose} event={result} text={msg} />
@@ -94,10 +107,10 @@ function HallBookings(props) {
           <div>
             <h3 className="text-2xl font-semibold underline decoration-[#E17833] underline-offset-4 text-gray-800 pb-2">{props.event_name}</h3>
             <p className="text-xl text-gray-600">
-              From {props.date_from} - {props.date_to}
+              From {convertDateFormat(props.date_from)} - {convertDateFormat(props.date_to)}
             </p>
             <p className="text-xl text-gray-600">
-              {props.from} to {props.to}
+              {convertTimeFormat(props.from)} to {convertTimeFormat(props.to)}
             </p>
           </div>
           <ExpandMoreIcon fontSize="large" className={`text-blue-600 transform transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />

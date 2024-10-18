@@ -100,6 +100,20 @@ function BookingRequestsPage() {
     }
     setOpen(false);
   };
+
+  function convertDateFormat(dateString) {
+    const [year, month, day] = dateString.split('-');
+    return `${day}-${month}-${year}`;
+  }
+
+  function convertTimeFormat(timeString) {
+    let [hours, minutes] = timeString.split(':');  
+    hours = parseInt(hours, 10);
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12 || 12;
+    return `${hours}:${minutes} ${ampm}`;
+  }
+
   return (
     <div className="px-8 py-12 ">
       <Popup state={open} handleClose={handleClose} event={result} text={msg} />
@@ -115,10 +129,10 @@ function BookingRequestsPage() {
             <div className="p-6 flex flex-col justify-stretch gap-6">
               <div className='flex flex-col gap-4' >
                 <div>
-                    <p className="text-xl font-bold text-gray-700">Date: <span className='font-medium'>{booking.date_from} to {booking.date_to}</span></p>
+                    <p className="text-xl font-bold text-gray-700">Date: <span className='font-medium'>{convertDateFormat(booking.date_from)} to {convertDateFormat(booking.date_to)}</span></p>
                 </div>
                 <div>
-                    <p className="text-xl font-bold text-gray-700">Time: <span className='font-medium'>{booking.time_from} - {booking.time_to}</span></p>
+                    <p className="text-xl font-bold text-gray-700">Time: <span className='font-medium'>{convertTimeFormat(booking.time_from)} - {convertTimeFormat(booking.time_to)}</span></p>
                 </div>
                 <div>
                     <p className="text-xl font-bold text-gray-700">Event: <span className='font-medium'>{booking.event_name}</span></p>
