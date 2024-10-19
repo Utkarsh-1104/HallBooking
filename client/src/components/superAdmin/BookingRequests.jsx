@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useRecoilState, useRecoilValue } from 'recoil'
 import {bookingRequests} from '../../atoms/getBookingReqsAtom'
 import axios from 'axios'
@@ -9,21 +10,23 @@ import Unauthorized from '../../ui/Unauthorized'
 
 export default function BookingRequests() {
   const access = useRecoilValue(superAdminAccessAtom);
+  const name = access.fname + ' ' + access.lname;
   return (
     <div className="bg-gradient-to-br from-slate-100 to-slate-400 min-h-screen text-gray-800">
-      {(access.msg === 'Authorized') ? <BookingRequestsPage /> : <Unauthorized />}
+      {(access.msg === 'Authorized') ? <BookingRequestsPage name={name} /> : <Unauthorized />}
     </div>
   );
 }
 
 
-function BookingRequestsPage() {
+function BookingRequestsPage(props) {
   const handleApprove = async (hall_name, id) => {
     try {
       const response = await axios.put(`http://localhost:3000/approvebooking`,
         {
           hall_name: hall_name,
-          reqId: id
+          reqId: id,
+          superadmin_name: props.name
         }, 
         {
           headers: {

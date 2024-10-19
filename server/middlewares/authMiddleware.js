@@ -21,6 +21,7 @@ const authMiddleware = async (req, res, next) => {
             req.fname = decoded.fname;
             req.lname = decoded.lname;
             req.designation = decoded.designation;
+            req.username = decoded.username;
             req.role = decoded.role;
             next();
         } else {

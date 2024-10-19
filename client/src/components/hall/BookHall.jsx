@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/no-unescaped-entities */
 import { useRecoilState, useRecoilValue } from "recoil"
 import { accessAtom } from "../../atoms/accessAtom"
@@ -10,30 +11,31 @@ import axios from "axios"
 import { capitalize } from "@mui/material"
 
 const BookHall = () => {
-    const auth = useRecoilValue(accessAtom) 
-  
-    return (
-      <div className="text-gray-800 ">
-        {(auth.msg === "Authorized") ? <BookHallFunction /> : <Unauthorized /> }
-      </div>
-    )
+  const auth = useRecoilValue(accessAtom) 
+  return (
+    <div className="text-gray-800 ">
+      {(auth.msg === "Authorized") ? <BookHallFunction auth={auth} /> : <Unauthorized /> }
+    </div>
+  )
 }
 
 
-function BookHallFunction() {
+function BookHallFunction(props) {
   const [searchParams] = useSearchParams()
   const hall_name = searchParams.get('hall_name')
   const hall_id = searchParams.get('hall_id')
-  const admin_id = searchParams.get('admin_id')
+  const admin_id = props.auth.id
   const time_from = searchParams.get('time_from')
   const time_to = searchParams.get('time_to')
   const date_from = searchParams.get('date_from')
   const date_to = searchParams.get('date_to')
-  const fname = searchParams.get('fname')
-  const lname = searchParams.get('lname')
-  const role = searchParams.get('role')
+  const fname = props.auth.fname
+  const lname = props.auth.lname
+  const role = props.auth.role
   const hall_building = searchParams.get('hall_building')
   const hall_college = searchParams.get('hall_college')
+  const username = props.auth.username
+
   const booked_by = capitalize(fname) + " " + capitalize(lname)
 
   const [eventName, setEventName] = useState('')
@@ -80,6 +82,7 @@ function BookHallFunction() {
           admin_booking_id: admin_id,
           number_of_attendees: noOfParticipants,
           role: role,
+          username: username,
           hall_name: hall_name,
           hall_building: hall_building,
           hall_college: hall_college
@@ -89,7 +92,6 @@ function BookHallFunction() {
             Authorization: `Bearer ${localStorage.getItem('token')}`
           }
         });
-        console.log(time_from, time_to, date_from, date_to, booked_by, admin_id, eventName, noOfParticipants, role, hall_name, hall_building, hall_college);
         if (response.data.status === 200) {
           setOpen(true);
           setResult('success');
