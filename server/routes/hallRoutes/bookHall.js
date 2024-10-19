@@ -1,6 +1,7 @@
 import express from "express";
 import { db } from "../../db/db.js";
 import Hall from "../../schema/hallSchema.js";
+import sendEmail from "../../controller/emailService.js";
 const router = express.Router();
 
 function randomIdGenerator() {
@@ -47,6 +48,24 @@ router.patch('/:hall_id', async (req, res) => {
                     }
                 }
             )
+
+            const subject = `New booking request for ${hall_name} hall.`
+            const htmlContent = `
+                <h1>A booking request has been made for ${hall_name} hall by ${booked_by}.</h1>
+                <h3>Event Name: ${event_name}</h3>
+                <h3>Date: ${date_from} to ${date_to}</h3>
+                <h3>Time: ${time_from} to ${time_to}</h3>
+                <h3>Number of Participants: ${number_of_attendees}</h3>
+                <h3>Building: ${hall_building}</h3>
+                <h3>College: ${hall_college}</h3>
+                <h3>Head over to the dashboard to approve or decline the request.</h3>
+            `
+            const superadminEmails = ["lone2104wolf@gmail.com", "lnctmca@lnct.ac.in"]
+
+            for (const email of superadminEmails) {
+                await sendEmail(email, subject, htmlContent)
+            }
+
             return res.json({
                 msg: 'Hall booking request sent.',
                 status: 200

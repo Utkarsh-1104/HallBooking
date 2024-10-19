@@ -60,7 +60,8 @@ function BookingRequestsPage(props) {
       const response = await axios.put(`http://localhost:3000/deletebookingreq`,
         {
           hall_name: hall_name,
-          reqId: id
+          reqId: id,
+          superadmin_name: props.name
         },
         {
           headers: {

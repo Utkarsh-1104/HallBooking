@@ -12,14 +12,15 @@ import Popup from "../../ui/Alert";
 
 const ViewSingleHall = () => {
   const access = useRecoilValue(superAdminAccessAtom);
+  const name = access.fname + ' ' + access.lname;
   return (
     <div className="bg-gradient-to-br from-slate-100 to-slate-400 min-h-screen font-[Roboto] text-gray-800">
-      {(access.msg === 'Authorized') ? <ViewHall /> : <Unauthorized />}
+      {(access.msg === 'Authorized') ? <ViewHall name={name} /> : <Unauthorized />}
     </div>
   );
 }
 
-function ViewHall() {
+function ViewHall(props) {
   const [hall, setHall] = useState({});
   const [searchParams] = useSearchParams();
   const id = searchParams.get('id');
@@ -63,6 +64,7 @@ function ViewHall() {
               booked_by={booking.booked_by}
               event_name={booking.event_name}
               number_of_attendees={booking.number_of_attendees}
+              superadmin_name={props.name}
             />
           ))
         ) : (
@@ -121,7 +123,7 @@ function HallBookings(props) {
             <p className="text-gray-700"><span className="font-semibold" >Number of participants: </span>{props.number_of_attendees}</p>
             <p className="text-gray-700"><span className="font-semibold" >Booking ID:</span> {props.booking_id}</p>
             <button
-              onClick={() => deleteBooking(props.hall_id, props.booking_id, setOpen, setResult, setMsg)}
+              onClick={() => deleteBooking(props.hall_id, props.booking_id, props.superadmin_name, setOpen, setResult, setMsg)}
               className=" px-4 py-2 bg-[#e14733] text-lg text-white font-bold rounded-md transition-all duration-300 ease-in-out transform hover:bg-[#b03d2e] hover:scale-105 focus:outline-none focus:ring-2 focus:ring-opacity-50 flex items-center justify-center"
             >
               Delete Booking
@@ -134,11 +136,12 @@ function HallBookings(props) {
   );
 }
 
-async function deleteBooking(hall_id, booking_id, setOpen, setResult, setMsg) {
+async function deleteBooking(hall_id, booking_id, superadmin_name, setOpen, setResult, setMsg) {
   try {
     const response = await axios.post(`http://localhost:3000/removebooking/${hall_id}`,
       {
-        booking_id: booking_id
+        booking_id: booking_id,
+        superadmin_name: superadmin_name
       },
       {
         headers: {

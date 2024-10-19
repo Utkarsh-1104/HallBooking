@@ -38,7 +38,7 @@ router.put('/', async (req, res) => {
     // Save the updated hall document
     await hall.save();
 
-    const subject = `Your booking request ${bookingRequest.hall_name} has been approved by ${superadmin_name}`;
+    const subject = `Your booking request at ${bookingRequest.hall_name} has been approved by ${superadmin_name}.`;
     const htmlContent = `
       <h1>Congratulations! Your spot has been reserved.</h1>
       <h3>Event: ${bookingRequest.event_name}</h3>
