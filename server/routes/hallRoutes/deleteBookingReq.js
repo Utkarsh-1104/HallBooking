@@ -27,14 +27,41 @@ router.put('/', async (req, res) => {
         const subject = `Your booking request at ${hall.hall_booking_reqs[bookingReqIndex].hall_name} has been declined by ${superadmin_name}.`;
         
         const htmlContent = `
-            <h1>Sorry! Your booking request has been declined.</h1>
-            <h3>Event: ${hall.hall_booking_reqs[bookingReqIndex].event_name}</h3>
-            <h3>Date: ${hall.hall_booking_reqs[bookingReqIndex].date_from} to ${hall.hall_booking_reqs[bookingReqIndex].date_to}</h3>
-            <h3>Time: ${hall.hall_booking_reqs[bookingReqIndex].time_from} to ${hall.hall_booking_reqs[bookingReqIndex].time_to}</h3>
-            <h3>Participants: ${hall.hall_booking_reqs[bookingReqIndex].number_of_attendees} </h3>
-            <h3>Hall Name: ${hall.hall_booking_reqs[bookingReqIndex].hall_name} </h3>
-            <h3>Hall Building: ${hall.hall_booking_reqs[bookingReqIndex].hall_building} </h3>
-            <h3>Hall College: ${hall.hall_booking_reqs[bookingReqIndex].hall_college} </h3>
+            <div style="font-family: Arial, sans-serif; color: #333;">
+                <h1 style="color: #e14733; text-align: center;">Sorry! Your booking request has been declined.</h1>
+
+                <table style="width: 100%; max-width: 600px; margin: 20px auto; border-collapse: collapse; background-color: #f9f9f9; border: 1px solid #ddd; padding-left: 50px;">
+                    <tr>
+                    <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem; width: 30%;"><strong style="color: #374151;">Event:</strong></td>
+                    <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem; width: 70%;">${hall.hall_booking_reqs[bookingReqIndex].event_name}</td>
+                    </tr>
+                    <tr>
+                    <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem"><strong style="color: #374151;">Date:</strong></td>
+                    <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem">${hall.hall_booking_reqs[bookingReqIndex].date_from} to ${hall.hall_booking_reqs[bookingReqIndex].date_to}</td>
+                    </tr>
+                    <tr>
+                    <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem"><strong style="color: #374151;">Time:</strong></td>
+                    <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem">${hall.hall_booking_reqs[bookingReqIndex].time_from} to ${hall.hall_booking_reqs[bookingReqIndex].time_to}</td>
+                    </tr>
+                    <tr>
+                    <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem"><strong style="color: #374151;">Participants:</strong></td>
+                    <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem">${hall.hall_booking_reqs[bookingReqIndex].number_of_attendees}</td>
+                    </tr>
+                    <tr>
+                    <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem"><strong style="color: #374151;">Hall Name:</strong></td>
+                    <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem">${hall.hall_booking_reqs[bookingReqIndex].hall_name}</td>
+                    </tr>
+                    <tr>
+                    <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem"><strong style="color: #374151;">Building:</strong></td>
+                    <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem">${hall.hall_booking_reqs[bookingReqIndex].hall_building}</td>
+                    </tr>
+                    <tr>
+                    <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem"><strong style="color: #374151;">College:</strong></td>
+                    <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem">${hall.hall_booking_reqs[bookingReqIndex].hall_college}</td>
+                    </tr>
+                </table>
+                </div>
+
         `
         await sendEmail(hall.hall_booking_reqs[bookingReqIndex].username, subject, htmlContent);
 

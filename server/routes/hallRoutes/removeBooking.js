@@ -41,14 +41,41 @@ router.post('/:id', async (req, res) => {
             async function emailSender() {
                 const subject = `Your booking at ${hall.hall_name} has been removed by ${superadmin_name}.`
                 const htmlContent = `
-                    <h1>Your existing booking has been removed.</h1>
-                    <h3>Event: ${booking.event_name}</h3>
-                    <h3>Date: ${booking.date_from} to ${booking.date_to}</h3>
-                    <h3>Time: ${booking.time_from} to ${booking.time_to}</h3>
-                    <h3>Participants: ${booking.number_of_attendees}</h3>
-                    <h3>Hall Name: ${hall.hall_name}</h3>
-                    <h3>Building: ${hall.building}</h3>
-                    <h3>College: ${hall.college}</h3>
+                    <div style="font-family: Arial, sans-serif; color: #333;">
+                        <h1 style="color: #e14733; text-align: center;">Your existing booking has been removed</h1>
+
+                        <table style="width: 100%; max-width: 600px; margin: 20px auto; border-collapse: collapse; background-color: #f9f9f9; border: 1px solid #ddd; padding-left: 50px;">
+                            <tr>
+                            <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem; width: 30%;"><strong style="color: #374151;">Event:</strong></td>
+                            <td style="padding: 20px; border-bottom: 1px solid #ddd; width: 70%; font-size:1.15rem">${booking.event_name}</td>
+                            </tr>
+                            <tr>
+                            <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem"><strong style="color: #374151;">Date:</strong></td>
+                            <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem">${booking.date_from} to ${booking.date_to}</td>
+                            </tr>
+                            <tr>
+                            <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem"><strong style="color: #374151;">Time:</strong></td>
+                            <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem">${booking.time_from} to ${booking.time_to}</td>
+                            </tr>
+                            <tr>
+                            <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem"><strong style="color: #374151;">Participants:</strong></td>
+                            <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem">${booking.number_of_attendees}</td>
+                            </tr>
+                            <tr>
+                            <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem"><strong style="color: #374151;">Hall Name:</strong></td>
+                            <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem">${hall.hall_name}</td>
+                            </tr>
+                            <tr>
+                            <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem"><strong style="color: #374151;">Building:</strong></td>
+                            <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem">${hall.building}</td>
+                            </tr>
+                            <tr>
+                            <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem"><strong style="color: #374151;">College:</strong></td>
+                            <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem">${hall.college}</td>
+                            </tr>
+                        </table>
+                        </div>
+
                 `
                 await sendEmail(booking.username, subject, htmlContent)
             }

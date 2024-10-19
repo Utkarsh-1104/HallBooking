@@ -51,15 +51,42 @@ router.patch('/:hall_id', async (req, res) => {
 
             const subject = `New booking request for ${hall_name} hall.`
             const htmlContent = `
-                <h1>A booking request has been made for ${hall_name} hall by ${booked_by}.</h1>
-                <h3>Event Name: ${event_name}</h3>
-                <h3>Date: ${date_from} to ${date_to}</h3>
-                <h3>Time: ${time_from} to ${time_to}</h3>
-                <h3>Number of Participants: ${number_of_attendees}</h3>
-                <h3>Building: ${hall_building}</h3>
-                <h3>College: ${hall_college}</h3>
-                <h3>Head over to the dashboard to approve or decline the request.</h3>
-            `
+                <div style="font-family: Arial, sans-serif; color: #333;">
+                <h1 style="color: #2563EB; text-align: center;">A booking request has been made for ${hall_name} by ${booked_by}.</h1>
+
+                <table style="width: 100%; max-width: 600px; margin: 20px auto; border-collapse: collapse; background-color: #f9f9f9; border: 1px solid #ddd; padding-left: 50px;">
+                    <tr>
+                    <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem; width: 30%;"><strong style="color: #374151;">Event:</strong></td>
+                    <td style="padding: 20px; border-bottom: 1px solid #ddd; width: 70%; font-size:1.15rem">${event_name}</td>
+                    </tr>
+                    <tr>
+                    <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem"><strong style="color: #374151;">Date:</strong></td>
+                    <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem">${date_from} to ${date_to}</td>
+                    </tr>
+                    <tr>
+                    <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem"><strong style="color: #374151;">Time:</strong></td>
+                    <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem">${time_from} to ${time_to}</td>
+                    </tr>
+                    <tr>
+                    <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem"><strong style="color: #374151;">Participants:</strong></td>
+                    <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem">${number_of_attendees}</td>
+                    </tr>
+                    <tr>
+                    <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem"><strong style="color: #374151;">Hall Name:</strong></td>
+                    <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem">${hall_name}</td>
+                    </tr>
+                    <tr>
+                    <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem"><strong style="color: #374151;">Building:</strong></td>
+                    <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem">${hall_building}</td>
+                    </tr>
+                    <tr>
+                    <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem"><strong style="color: #374151;">College:</strong></td>
+                    <td style="padding: 20px; border-bottom: 1px solid #ddd; font-size:1.15rem">${hall_college}</td>
+                    </tr>
+                </table>
+            </div>
+
+        `
             const superadminEmails = ["lone2104wolf@gmail.com", "lnctmca@lnct.ac.in"]
 
             for (const email of superadminEmails) {
