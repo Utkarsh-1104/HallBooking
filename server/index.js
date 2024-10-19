@@ -19,6 +19,7 @@ import deleteBookingReq from './routes/hallRoutes/deleteBookingReq.js'
 import loginAdmin from './routes/authRoutes/loginAdmin.js'
 import adminDashboard from './routes/authRoutes/adminDashboard.js'
 import superAdminDashboard from './routes/authRoutes/superAdminDashboard.js'
+import bothDashboard from './routes/authRoutes/bothDashboard.js'
 
 import getAdmins from './routes/adminRoutes/getAdmins.js'
 import postAdmins from './routes/adminRoutes/postAdmins.js'
@@ -44,8 +45,9 @@ app.use('/approvebooking', superAdminAuthMiddleware, approveBookingReqs)
 app.use('/deletebookingreq', superAdminAuthMiddleware, deleteBookingReq)
 
 app.use('/loginadmin', loginAdmin)
-app.use('/admindashboard', authMiddleware, adminDashboard)
+app.use('/admindashboard', adminAuthMiddleware, adminDashboard)
 app.use('/superadmindashboard', superAdminAuthMiddleware, superAdminDashboard)
+app.use('/bothdashboard', authMiddleware, bothDashboard)
 
 app.use('/getadmins', superAdminAuthMiddleware, getAdmins)
 app.use('/postadmins', superAdminAuthMiddleware, postAdmins)

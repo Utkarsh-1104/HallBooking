@@ -11,11 +11,13 @@ router.get("/", async (req, res) => {
         const admins = await Admin.find({
             $or: [{
                 fname: {
-                    "$regex": filter
+                    "$regex": filter,
+                    "$options": "i"
                 }
             }, {
                 lname: {
-                    "$regex": filter
+                    "$regex": filter,
+                    "$options": "i"
                 }
             }]
         });

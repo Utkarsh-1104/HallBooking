@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useRecoilState, useRecoilValue } from "recoil";
-import { adminAccessAtom } from "../../atoms/accessAtom";
+import { accessAtom } from "../../atoms/accessAtom";
 import Unauthorized from "../../ui/Unauthorized";
 import React, { useState } from 'react'
 import { dateFromAtom, dateToAtom, timeFromAtom, timeToAtom } from "../../atoms/bookHallAtoms";
@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import SearchIcon from '@mui/icons-material/Search';
 
 const AvailableHalls = () => {
-  const auth = useRecoilValue(adminAccessAtom)
+  const auth = useRecoilValue(accessAtom)
   return (
     <div className="bg-gradient-to-br from-slate-100 to-slate-400 min-h-screen text-gray-800 ">
       {(auth.msg === "Authorized") ? <BookDetails auth={auth} /> : <Unauthorized /> }

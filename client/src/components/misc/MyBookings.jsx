@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-unescaped-entities */
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { adminAccessAtom } from '../../atoms/accessAtom'
+import { accessAtom } from '../../atoms/accessAtom'
 import Unauthorized from '../../ui/Unauthorized'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
@@ -11,7 +11,7 @@ import Popup from '../../ui/Alert'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 const MyBookings = () => {
-    const auth = useRecoilValue(adminAccessAtom) 
+    const auth = useRecoilValue(accessAtom) 
   
     return (
       <div className="bg-gradient-to-br from-slate-100 to-slate-400 min-h-screen text-white">

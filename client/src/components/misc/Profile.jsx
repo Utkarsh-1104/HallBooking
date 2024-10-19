@@ -1,12 +1,12 @@
 import { useRecoilValue } from 'recoil'
-import { adminAccessAtom } from '../../atoms/accessAtom'
+import { accessAtom } from '../../atoms/accessAtom'
 import Unauthorized from '../../ui/Unauthorized'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
 const Profile = () => {
-  const auth = useRecoilValue(adminAccessAtom) 
+  const auth = useRecoilValue(accessAtom) 
 
   return (
     <div className="bg-gradient-to-br from-slate-100 to-slate-400 min-h-screen font-[Roboto] text-gray-800">

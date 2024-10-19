@@ -16,6 +16,21 @@ export const adminAccessAtom = atom({
     })
 })
 
+export const accessAtom = atom({
+    key: 'accessAtom',
+    default: selector({
+        key: 'accessSelector',
+        get: async () => {
+            const access = await axios.get('http://localhost:3000/bothdashboard', {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+            return access.data
+        }
+    })
+})
+
 export const superAdminAccessAtom = atom({
     key: 'superAdminAccessAtom',
     default: selector({

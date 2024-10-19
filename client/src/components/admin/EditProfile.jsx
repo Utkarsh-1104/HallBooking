@@ -1,5 +1,5 @@
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { adminAccessAtom } from '../../atoms/accessAtom'
+import { accessAtom } from '../../atoms/accessAtom'
 import Unauthorized from '../../ui/Unauthorized'
 import React from 'react'
  import axios from 'axios'
@@ -9,7 +9,7 @@ import { eventAtom, textAtom } from '../../atoms/adminRegisterAtoms'
 import Popup from '../../ui/Alert'
 
 const EditProfile = () => {
-    const auth = useRecoilValue(adminAccessAtom) 
+    const auth = useRecoilValue(accessAtom) 
     return (
       <div className="bg-gradient-to-br from-slate-100 to-slate-400 min-h-screen text-white">
         {(auth.msg === "Authorized") ? <EditDetails /> : <Unauthorized /> }
@@ -83,7 +83,7 @@ function EditDetails() {
           <p className='text-blue-100 text-base'>Leave the field empty for the details you dont wanna update.</p>
         </div>
         <div className="p-8">
-          <form onSubmit={updateDetails} className="space-y-6">
+          <form onSubmit={updateDetails} className="space-y-6 text-gray-700">
             <div>
               <label htmlFor="username" className="block text-lg font-medium text-gray-700">New Username</label>
               <input

@@ -65,6 +65,7 @@ function Settings() {
             id={admin._id}
             fname={admin.fname}
             lname={admin.lname}
+            role={admin.role}
           />
         ))}
       </div>

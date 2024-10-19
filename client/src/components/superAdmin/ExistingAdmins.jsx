@@ -15,6 +15,8 @@ const ExistingAdmins = (props) => {
   const name = capitalize(props.fname) + " " + capitalize(props.lname);
   const id = props.id;
 
+  const bg = (props.role === 'superadmin') ? 'bg-[#261063]' : 'bg-blue-600';
+
   const [result, setResult] = useRecoilState(eventAtom);
   const [msg, setMsg] = useRecoilState(textAtom);
 
@@ -30,7 +32,7 @@ const ExistingAdmins = (props) => {
   return (
   <>
     <Popup state={open} handleClose={handleClose} event={result} text={msg} />
-    <div className='w-full flex flex-col justify-between items-center gap-3 bg-blue-600 rounded-xl p-4 shadow-2xl text-white'>
+    <div className={`w-full flex flex-col justify-between items-center gap-3 ${bg} rounded-xl p-4 shadow-2xl text-white`}>
       <div className='flex flex-col justify-between items-center gap-3'>
         <h1 className="text-2xl font-bold mb-4 sm:mb-0">{name}</h1>
         <div className='flex flex-wrap justify-center gap-3 '>

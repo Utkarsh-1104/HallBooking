@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useRecoilState, useRecoilValue } from "recoil"
-import { adminAccessAtom } from "../../atoms/accessAtom"
+import { accessAtom } from "../../atoms/accessAtom"
 import Unauthorized from "../../ui/Unauthorized"
 import { useSearchParams } from "react-router-dom"
 import { useState } from "react"
@@ -10,7 +10,7 @@ import axios from "axios"
 import { capitalize } from "@mui/material"
 
 const BookHall = () => {
-    const auth = useRecoilValue(adminAccessAtom) 
+    const auth = useRecoilValue(accessAtom) 
   
     return (
       <div className="text-gray-800 ">
