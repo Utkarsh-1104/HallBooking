@@ -7,7 +7,7 @@ import { useSearchParams } from 'react-router-dom'
 import { newPasswordAtom, newUsernameAtom } from '../../atoms/editProfile'
 import { eventAtom, textAtom } from '../../atoms/adminRegisterAtoms'
 import Popup from '../../ui/Alert'
-const BACKEND_ENDPOINT = import.meta.env.VITE_BACKEND_ENDPOINT
+
 const EditProfile = () => {
     const auth = useRecoilValue(accessAtom) 
     return (
@@ -56,7 +56,7 @@ function EditDetails() {
 
     async function editProfile() {
       try {
-        const response = await axios.patch(`${BACKEND_ENDPOINT}/editprofile/${admin_id}`, {
+        const response = await axios.patch(`https://lncthalls-server.onrender.com/editprofile/${admin_id}`, {
           newUsername: newUsername,
           newPassword: newPassword
         }, {

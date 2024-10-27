@@ -9,7 +9,7 @@ import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { eventAtom, textAtom } from '../../atoms/adminRegisterAtoms';
 import Popup from '../../ui/Alert';
-const BACKEND_ENDPOINT = import.meta.env.VITE_BACKEND_ENDPOINT
+
 const ExistingAdmins = (props) => {
   const navigate = useNavigate();
   const name = capitalize(props.fname) + " " + capitalize(props.lname);
@@ -63,7 +63,7 @@ const ExistingAdmins = (props) => {
 
 async function deleteAdmin(id, setOpen, setResult, setMsg) {
   
-  const response = await axios.delete(`${BACKEND_ENDPOINT}/removeadmins/${id}`,
+  const response = await axios.delete(`https://lncthalls-server.onrender.com/removeadmins/${id}`,
     {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`

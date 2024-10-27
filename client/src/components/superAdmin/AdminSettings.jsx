@@ -7,7 +7,7 @@ import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 // import { adminsAtom } from "../../atoms/getAdminsAtom"
 import { useEffect, useState } from "react";
 import axios from "axios";
-const BACKEND_ENDPOINT = import.meta.env.VITE_BACKEND_ENDPOINT
+
 const AdminSettings = () => {
   
   const access = useRecoilValue(superAdminAccessAtom);
@@ -25,7 +25,7 @@ function Settings() {
   const [filter, setFilter] = useState('')
 
   useEffect(() => {
-    axios.get(`${BACKEND_ENDPOINT}/getadmins?filter=${filter}`, {
+    axios.get(`https://lncthalls-server.onrender.com/getadmins?filter=${filter}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`
       }

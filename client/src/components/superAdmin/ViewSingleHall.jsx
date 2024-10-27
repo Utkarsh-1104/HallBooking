@@ -9,7 +9,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { eventAtom, textAtom } from "../../atoms/adminRegisterAtoms";
 import Popup from "../../ui/Alert";
-const BACKEND_ENDPOINT = import.meta.env.VITE_BACKEND_ENDPOINT
+
 const ViewSingleHall = () => {
   const access = useRecoilValue(superAdminAccessAtom);
   const name = access.fname + ' ' + access.lname;
@@ -28,7 +28,7 @@ function ViewHall(props) {
   useEffect(() => {
     async function singleHall() {
       try {
-        const res = await axios.get(`${BACKEND_ENDPOINT}/gethalls/${id}`)
+        const res = await axios.get(`https://lncthalls-server.onrender.com/gethalls/${id}`)
         setHall(res.data);
       } catch (error) {
         console.log(error);

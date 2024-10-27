@@ -9,7 +9,7 @@ import Popup from "../../ui/Alert";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import SearchIcon from '@mui/icons-material/Search';
-const BACKEND_ENDPOINT = import.meta.env.VITE_BACKEND_ENDPOINT
+
 const AvailableHalls = () => {
   const auth = useRecoilValue(accessAtom)
   return (
@@ -50,7 +50,7 @@ function BookDetails() {
     }
 
     try {
-      const response = await axios.post(`${BACKEND_ENDPOINT}/availablehalls`, {
+      const response = await axios.post(`https://lncthalls-server.onrender.com/availablehalls`, {
         date_from: dateFrom,
         date_to: dateTo,
         time_from: timeFrom,

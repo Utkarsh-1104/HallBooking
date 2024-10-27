@@ -4,7 +4,7 @@ import Unauthorized from '../../ui/Unauthorized'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-const BACKEND_ENDPOINT = import.meta.env.VITE_BACKEND_ENDPOINT
+
 const Profile = () => {
   const auth = useRecoilValue(accessAtom) 
 
@@ -25,7 +25,7 @@ function MyProfile() {
 
   useEffect(() => {
     async function getProfile() {
-      const response = await axios.get(`${BACKEND_ENDPOINT}/getprofile/${admin_id}`, {
+      const response = await axios.get(`https://lncthalls-server.onrender.com/getprofile/${admin_id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }

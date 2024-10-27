@@ -1,12 +1,12 @@
 import axios from "axios";
 import { atom, selector } from "recoil";
-const BACKEND_ENDPOINT = import.meta.env.VITE_BACKEND_ENDPOINT
+
 export const bookingRequests = atom({
     key: 'bookingRequests',
     default: selector({
         key: "getBookingReqsSelector",
         get: async () => {
-            const bookingReqs = await axios.get(`${BACKEND_ENDPOINT}/getbookingreqs`,
+            const bookingReqs = await axios.get(`https://lncthalls-server.onrender.com/getbookingreqs`,
                 {
                     headers: {
                         'Content-Type': 'application/json',

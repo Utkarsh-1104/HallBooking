@@ -7,7 +7,7 @@ import { eventAtom, textAtom } from "../../atoms/adminRegisterAtoms.js";
 import { superAdminAccessAtom } from "../../atoms/accessAtom.js";
 import Unauthorized from "../../ui/Unauthorized.jsx";
 import { useSearchParams } from "react-router-dom";
-const BACKEND_ENDPOINT = import.meta.env.VITE_BACKEND_ENDPOINT
+
 const EditHallsPage = () => {
     const access = useRecoilValue(superAdminAccessAtom);
 
@@ -70,7 +70,7 @@ const EditHall = () => {
 
         async function edithall(id) {
             try {
-                const response = await axios.patch(`${BACKEND_ENDPOINT}/updatehall/${id}`, {
+                const response = await axios.patch(`https://lncthalls-server.onrender.com/updatehall/${id}`, {
                     hall_name: hallName,
                     hall_capacity: hallCapacity,
                     college: hallCollege,
