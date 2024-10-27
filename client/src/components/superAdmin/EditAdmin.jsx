@@ -6,7 +6,7 @@ import Popup from '../../ui/Alert.jsx';
 import { useSearchParams } from "react-router-dom";
 import { superAdminAccessAtom } from "../../atoms/accessAtom.js";
 import Unauthorized from "../../ui/Unauthorized.jsx";
-
+const BACKEND_ENDPOINT = import.meta.env.VITE_BACKEND_ENDPOINT
 const EditAdminsPage = () => {
     const access = useRecoilValue(superAdminAccessAtom);
 
@@ -91,7 +91,7 @@ const EditAdmin = () => {
 
         async function editAdmin(id) {
             try {
-                const response = await axios.patch(`http://localhost:3000/updateadmins/${id}`, {
+                const response = await axios.patch(`${BACKEND_ENDPOINT}/updateadmins/${id}`, {
                     fname: fname,
                     lname: lname,
                     username: username,

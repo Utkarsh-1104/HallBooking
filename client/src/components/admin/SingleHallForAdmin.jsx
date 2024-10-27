@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
+const BACKEND_ENDPOINT = import.meta.env.VITE_BACKEND_ENDPOINT
 const SingleHallForAdmin = () => {
     return (
       <div className="bg-gradient-to-br from-slate-100 to-slate-400 min-h-screen font-[Roboto] text-gray-800">
@@ -20,7 +20,7 @@ function ViewHallAdmin() {
     useEffect(() => {
         async function singeAdmin() {
             try {
-                const res = await axios.get(`http://localhost:3000/gethalls/${id}`)
+                const res = await axios.get(`${BACKEND_ENDPOINT}/gethalls/${id}`)
                 setHall(res.data);
             } catch (error) {
                 console.log(error);

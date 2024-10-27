@@ -7,7 +7,7 @@ import { eventAtom, textAtom } from "../../atoms/adminRegisterAtoms.js";
 import { superAdminAccessAtom } from "../../atoms/accessAtom.js";
 import Unauthorized from "../../ui/Unauthorized.jsx";
 import AddIcon from '@mui/icons-material/Add';
-
+const BACKEND_ENDPOINT = import.meta.env.VITE_BACKEND_ENDPOINT
 
 export default function AddHall() {
     const access = useRecoilValue(superAdminAccessAtom);
@@ -65,7 +65,7 @@ const AddHallPage = () => {
 
         async function postHall() {
             try {
-                const response = await axios.post('http://localhost:3000/posthall', {
+                const response = await axios.post(`${BACKEND_ENDPOINT}/posthall`, {
                     hall_name: hallName,
                     hall_capacity: hallCapacity,
                     college: hallCollege,

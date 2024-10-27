@@ -9,7 +9,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { eventAtom, textAtom } from '../../atoms/adminRegisterAtoms';
 import Popup from '../../ui/Alert';
 import { hallAtom } from '../../atoms/getHallsAtom';
-
+const BACKEND_ENDPOINT = import.meta.env.VITE_BACKEND_ENDPOINT
 const ExistingHalls = () => {
   const halls = useRecoilValue(hallAtom);
 
@@ -29,7 +29,7 @@ const ExistingHalls = () => {
 
   async function deleteHall(id) {
     try {
-      const response = await axios.delete(`http://localhost:3000/removehall/${id}`, {
+      const response = await axios.delete(`${BACKEND_ENDPOINT}/removehall/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }

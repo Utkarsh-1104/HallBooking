@@ -7,7 +7,7 @@ import { useState } from 'react'
 import { eventAtom, textAtom } from '../../atoms/adminRegisterAtoms'
 import { superAdminAccessAtom } from '../../atoms/accessAtom'
 import Unauthorized from '../../ui/Unauthorized'
-
+const BACKEND_ENDPOINT = import.meta.env.VITE_BACKEND_ENDPOINT
 export default function BookingRequests() {
   const access = useRecoilValue(superAdminAccessAtom);
   const name = access.fname + ' ' + access.lname;
@@ -22,7 +22,7 @@ export default function BookingRequests() {
 function BookingRequestsPage(props) {
   const handleApprove = async (hall_name, id) => {
     try {
-      const response = await axios.put(`http://localhost:3000/approvebooking`,
+      const response = await axios.put(`${BACKEND_ENDPOINT}/approvebooking`,
         {
           hall_name: hall_name,
           reqId: id,
@@ -57,7 +57,7 @@ function BookingRequestsPage(props) {
 
   const handleDelete = async (hall_name, id) => {
     try {
-      const response = await axios.put(`http://localhost:3000/deletebookingreq`,
+      const response = await axios.put(`${BACKEND_ENDPOINT}/deletebookingreq`,
         {
           hall_name: hall_name,
           reqId: id,

@@ -9,7 +9,7 @@ import { eventAtom, textAtom } from "../../atoms/adminRegisterAtoms"
 import Popup from "../../ui/Alert"
 import axios from "axios"
 import { capitalize } from "@mui/material"
-
+const BACKEND_ENDPOINT = import.meta.env.VITE_BACKEND_ENDPOINT
 const BookHall = () => {
   const auth = useRecoilValue(accessAtom) 
   return (
@@ -72,7 +72,7 @@ function BookHallFunction(props) {
 
     async function postEvent() {
       try {
-        const response = await axios.patch(`http://localhost:3000/bookhall/${hall_id}`, {
+        const response = await axios.patch(`${BACKEND_ENDPOINT}/bookhall/${hall_id}`, {
           time_from: time_from,
           time_to: time_to,
           date_from: date_from,

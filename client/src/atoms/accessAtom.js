@@ -1,12 +1,14 @@
 import axios from "axios";
 import { atom, selector } from "recoil";
 
+const BACKEND_ENDPOINT = import.meta.env.VITE_BACKEND_ENDPOINT
+
 export const adminAccessAtom = atom({
     key: 'adminAccessAtom',
     default: selector({
         key: 'adminAccessSelector',
         get: async () => {
-            const access = await axios.get('http://localhost:3000/admindashboard', {
+            const access = await axios.get(`${BACKEND_ENDPOINT}/admindashboard`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
@@ -21,7 +23,7 @@ export const accessAtom = atom({
     default: selector({
         key: 'accessSelector',
         get: async () => {
-            const access = await axios.get('http://localhost:3000/bothdashboard', {
+            const access = await axios.get(`${BACKEND_ENDPOINT}/bothdashboard`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
@@ -36,7 +38,7 @@ export const superAdminAccessAtom = atom({
     default: selector({
         key: 'superAdminAccessSelector',
         get: async () => {
-            const access = await axios.get('http://localhost:3000/superadmindashboard', {
+            const access = await axios.get(`${BACKEND_ENDPOINT}/superadmindashboard`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }

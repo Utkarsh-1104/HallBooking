@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import React from "react";
 import Popup from "../../ui/Alert";
+const BACKEND_ENDPOINT = import.meta.env.VITE_BACKEND_ENDPOINT
 
 const Login = () => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ const Login = () => {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const response = await axios.post("http://localhost:3000/loginadmin", {
+    const response = await axios.post(`${BACKEND_ENDPOINT}/loginadmin`, {
       username,
       password
     });

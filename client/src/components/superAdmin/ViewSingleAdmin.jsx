@@ -5,7 +5,7 @@ import Unauthorized from "../../ui/Unauthorized";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";
-
+const BACKEND_ENDPOINT = import.meta.env.VITE_BACKEND_ENDPOINT
 const ViewSingleAdmin = () => {
     const access = useRecoilValue(superAdminAccessAtom);
     return (
@@ -23,7 +23,7 @@ function ViewAdmin() {
     useEffect(() => {
         async function singleAdmin() {
             try {
-                const res = await axios.get(`http://localhost:3000/getadmins/${id}`,
+                const res = await axios.get(`${BACKEND_ENDPOINT}/getadmins/${id}`,
                     {
                         headers: {
                             Authorization: `Bearer ${localStorage.getItem('token')}`

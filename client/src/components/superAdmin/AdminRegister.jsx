@@ -6,7 +6,7 @@ import Popup from '../../ui/Alert.jsx';
 import { superAdminAccessAtom } from "../../atoms/accessAtom.js";
 import Unauthorized from "../../ui/Unauthorized.jsx";
 import AddIcon from '@mui/icons-material/Add';
-
+const BACKEND_ENDPOINT = import.meta.env.VITE_BACKEND_ENDPOINT
 export default function AdminRegister() {
     const access = useRecoilValue(superAdminAccessAtom);
     return (
@@ -87,7 +87,7 @@ const AdminRegisterPage = () => {
 
         async function postAdmin() {
             try {
-                const response = await axios.post('http://localhost:3000/postadmins', {
+                const response = await axios.post(`${BACKEND_ENDPOINT}/postadmins`, {
                     fname: fname,
                     lname: lname,
                     username: username,

@@ -9,7 +9,7 @@ import { useSearchParams } from 'react-router-dom'
 import { eventAtom, textAtom } from '../../atoms/adminRegisterAtoms'
 import Popup from '../../ui/Alert'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-
+const BACKEND_ENDPOINT = import.meta.env.VITE_BACKEND_ENDPOINT
 const MyBookings = () => {
     const auth = useRecoilValue(accessAtom) 
   
@@ -40,7 +40,7 @@ function MyBookingsPage() {
 
   useEffect(() => {
       async function getBookings() {
-        const response = await axios.get(`http://localhost:3000/getbookedhalls/${admin_id}`, {
+        const response = await axios.get(`${BACKEND_ENDPOINT}/getbookedhalls/${admin_id}`, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem('token')}`
             }
@@ -107,7 +107,7 @@ function MyBookingsPage() {
 
 async function deleteBooking(hall_id, booking_id, setOpen, setResult, setMsg) {
   try {
-      const response = await axios.post(`http://localhost:3000/removebooking/${hall_id}`,
+      const response = await axios.post(`${BACKEND_ENDPOINT}/removebooking/${hall_id}`,
       {
         booking_id: booking_id
       },

@@ -9,7 +9,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { eventAtom, textAtom } from "../../atoms/adminRegisterAtoms";
 import Popup from "../../ui/Alert";
-
+const BACKEND_ENDPOINT = import.meta.env.VITE_BACKEND_ENDPOINT
 const ViewSingleHall = () => {
   const access = useRecoilValue(superAdminAccessAtom);
   const name = access.fname + ' ' + access.lname;
@@ -28,7 +28,7 @@ function ViewHall(props) {
   useEffect(() => {
     async function singleHall() {
       try {
-        const res = await axios.get(`http://localhost:3000/gethalls/${id}`)
+        const res = await axios.get(`${BACKEND_ENDPOINT}/gethalls/${id}`)
         setHall(res.data);
       } catch (error) {
         console.log(error);
@@ -138,7 +138,7 @@ function HallBookings(props) {
 
 async function deleteBooking(hall_id, booking_id, superadmin_name, setOpen, setResult, setMsg) {
   try {
-    const response = await axios.post(`http://localhost:3000/removebooking/${hall_id}`,
+    const response = await axios.post(`BACKEND_ENDPOINT/removebooking/${hall_id}`,
       {
         booking_id: booking_id,
         superadmin_name: superadmin_name
