@@ -138,7 +138,7 @@ function HallBookings(props) {
 
 async function deleteBooking(hall_id, booking_id, superadmin_name, setOpen, setResult, setMsg) {
   try {
-    const response = await axios.post(`BACKEND_ENDPOINT/removebooking/${hall_id}`,
+    const response = await axios.post(`https://lncthalls-server.onrender.com/removebooking/${hall_id}`,
       {
         booking_id: booking_id,
         superadmin_name: superadmin_name

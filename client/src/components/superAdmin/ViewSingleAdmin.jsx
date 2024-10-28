@@ -54,7 +54,7 @@ function ViewAdmin() {
                             <AdminDetailItem label="Username" value={admin.username} />
                             <AdminDetailItem label="Role" value={admin.role} />
                             <AdminDetailItem label="Designation" value={admin.designation} />
-                            <AdminDetailItem label="Branch" value={admin.branch} />
+                            {admin.branch && <AdminDetailItem label="Branch" value={admin.branch} />}
                             <AdminDetailItem label="College" value={admin.college} />
                         </div>
                     </div>

@@ -46,18 +46,12 @@ const AdminRegisterPage = () => {
                 if ((username.toLowerCase() !== username.toUpperCase()) && username.length >= 6) {
                     if (password.length >= 6) {
                         if ((designation.toLowerCase() !== designation.toUpperCase())) {
-                            if ((branch.toLowerCase() !== branch.toUpperCase())) {
-                                if ((college.toLowerCase() !== college.toUpperCase())) {
-                                    postAdmin();
-                                } else {
-                                    setOpen(true);
-                                    setResult('error');
-                                    setMsg('College should be a string.');
-                                }
+                            if ((college.toLowerCase() !== college.toUpperCase())) {
+                                postAdmin();
                             } else {
                                 setOpen(true);
                                 setResult('error');
-                                setMsg('Branch should be a string.');
+                                setMsg('College should be a string.');
                             }
                         } else {
                             setOpen(true);

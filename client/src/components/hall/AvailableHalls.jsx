@@ -161,7 +161,7 @@ function BookDetails() {
                       { hall.college && <p className="text-lg text-gray-100"> <span className="font-semibold">College:</span> {hall.college}</p>}
                     </div>
                     <button
-                      onClick={() => { navigate(`/bookhall/?hall_id=${hall._id}&hall_name=${hall.hall_name}&hall_building=${hall.building}&hall_college=${hall.college}&date_from=${dateFrom}&date_to=${dateTo}&time_from=${timeFrom}&time_to=${timeTo}`); }}
+                      onClick={() => { navigate(`/bookhall/?hall_id=${hall._id}&hall_name=${hall.hall_name}&hall_capacity=${hall.hall_capacity}&hall_building=${hall.building}&hall_college=${hall.college}&date_from=${dateFrom}&date_to=${dateTo}&time_from=${timeFrom}&time_to=${timeTo}`); }}
                       className="bg-[#E17833] text-white font-bold py-2 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:bg-[#E17833] hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#9f5625] focus:ring-opacity-50"
                     >
                       Book Now

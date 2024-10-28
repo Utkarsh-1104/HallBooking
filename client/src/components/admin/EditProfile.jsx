@@ -4,7 +4,7 @@ import Unauthorized from '../../ui/Unauthorized'
 import React from 'react'
  import axios from 'axios'
 import { useSearchParams } from 'react-router-dom'
-import { newPasswordAtom, newUsernameAtom } from '../../atoms/editProfile'
+import { confirmPasswordAtom, newPasswordAtom } from '../../atoms/editProfile'
 import { eventAtom, textAtom } from '../../atoms/adminRegisterAtoms'
 import Popup from '../../ui/Alert'
 
@@ -19,8 +19,8 @@ const EditProfile = () => {
 
 function EditDetails() {
 
-  const [newUsername, setNewUsername] = useRecoilState(newUsernameAtom)
   const [newPassword, setNewPassword] = useRecoilState(newPasswordAtom)
+  const [confrimPassword, setconfrimPassword] = useRecoilState(confirmPasswordAtom)
   const [searchParams] = useSearchParams()
   const admin_id = searchParams.get('id')
 
@@ -39,40 +39,38 @@ function EditDetails() {
   async function updateDetails(e) {
     e.preventDefault()
 
-    if (newUsername === "" || ((newUsername.toLowerCase() !== newUsername.toUpperCase()) && newUsername.length >= 6)) {
-      if (newPassword === "" || newPassword.length >= 6) {
+    if (newPassword.length >= 6) {
+      if (newPassword === confrimPassword) {
         editProfile();
       } else {
         setOpen(true);
         setResult('error');
-        setMsg('Password must be at least 6 characters.');
+        setMsg('Passwords do not match.');
       }
     } else {
       setOpen(true);
       setResult('error');
-      setMsg('Username must be a string and at least 6 characters.');
+      setMsg('Password must be at least 6 characters.');
     }
+  } 
 
 
-    async function editProfile() {
-      try {
-        const response = await axios.patch(`https://lncthalls-server.onrender.com/editprofile/${admin_id}`, {
-          newUsername: newUsername,
-          newPassword: newPassword
-        }, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`
-          }
-        })
-        setOpen(true);
-        setResult('success');
-        setMsg(response.data.msg);
-      } catch (error) {
-        console.error(error)
-      }
+  async function editProfile() {
+    try {
+      const response = await axios.patch(`https://lncthalls-server.onrender.com/editprofile/${admin_id}`, {
+        newPassword: newPassword
+      }, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+      setOpen(true);
+      setResult('success');
+      setMsg(response.data.msg);
+    } catch (error) {
+      console.error(error)
     }
   }
-
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-100 to-slate-400 flex items-center justify-center p-4 ">
@@ -85,17 +83,6 @@ function EditDetails() {
         <div className="p-8">
           <form onSubmit={updateDetails} className="space-y-6 text-gray-700">
             <div>
-              <label htmlFor="username" className="block text-lg font-medium text-gray-700">New Username</label>
-              <input
-                type="text"
-                id="username"
-                name="username"
-                className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                placeholder="Enter new username"
-                onChange={(e) => setNewUsername(e.target.value)}
-              />
-            </div>
-            <div>
               <label htmlFor="password" className="block text-lg font-medium text-gray-700">New Password</label>
               <input
                 type="password"
@@ -104,6 +91,17 @@ function EditDetails() {
                 className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                 placeholder="Enter new password"
                 onChange={(e) => setNewPassword(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="password" className="block text-lg font-medium text-gray-700">Confirm Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                placeholder="Enter new password"
+                onChange={(e) => setconfrimPassword(e.target.value)}
               />
             </div>
             <button

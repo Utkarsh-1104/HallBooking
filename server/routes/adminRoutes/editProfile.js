@@ -15,33 +15,18 @@ router.patch('/:id', async (req, res) => {
                 status: 404
             })
         }
-        const newPassword = req.body.newPassword;
-        if (newPassword.length === 0) {
+        bcrypt.hash(req.body.newPassword, 10, async function(err, hash) {
             await Admin.updateOne(
                 {
                     _id: id
                 },
                 {
                     "$set": {
-                        username: req.body.newUsername || adminToBeUpdated.username,
+                        password: hash
                     }
                 }
             )
-        } else {
-            bcrypt.hash(req.body.newPassword, 10, async function(err, hash) {
-                await Admin.updateOne(
-                    {
-                        _id: id
-                    },
-                    {
-                        "$set": {
-                            username: req.body.newUsername || adminToBeUpdated.username,
-                            password: hash || adminToBeUpdated.password,
-                        }
-                    }
-                )
-            });
-        }
+        });
         return res.json({
             msg: 'Profile updated successfully.',
             status: 200

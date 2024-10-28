@@ -24,6 +24,7 @@ function BookHallFunction(props) {
   const [searchParams] = useSearchParams()
   const hall_name = searchParams.get('hall_name')
   const hall_id = searchParams.get('hall_id')
+  const hall_capacity = searchParams.get('hall_capacity')
   const admin_id = props.auth.id
   const time_from = searchParams.get('time_from')
   const time_to = searchParams.get('time_to')
@@ -56,12 +57,12 @@ function BookHallFunction(props) {
   function handleBook(e) {
     e.preventDefault()
     if ((eventName.toLowerCase() !== eventName.toUpperCase())) {
-      if ( noOfParticipants && noOfParticipants > 0) {
+      if ( noOfParticipants && noOfParticipants <= hall_capacity) {
         postEvent();
       } else {
         setOpen(true);
         setResult('error');
-        setMsg('Number of participants should be greater than 0.');
+        setMsg('Number of participants should be less than hall capacity.');
       }
     } else {
       setOpen(true);
@@ -96,11 +97,16 @@ function BookHallFunction(props) {
           setOpen(true);
           setResult('success');
           setMsg(response.data.msg);
-      } else {
+
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000)
+
+        } else {
           setOpen(true);
           setResult('error');
           setMsg(response.data.msg);
-      }
+        }
       } catch (error) {
         setOpen(true);
         setResult('error');
@@ -192,6 +198,8 @@ function BookHallFunction(props) {
               <input
                 type="number"
                 id="noOfParticipants"
+                min="1"
+                step="1"
                 value={noOfParticipants}
                 onChange={(e) => setNoOfParticipants(e.target.value)}
                 placeholder="Enter number of participants"

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { branchAtom, collegeAtom, designationAtom, eventAtom, fnameAtom, lnameAtom, passwordAtom, roleAtom, textAtom, usernameAtom } from "../../atoms/adminRegisterAtoms.js";
 import axios from 'axios';
@@ -18,6 +18,9 @@ const EditAdminsPage = () => {
 }
 
 const EditAdmin = () => {
+    const [searchParams] = useSearchParams();
+    const id = searchParams.get('id');
+
     const [fname, setfname] = useRecoilState(fnameAtom);
     const [lname, setlname] = useRecoilState(lnameAtom);
     const [username, setusername] = useRecoilState(usernameAtom);
@@ -26,6 +29,24 @@ const EditAdmin = () => {
     const [designation, setdesignation] = useRecoilState(designationAtom);
     const [branch, setbranch] = useRecoilState(branchAtom);
     const [college, setcollege] = useRecoilState(collegeAtom);
+    const [admin, setAdmin] = React.useState({});
+
+    useEffect(() => {
+        async function singleAdmin() {
+            try {
+                const res = await axios.get(`https://lncthalls-server.onrender.com/getadmins/${id}`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${localStorage.getItem('token')}`
+                        }
+                    });
+                setAdmin(res.data);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        singleAdmin();
+    }, [id])
 
     const [result, setResult] = useRecoilState(eventAtom);
     const [msg, setMsg] = useRecoilState(textAtom);
@@ -39,8 +60,6 @@ const EditAdmin = () => {
         setOpen(false);
     };
 
-    const [searchParams] = useSearchParams();
-    const id = searchParams.get('id');
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -146,13 +165,13 @@ const EditAdmin = () => {
                                     <label htmlFor="fname" className="block text-xl font-medium text-gray-700">
                                         First Name
                                     </label>
-                                    <input type="text" placeholder="Enter first name" className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" value={fname} onChange={(e) => (setfname(e.target.value))} />
+                                    <input type="text" placeholder={admin.fname} className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" value={fname} onChange={(e) => (setfname(e.target.value))} />
                                 </div>
                                 <div>
                                     <label htmlFor="fname" className="block text-xl font-medium text-gray-700">
                                         Last Name
                                     </label>
-                                    <input type="text" placeholder="Enter last name" className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" value={lname} onChange={(e) => (setlname(e.target.value))} />
+                                    <input type="text" placeholder={admin.lname} className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" value={lname} onChange={(e) => (setlname(e.target.value))} />
                                 </div>
                             </div>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -160,13 +179,13 @@ const EditAdmin = () => {
                                     <label htmlFor="fname" className="block text-xl font-medium text-gray-700">
                                         Username
                                     </label>
-                                    <input type="text" placeholder="Enter username" className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" value={username} onChange={(e) => (setusername(e.target.value))} />
+                                    <input type="text" placeholder={admin.username} className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" value={username} onChange={(e) => (setusername(e.target.value))} />
                                 </div>
                                 <div>
                                     <label htmlFor="adminPass" className="block text-xl font-medium text-gray-700">
                                         Password
                                     </label>
-                                    <input type="password" name="adminPass" placeholder="Enter password" id="adminPass" className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" value={password} onChange={(e) => (setpassword(e.target.value))} />
+                                    <input type="password" name="adminPass" placeholder="Enter password" id="adminPass" className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" value={password} onChange={(e) => (setpassword(e.target.value))} />
                                 </div>
                             </div>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -174,7 +193,7 @@ const EditAdmin = () => {
                                     <label htmlFor="fname" className="block text-xl font-medium text-gray-700">
                                         Role
                                     </label>
-                                    <select name="role" id="role" className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" value={role} onChange={(e) => (setrole(e.target.value))}>
+                                    <select name="role" id="role" className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" value={role} onChange={(e) => (setrole(e.target.value))}>
                                         <option value="admin">Admin</option>
                                         <option value="superadmin">Super Admin</option>
                                     </select>
@@ -183,7 +202,7 @@ const EditAdmin = () => {
                                     <label htmlFor="fname" className="block text-xl font-medium text-gray-700">
                                         Designation
                                     </label>
-                                    <input type="text" placeholder="Enter designation" className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" value={designation} onChange={(e) => (setdesignation(e.target.value))} />
+                                    <input type="text" placeholder={admin.designation} className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" value={designation} onChange={(e) => (setdesignation(e.target.value))} />
                                 </div>
                             </div>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">                              
@@ -193,8 +212,8 @@ const EditAdmin = () => {
                                     </label>
                                     <input
                                         type="text"
-                                        placeholder="Enter branch"
-                                        className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                                        placeholder={admin.branch}
+                                        className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                                         value={branch}
                                         onChange={(e) => setbranch(e.target.value)}
                                     />
@@ -205,8 +224,8 @@ const EditAdmin = () => {
                                     </label>
                                     <input
                                         type="text"
-                                        placeholder="Enter college"
-                                        className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                                        placeholder={admin.college}
+                                        className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                                         value={college}
                                         onChange={(e) => setcollege(e.target.value)}
                                         />

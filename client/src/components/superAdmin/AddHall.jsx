@@ -128,6 +128,8 @@ const AddHallPage = () => {
                                 <input
                                     type="number"
                                     id="hallCapacity"
+                                    min="1"
+                                    step="1"
                                     placeholder="Enter hall capacity"
                                     className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                                     value={hallCapacity}

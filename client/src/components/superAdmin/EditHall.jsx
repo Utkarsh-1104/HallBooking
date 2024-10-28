@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import axios from 'axios';
 import Popup from '../../ui/Alert.jsx';
@@ -19,10 +19,26 @@ const EditHallsPage = () => {
 }
 
 const EditHall = () => {
+    const [searchParams] = useSearchParams();
+    const id = searchParams.get('id');
+
     const [hallName, setHallName] = useRecoilState(hallNameAtom);
     const [hallCapacity, setHallCapacity] = useRecoilState(hallCapacityAtom);
     const [hallBuilding, setHallBuilding] = useRecoilState(hallBuildingAtom);
     const [hallCollege, setHallCollege] = useRecoilState(hallCollegeAtom);
+    const [hall, setHall] = React.useState({});
+
+    useEffect(() => {
+        async function singleHall() {
+          try {
+            const res = await axios.get(`https://lncthalls-server.onrender.com/gethalls/${id}`)
+            setHall(res.data);
+          } catch (error) {
+            console.log(error);
+          }
+        }
+        singleHall();
+      }, [id])
 
     const [result, setResult] = useRecoilState(eventAtom);
     const [msg, setMsg] = useRecoilState(textAtom);
@@ -35,9 +51,6 @@ const EditHall = () => {
         }
         setOpen(false);
     };
-
-    const [searchParams] = useSearchParams();
-    const id = searchParams.get('id');
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -60,7 +73,7 @@ const EditHall = () => {
             } else {
                 setOpen(true);
                 setResult('error');
-                setMsg('Hall capacity should be a number.');
+                setMsg('Hall capacity should be a number and greater than 0.');
             }
         } else {
             setOpen(true);
@@ -119,8 +132,8 @@ const EditHall = () => {
                                 </label>
                                 <input
                                     type="text"
-                                    placeholder="New Hall Name"
-                                    className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                                    placeholder={hall.hall_name}
+                                    className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                                     value={hallName}
                                     onChange={(e) => {
                                     setHallName(e.target.value);
@@ -134,9 +147,11 @@ const EditHall = () => {
                                 </label>
                                 <input
                                     type="number"
-                                    placeholder="New Hall Capacity"
+                                    placeholder={hall.hall_capacity}
                                     id="superPass"
-                                    className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                                    min="1"
+                                    step="1"
+                                    className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                                     value={hallCapacity}
                                     onChange={(e) => {
                                         setHallCapacity(e.target.value);
@@ -150,8 +165,8 @@ const EditHall = () => {
                                 <input
                                     type="text"
                                     id="hallBuilding"
-                                    placeholder="Enter building name"
-                                    className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                                    placeholder={hall.building}
+                                    className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                                     value={hallBuilding}
                                     onChange={(e) => setHallBuilding(e.target.value)}
                                 />
@@ -163,8 +178,8 @@ const EditHall = () => {
                                 <input
                                     type="text"
                                     id="hallCollege"
-                                    placeholder="Enter college name"
-                                    className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                                    placeholder={hall.college}
+                                    className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-base shadow-sm placeholder-gray-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                                     value={hallCollege}
                                     onChange={(e) => setHallCollege(e.target.value)}
                                 />
