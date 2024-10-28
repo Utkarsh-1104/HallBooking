@@ -28,7 +28,7 @@ function App() {
   return (
     <>
     <RecoilRoot>
-      <BrowserRouter>
+      <BrowserRouter basename="/">
         <Navbar />
         <Routes>
           <Route path="/" element={<LandingPage />} />
