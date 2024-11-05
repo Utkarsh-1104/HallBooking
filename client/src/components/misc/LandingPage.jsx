@@ -17,10 +17,15 @@ const LandingPage = () => {
               <p className="mt-3 max-w-md mx-auto text-lg text-gray-500 sm:text-xl md:mt-5 md:max-w-3xl">
                 Welcome to LNCT Group's hall booking system. Streamline your event planning process by easily reserving halls across our campuses.
               </p>
-              <div className="mt-10 sm:flex sm:justify-start">
+              <div className="mt-10 flex flex-col sm:flex-row sm:justify-start gap-5">
                 <div className="rounded-md shadow">
-                  <button onClick={() => {navigate('/login')}} className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10">
+                  <button onClick={() => {navigate('/login')}} className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 md:py-4 md:text-lg md:px-10 transition-all duration-300 ease-in-out transform hover:scale-105">
                     Get Started
+                  </button>
+                </div>
+                <div className="rounded-md shadow">
+                  <button onClick={() => {navigate('/viewbookings')}} className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md transition-all duration-300 ease-in-out transform hover:scale-105 text-white bg-[#E17833] md:py-4 md:text-lg md:px-10">
+                    View Bookings
                   </button>
                 </div>
               </div>

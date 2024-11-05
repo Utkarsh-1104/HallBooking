@@ -19,6 +19,7 @@ const MyProfile = React.lazy(() => import('./components/misc/Profile'))
 const EditProfile = React.lazy(() => import('./components/admin/EditProfile'))
 const MyBookings = React.lazy(() => import('./components/misc/MyBookings'))
 const BookingRequests = React.lazy(() => import('./components/superAdmin/BookingRequests'))
+const ViewBookings = React.lazy(() => import('./components/misc/ViewBookings'))
 import Loader from "./ui/Loader"
 import Navbar from './components/misc/Navbar'
 import { Suspense } from "react"
@@ -50,6 +51,7 @@ function App() {
           <Route path="/editprofile" element={<Suspense fallback={<Loader />}><EditProfile /></Suspense>}></Route>
           <Route path="/mybookings" element={<Suspense fallback={<Loader />}><MyBookings /></Suspense> }></Route>
           <Route path="/superadminpage/bookingrequests" element={<Suspense fallback={<Loader />}><BookingRequests /></Suspense> }></Route>
+          <Route path="/viewbookings" element={<Suspense fallback={<Loader />}><ViewBookings /></Suspense> }></Route>
         </Routes>
       </BrowserRouter>
     </RecoilRoot>
