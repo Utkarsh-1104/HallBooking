@@ -69,18 +69,12 @@ const EditAdmin = () => {
                 if (username === "" || ((username.toLowerCase() !== username.toUpperCase()) && username.length >= 6)) {
                     if (password === "" || password.length >= 6) {
                         if (designation === "" || (designation.toLowerCase() !== designation.toUpperCase())) {
-                            if (branch === "" || (branch.toLowerCase() !== branch.toUpperCase())) {
-                                if (college === "" || (college.toLowerCase() !== college.toUpperCase())) {
-                                    editAdmin(id);
-                                } else {
-                                    setOpen(true);
-                                    setResult('error');
-                                    setMsg('New college should be a string.');
-                                }
+                            if (college === "" || (college.toLowerCase() !== college.toUpperCase())) {
+                                editAdmin(id);
                             } else {
                                 setOpen(true);
                                 setResult('error');
-                                setMsg('New branch should be a string.');
+                                setMsg('New college should be a string.');
                             }
                         } else {
                             setOpen(true);
