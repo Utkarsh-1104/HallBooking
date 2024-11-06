@@ -36,7 +36,7 @@ function BookHallFunction(props) {
   const hall_building = searchParams.get('hall_building')
   const hall_college = searchParams.get('hall_college')
   const username = props.auth.username
-
+  const hall_cap = parseInt(hall_capacity);
   const booked_by = capitalize(fname) + " " + capitalize(lname)
 
   const [eventName, setEventName] = useState('')
@@ -57,12 +57,12 @@ function BookHallFunction(props) {
   function handleBook(e) {
     e.preventDefault()
     if ((eventName.toLowerCase() !== eventName.toUpperCase())) {
-      if ( noOfParticipants && noOfParticipants <= hall_capacity) {
+      if (noOfParticipants && noOfParticipants > 0 && noOfParticipants <= hall_cap) {
         postEvent();
       } else {
         setOpen(true);
         setResult('error');
-        setMsg('Number of participants should be less than hall capacity.');
+        setMsg('Number of participants should be positive and less than hall capacity.');
       }
     } else {
       setOpen(true);
