@@ -38,6 +38,11 @@ function BookDetails() {
       }
       setOpen(false);
   };
+  const dateNow = new Date
+  const newDateFrom = dateFrom.split('-')
+  const newDateTo = dateTo.split('-')
+  const newTimeFrom = timeFrom.split(':')
+  const newTimeTo = timeTo.split(':')
 
   const handleSearch = async (e) => {
     e.preventDefault()
@@ -48,25 +53,53 @@ function BookDetails() {
       setMsg('Please fill in all fields.');
       return
     }
-
-    try {
-      const response = await axios.post(`https://lncthalls-server.onrender.com/availablehalls`, {
-        date_from: dateFrom,
-        date_to: dateTo,
-        time_from: timeFrom,
-        time_to: timeTo,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`
+    
+    if (!((parseInt(newDateFrom[2]) < dateNow.getDate()) || (parseInt(newDateFrom[1]) < dateNow.getMonth() + 1) || (parseInt(newDateFrom[0]) < dateNow.getFullYear()))) {
+      if (!((parseInt(newDateTo[2]) < parseInt(newDateFrom[2])) || (parseInt(newDateTo[1]) < parseInt(newDateFrom[1])) || (parseInt(newDateTo[0]) < parseInt(newDateFrom[0]))) ) {
+        if (!((parseInt(newTimeFrom[0]) < dateNow.getHours()) || (parseInt(newTimeFrom[1]) < dateNow.getMinutes()))) {
+          if (!((parseInt(newTimeTo[0]) < parseInt(newTimeFrom[0])) || (parseInt(newTimeTo[1]) < parseInt(newTimeFrom[1]))) ) {
+            try {
+              const response = await axios.post(`https://lncthalls-server.onrender.com/availablehalls`, {
+                date_from: dateFrom,
+                date_to: dateTo,
+                time_from: timeFrom,
+                time_to: timeTo,
+              },
+              {
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+              });
+              setAvailableHalls(response.data.available_halls)
+              setShowResults(true)
+            } catch (error) {
+              setOpen(true);
+              setResult('error');
+              setMsg('An error occurred. Please try again.');
+            }
+          } else {
+            setOpen(true);
+            setResult('error');
+            setMsg('Please select a future time.');
+            return
+          }
+        } else {
+          setOpen(true);
+          setResult('error');
+          setMsg('Please select a future time.');
+          return
         }
-      });
-      setAvailableHalls(response.data.available_halls)
-      setShowResults(true)
-    } catch (error) {
+      } else {
+        setOpen(true);
+        setResult('error');
+        setMsg('Please select a future date.');
+        return 
+      }
+    } else {
       setOpen(true);
       setResult('error');
-      setMsg('An error occurred. Please try again.');
+      setMsg('Please select a future date.');
+      return
     }
   }
 
@@ -74,7 +107,7 @@ function BookDetails() {
 
   return (
     <div className="py-12 px-4 sm:px-6 lg:px-8">
-      <Popup result={result} msg={msg} open={open} handleClose={handleClose} />
+      <Popup state={open} handleClose={handleClose} event={result} text={msg} />
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-center ">
