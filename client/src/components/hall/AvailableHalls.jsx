@@ -39,10 +39,13 @@ function BookDetails() {
       setOpen(false);
   };
   const dateNow = new Date
+  console.log(dateNow.getHours(), dateNow.getMinutes());
   const newDateFrom = dateFrom.split('-')
   const newDateTo = dateTo.split('-')
   const newTimeFrom = timeFrom.split(':')
+  console.log(newTimeFrom);
   const newTimeTo = timeTo.split(':')
+  console.log(newTimeTo);
 
   const handleSearch = async (e) => {
     e.preventDefault()
@@ -53,10 +56,11 @@ function BookDetails() {
       setMsg('Please fill in all fields.');
       return
     }
-    
+
+    // if not past date
     if (!((parseInt(newDateFrom[2]) < dateNow.getDate()) || (parseInt(newDateFrom[1]) < dateNow.getMonth() + 1) || (parseInt(newDateFrom[0]) < dateNow.getFullYear()))) {
       if (!((parseInt(newDateTo[2]) < parseInt(newDateFrom[2])) || (parseInt(newDateTo[1]) < parseInt(newDateFrom[1])) || (parseInt(newDateTo[0]) < parseInt(newDateFrom[0]))) ) {
-        if (!((parseInt(newTimeFrom[0]) < dateNow.getHours()) || (parseInt(newTimeFrom[1]) < dateNow.getMinutes()))) {
+        // if (!((parseInt(newTimeFrom[0]) < dateNow.getHours()) || (parseInt(newTimeFrom[1]) < dateNow.getMinutes()))) {
           if (!((parseInt(newTimeTo[0]) < parseInt(newTimeFrom[0])) || (parseInt(newTimeTo[1]) < parseInt(newTimeFrom[1]))) ) {
             try {
               const response = await axios.post(`https://lncthalls-server.onrender.com/availablehalls`, {
@@ -83,12 +87,12 @@ function BookDetails() {
             setMsg('Please select a future time.');
             return
           }
-        } else {
-          setOpen(true);
-          setResult('error');
-          setMsg('Please select a future time.');
-          return
-        }
+        // } else {
+        //   setOpen(true);
+        //   setResult('error');
+        //   setMsg('Please select a future time.');
+        //   return
+        // }
       } else {
         setOpen(true);
         setResult('error');
