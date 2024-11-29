@@ -39,13 +39,14 @@ function BookDetails() {
       setOpen(false);
   };
   const dateNow = new Date
-  console.log(dateNow.getHours(), dateNow.getMinutes());
+  // console.log(dateNow.getHours(), dateNow.getMinutes());
   const newDateFrom = dateFrom.split('-')
+  // console.log(newDateFrom);
   const newDateTo = dateTo.split('-')
   const newTimeFrom = timeFrom.split(':')
-  console.log(newTimeFrom);
+  // console.log(newTimeFrom);
   const newTimeTo = timeTo.split(':')
-  console.log(newTimeTo);
+  // console.log(newTimeTo);
 
   const handleSearch = async (e) => {
     e.preventDefault()
@@ -57,53 +58,185 @@ function BookDetails() {
       return
     }
 
-    // if not past date
-    if (!((parseInt(newDateFrom[2]) < dateNow.getDate()) || (parseInt(newDateFrom[1]) < dateNow.getMonth() + 1) || (parseInt(newDateFrom[0]) < dateNow.getFullYear()))) {
-      if (!((parseInt(newDateTo[2]) < parseInt(newDateFrom[2])) || (parseInt(newDateTo[1]) < parseInt(newDateFrom[1])) || (parseInt(newDateTo[0]) < parseInt(newDateFrom[0]))) ) {
-        // if (!((parseInt(newTimeFrom[0]) < dateNow.getHours()) || (parseInt(newTimeFrom[1]) < dateNow.getMinutes()))) {
-          if (!((parseInt(newTimeTo[0]) < parseInt(newTimeFrom[0])) || (parseInt(newTimeTo[1]) < parseInt(newTimeFrom[1]))) ) {
-            try {
-              const response = await axios.post(`https://lncthalls-server.onrender.com/availablehalls`, {
-                date_from: dateFrom,
-                date_to: dateTo,
-                time_from: timeFrom,
-                time_to: timeTo,
-              },
-              {
-                headers: {
-                  Authorization: `Bearer ${localStorage.getItem('token')}`
-                }
-              });
-              setAvailableHalls(response.data.available_halls)
-              setShowResults(true)
-            } catch (error) {
+    //date from ka year greater than current year then direct check date to no need of month and date
+    if ((parseInt(newDateFrom[0]) > dateNow.getFullYear())) {
+      //date to year greater than date from then no need of month and date
+      if (parseInt(newDateFrom[0]) < parseInt(newDateTo[0]) ) {
+        checkTimeAndSearch()
+      } else if(parseInt(newDateFrom[0]) === parseInt(newDateTo[0])) {
+        if (parseInt(newDateFrom[1]) < parseInt(newDateTo[1]) ) {
+          checkTimeAndSearch()
+        } else if (parseInt(newDateFrom[1]) === parseInt(newDateTo[1])) {
+          if (parseInt(newDateFrom[2]) <= parseInt(newDateTo[2])) {
+            checkTimeAndSearch()
+          } else {
+            setOpen(true);
+            setResult('error');
+            setMsg('Please select a future date.');
+            return
+          }
+        } else {
+          setOpen(true);
+          setResult('error');
+          setMsg('Please select a future date.');
+          return
+        }
+      }
+       else {
+        setOpen(true);
+        setResult('error');
+        setMsg('Please select a future date.');
+        return
+      }
+    } else if (parseInt(newDateFrom[0]) === dateNow.getFullYear()) {
+      if (parseInt(newDateFrom[1]) > (dateNow.getMonth() + 1)) {
+        // date to year check with date from year
+        if (parseInt(newDateFrom[0]) < parseInt(newDateTo[0]) ) {
+          checkTimeAndSearch()
+        } else if (parseInt(newDateFrom[0]) === parseInt(newDateTo[0])) {
+          if (parseInt(newDateFrom[1]) < parseInt(newDateTo[1]) ) {
+            checkTimeAndSearch()
+          } else if (parseInt(newDateFrom[1]) === parseInt(newDateTo[1])) {
+            if (parseInt(newDateFrom[2]) <= parseInt(newDateTo[2])) {
+              checkTimeAndSearch()
+            } else {
               setOpen(true);
               setResult('error');
-              setMsg('An error occurred. Please try again.');
+              setMsg('Please select a future date.');
+              return
             }
           } else {
             setOpen(true);
             setResult('error');
-            setMsg('Please select a future time.');
+            setMsg('Please select a future date.');
             return
           }
-        // } else {
-        //   setOpen(true);
-        //   setResult('error');
-        //   setMsg('Please select a future time.');
-        //   return
-        // }
+        } else {
+          setOpen(true);
+          setResult('error');
+          setMsg('Please select a future date.');
+          return
+        }
+      } else if (parseInt(newDateFrom[1]) === (dateNow.getMonth() + 1)) {
+        if (parseInt(newDateFrom[2]) > dateNow.getDate()) {
+          if (parseInt(newDateFrom[0]) < parseInt(newDateTo[0]) ) {
+            checkTimeAndSearch()
+          } else if (parseInt(newDateFrom[0]) === parseInt(newDateTo[0])) {
+            if (parseInt(newDateFrom[1]) < parseInt(newDateTo[1]) ) {
+              checkTimeAndSearch()
+            } else if (parseInt(newDateFrom[1]) === parseInt(newDateTo[1])) {
+              if (parseInt(newDateFrom[2]) <= parseInt(newDateTo[2])) {
+                checkTimeAndSearch()
+              } else {
+                setOpen(true);
+                setResult('error');
+                setMsg('Please select a future date.');
+                return
+              }
+            } else {
+              setOpen(true);
+              setResult('error');
+              setMsg('Please select a future date.');
+              return
+            }
+          } else {
+            setOpen(true);
+            setResult('error');
+            setMsg('Please select a future date.');
+            return
+          }
+        } else if (parseInt(newDateFrom[2]) === dateNow.getDate()) {
+          if (parseInt(newDateFrom[0]) < parseInt(newDateTo[0]) ) {
+            if (!((parseInt(newTimeFrom[0]) < dateNow.getHours()) || (parseInt(newTimeFrom[1]) < dateNow.getMinutes()))) {
+              checkTimeAndSearch()
+            } else {
+              setOpen(true);
+              setResult('error');
+              setMsg('Please select a future time.');
+            }
+          } else if (parseInt(newDateFrom[0]) === parseInt(newDateTo[0])) {
+            if (parseInt(newDateFrom[1]) < parseInt(newDateTo[1]) ) {
+              if (!((parseInt(newTimeFrom[0]) < dateNow.getHours()) || (parseInt(newTimeFrom[1]) < dateNow.getMinutes()))) {
+                checkTimeAndSearch()
+              } else {
+                setOpen(true);
+                setResult('error');
+                setMsg('Please select a future time.');
+              }
+            } else if (parseInt(newDateFrom[1]) === parseInt(newDateTo[1])) {
+              if (parseInt(newDateFrom[2]) <= parseInt(newDateTo[2])) {
+                if (!((parseInt(newTimeFrom[0]) < dateNow.getHours()) || (parseInt(newTimeFrom[1]) < dateNow.getMinutes()))) {
+                  checkTimeAndSearch()
+                } else {
+                  setOpen(true);
+                  setResult('error');
+                  setMsg('Please select a future time.');
+                }
+              } else {
+                setOpen(true);
+                setResult('error');
+                setMsg('Please select a future date.');
+                return
+              }
+            } else {
+              setOpen(true);
+              setResult('error');
+              setMsg('Please select a future date.');
+              return
+            }
+          } else {
+            setOpen(true);
+            setResult('error');
+            setMsg('Please select a future date.');
+            return
+          }
+        }
+        else {
+          setOpen(true);
+          setResult('error');
+          setMsg('Please select a future date.');
+          return
+        }
       } else {
         setOpen(true);
         setResult('error');
         setMsg('Please select a future date.');
-        return 
+        return
       }
     } else {
       setOpen(true);
       setResult('error');
       setMsg('Please select a future date.');
       return
+    }
+
+    async function checkTimeAndSearch() {
+      if (!((parseInt(newTimeTo[0]) < parseInt(newTimeFrom[0])) || (parseInt(newTimeTo[1]) < parseInt(newTimeFrom[1]))) ) {
+          try {
+            const response = await axios.post(`https://lncthalls-server.onrender.com/availablehalls`, {
+              date_from: dateFrom,
+              date_to: dateTo,
+              time_from: timeFrom,
+              time_to: timeTo,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+              }
+            });
+            setAvailableHalls(response.data.available_halls)
+            setShowResults(true)
+          } catch (error) {
+            setOpen(true);
+            setResult('error');
+            setMsg('An error occurred. Please try again.');
+          }
+        } else {
+          setOpen(true);
+          setResult('error');
+          setMsg('Please select a future time.');
+          return
+        }
     }
   }
 
@@ -211,7 +344,6 @@ function BookDetails() {
             )}
         </div>
         )}
-        
       </div>
     </div>
   )
