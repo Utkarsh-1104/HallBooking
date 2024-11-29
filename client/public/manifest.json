@@ -1,6 +1,6 @@
 {
     "name": "LNCT Hall Booking",
-    "short_name": "Halls",
+    "short_name": "LNCT Halls",
     "start_url": "/",
     "display": "standalone",
     "background_color": "#ffffff",
