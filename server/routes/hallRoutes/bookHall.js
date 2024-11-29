@@ -87,7 +87,7 @@ router.patch('/:hall_id', async (req, res) => {
             </div>
 
         `
-            const superadminEmails = ["lone2104wolf@gmail.com", "lnctmca@lnct.ac.in"]
+            const superadminEmails = ["lone2104wolf@gmail.com", "lnctmca@lnct.ac.in", "secretary@lnct.ac.in"]
 
             for (const email of superadminEmails) {
                 await sendEmail(email, subject, htmlContent)
