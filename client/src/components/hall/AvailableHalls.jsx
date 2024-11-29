@@ -147,17 +147,33 @@ function BookDetails() {
           }
         } else if (parseInt(newDateFrom[2]) === dateNow.getDate()) {
           if (parseInt(newDateFrom[0]) < parseInt(newDateTo[0]) ) {
-            if (!((parseInt(newTimeFrom[0]) < dateNow.getHours()) || (parseInt(newTimeFrom[1]) < dateNow.getMinutes()))) {
+            if ((parseInt(newTimeFrom[0]) > dateNow.getHours())) {
               checkTimeAndSearch()
+            } else if ((parseInt(newTimeFrom[0]) === dateNow.getHours())) {
+              if ((parseInt(newTimeFrom[1]) > dateNow.getMinutes())) {
+                checkTimeAndSearch()
+              } else {
+                setOpen(true);
+                setResult('error');
+                setMsg('Please select a future time.');
+              }
             } else {
               setOpen(true);
               setResult('error');
               setMsg('Please select a future time.');
-            }
+            } 
           } else if (parseInt(newDateFrom[0]) === parseInt(newDateTo[0])) {
             if (parseInt(newDateFrom[1]) < parseInt(newDateTo[1]) ) {
-              if (!((parseInt(newTimeFrom[0]) < dateNow.getHours()) || (parseInt(newTimeFrom[1]) < dateNow.getMinutes()))) {
+              if ((parseInt(newTimeFrom[0]) > dateNow.getHours())) {
                 checkTimeAndSearch()
+              } else if ((parseInt(newTimeFrom[0]) === dateNow.getHours())) {
+                if ((parseInt(newTimeFrom[1]) > dateNow.getMinutes())) {
+                  checkTimeAndSearch()
+                } else {
+                  setOpen(true);
+                  setResult('error');
+                  setMsg('Please select a future time.');
+                }
               } else {
                 setOpen(true);
                 setResult('error');
@@ -165,8 +181,17 @@ function BookDetails() {
               }
             } else if (parseInt(newDateFrom[1]) === parseInt(newDateTo[1])) {
               if (parseInt(newDateFrom[2]) <= parseInt(newDateTo[2])) {
-                if (!((parseInt(newTimeFrom[0]) < dateNow.getHours()) || (parseInt(newTimeFrom[1]) < dateNow.getMinutes()))) {
+                if ((parseInt(newTimeFrom[0]) > dateNow.getHours())) {
                   checkTimeAndSearch()
+                } else if ((parseInt(newTimeFrom[0]) === dateNow.getHours())) {
+                  if ((parseInt(newTimeFrom[1]) > dateNow.getMinutes())) {
+                    checkTimeAndSearch()
+                  } else {
+                    console.log(dateNow.getHours(), dateNow.getMinutes());
+                    setOpen(true);
+                    setResult('error');
+                    setMsg('Please select a future time.');
+                  }
                 } else {
                   setOpen(true);
                   setResult('error');
@@ -211,7 +236,28 @@ function BookDetails() {
     }
 
     async function checkTimeAndSearch() {
-      if (!((parseInt(newTimeTo[0]) < parseInt(newTimeFrom[0])) || (parseInt(newTimeTo[1]) < parseInt(newTimeFrom[1]))) ) {
+      if (parseInt(newTimeTo[0]) > parseInt(newTimeFrom[0])){
+        try {
+          const response = await axios.post(`https://lncthalls-server.onrender.com/availablehalls`, {
+            date_from: dateFrom,
+            date_to: dateTo,
+            time_from: timeFrom,
+            time_to: timeTo,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+          });
+          setAvailableHalls(response.data.available_halls)
+          setShowResults(true)
+        } catch (error) {
+          setOpen(true);
+          setResult('error');
+          setMsg('An error occurred. Please try again.');
+        }
+      } else if (parseInt(newTimeTo[0]) === parseInt(newTimeFrom[0])) {
+        if (parseInt(newTimeTo[1]) > parseInt(newTimeFrom[1])) {
           try {
             const response = await axios.post(`https://lncthalls-server.onrender.com/availablehalls`, {
               date_from: dateFrom,
@@ -232,6 +278,15 @@ function BookDetails() {
             setMsg('An error occurred. Please try again.');
           }
         } else {
+
+          setOpen(true);
+          setResult('error');
+          setMsg('Please select a future time.');
+          return
+        }
+      }
+       else {
+
           setOpen(true);
           setResult('error');
           setMsg('Please select a future time.');
