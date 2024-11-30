@@ -43,7 +43,7 @@ const LandingPage = () => {
       <footer className="bg-gray-800 ">
         <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
-            <p className="text-base text-gray-400">&copy; {new Date().getFullYear()} LNCT Group of Colleges. All rights reserved.</p>
+            <p className="text-base text-gray-400">&copy; Developed by Utkarsh Bajpai (Tech Lead). <br /> All rights reserved.</p>
           </div>
         </div>
       </footer>
