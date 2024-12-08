@@ -106,6 +106,9 @@ function MyBookingsPage() {
 }
 
 async function deleteBooking(hall_id, booking_id, setOpen, setResult, setMsg) {
+  const confirm = window.confirm('Are you sure you want to delete this booking?');
+  if (!confirm) return;
+    
   try {
       const response = await axios.post(`https://lncthalls-server.onrender.com/removebooking/${hall_id}`,
       {
