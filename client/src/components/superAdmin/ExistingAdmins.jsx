@@ -62,6 +62,8 @@ const ExistingAdmins = (props) => {
 };
 
 async function deleteAdmin(id, setOpen, setResult, setMsg) {
+  const confirm = window.confirm('Are you sure you want to delete this admin?');
+  if (!confirm) return;
   
   const response = await axios.delete(`https://lncthalls-server.onrender.com/removeadmins/${id}`,
     {
