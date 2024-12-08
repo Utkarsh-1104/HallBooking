@@ -28,6 +28,8 @@ const ExistingHalls = () => {
   };
 
   async function deleteHall(id) {
+    const confirm = window.confirm('Are you sure you want to delete this hall?');
+    if (!confirm) return;
     try {
       const response = await axios.delete(`https://lncthalls-server.onrender.com/removehall/${id}`, {
         headers: {
