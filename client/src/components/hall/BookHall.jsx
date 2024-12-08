@@ -54,6 +54,8 @@ function BookHallFunction(props) {
       setOpen(false);
   };
 
+  const [disable, setDisable] = useState(false);
+
   function handleBook(e) {
     e.preventDefault()
     if ((eventName.toLowerCase() !== eventName.toUpperCase())) {
@@ -70,8 +72,8 @@ function BookHallFunction(props) {
       setMsg('Event name should be a string.');
     }
 
-
     async function postEvent() {
+      setDisable(true);
       try {
         const response = await axios.patch(`https://lncthalls-server.onrender.com/bookhall/${hall_id}`, {
           time_from: time_from,
@@ -222,7 +224,8 @@ function BookHallFunction(props) {
             { role === "admin" ? (hall_name === "Srinivas Ramanujan Auditorium" || hall_name === "Aryabhata Auditorium" ) ? <p className="text-amber-700 font-bold text-lg mt-1">Note: This hall requires a super-admin's approval for booking.</p> : null : null }
             <button
               type="submit"
-              className="w-full text-lg bg-blue-600 text-white font-bold py-3 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:bg-blue-800 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-opacity-50"
+              disabled={disable}
+              className={`w-full text-lg bg-blue-600 text-white font-bold py-3 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:bg-blue-800 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-opacity-50 disabled:opacity-50`}
               onClick={handleBook}
             >
               {role === "admin" && (hall_name === "Srinivas Ramanujan Auditorium" || hall_name === "Aryabhata Auditorium" ) ? "Request Booking" : "Book Event"}
