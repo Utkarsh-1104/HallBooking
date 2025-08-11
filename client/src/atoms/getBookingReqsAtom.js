@@ -26,6 +26,7 @@ export const bookingRequests = atom({
                     final_reqs.push(indi_req)
                 })
             })
+            final_reqs.sort((a, b) => new Date(b.booking_req_at) - new Date(a.booking_req_at))
             return final_reqs
         }
     })
